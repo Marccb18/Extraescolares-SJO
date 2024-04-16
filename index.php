@@ -14,8 +14,12 @@ $conn .= ";sslmode=verify-ca;sslrootcert=ca.pem";
 try {
     $db = new PDO($conn, $fields["user"], $fields["pass"]);
 
-    $stmt = $db->query("SELECT VERSION()");
-    print($stmt->fetch()[0]);
+    $stmt = $db->query("SHOW TABLES");
+    $tables = $stmt->fetchAll(PDO::FETCH_NUM);
+    echo "Tables in the database:\n";
+    foreach ($tables as $table) {
+        echo $table[0] . "\n";
+    }
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
