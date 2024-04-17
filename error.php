@@ -15,7 +15,7 @@
 <body>
     <h1>Error</h1>
     <p>Ocurrió un error durante la conexión a la base de datos:</p>
-    <p><?php echo $error_message; ?></p>
+    <p><?php echo $error; ?></p>
     <a href="./index.php">Volver al inicio</a>
 </body>
 </html>
