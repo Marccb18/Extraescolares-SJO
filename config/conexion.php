@@ -14,6 +14,7 @@ $conn .= ";sslmode=verify-ca;sslrootcert=ca.pem";
 try  {
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Conexion exitosa";
 } catch (PDOException $e) {
     echo "Erro de conexion: " . $e->getMessage();
 }
