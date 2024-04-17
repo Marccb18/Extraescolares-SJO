@@ -11,10 +11,11 @@
 
 
     if(isset($_POST['submit'])) {
+        require_once('../config/logout.php');
         logout();
     }
 ?>
 
-<form action="../index.php" method="post">
-    <input type="submit" name="logout" value="Cerrar Sesión">
+<form action="admin_dashboard.php" method="post">
+    <input type="submit" name="submit" value="Cerrar Sesión">
 </form>

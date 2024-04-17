@@ -23,9 +23,9 @@
                 if ($user['ROL'] == 'ADM') {
                     $ruta = './admin/admin_dashboard.php';
                 } elseif ($user['ROL'] == 'COO') {
-                    $ruta = "./coordinador_dashboard.php";
+                    $ruta = "./coordinador/coordinador_dashboard.php";
                 } else {
-                    $ruta = "./profesor_dashboard.php";
+                    $ruta = "./profesor/profesor_dashboard.php";
                 }
                 header("Location: $ruta");
                 exit();

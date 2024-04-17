@@ -1,5 +1,4 @@
-
-<?php 
+<?php
     require('./config/conexion.php');
     require('./config/users_control.php');
 ?>
