@@ -1,4 +1,7 @@
-<?php require('./config/conexion.php') ?>
+<?php require('./config/conexion.php');?>
+<?php 
+    require('./config/users_control.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,39 +11,6 @@
     <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 <body>
-    <?php
-        $error = "";
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST['email'];
-            $password = $_POST['password'];
-
-            try {
-                $statement = $db->prepare("SELECT * FROM personal WHERE Email = :email AND Password = :password");
-                $statement->execute(array(':email' => $username, ':password' => $password));
-
-                //OBtener el resultado de la consulta (el usuario)
-                $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-                if ($user) {
-                    session_start();
-                    $_SESSION['email'] = $user['Email'];
-                    if ($user['ROL'] == 'ADM') {
-                        $ruta = './admin/admin_dashboard.php';
-                    } elseif ($user['ROL'] == 'COO') {
-                        $ruta = "./coordinador_dashboard.php";
-                    } else {
-                        $ruta = "./profesor_dashboard.php";
-                    }
-                    header("Location: $ruta");
-                    exit();
-                } else {
-                    $error = "Usuario o contraseña incorrectos.";
-                }
-            } catch (PDOException $e) {
-                echo "Error de consulta: " . $e->getMessage();
-            }
-        }
-    ?>
     <form action="index.php" method="post">
         <?php if ($error != "") { ?>
             <div style="color: red;"><?php echo $error; ?></div>
