@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+aside {
+    width: 265px;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+}
+
+main {
+    font-size: 30rem;
+}

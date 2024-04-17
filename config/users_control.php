@@ -2,8 +2,16 @@
     session_start();
 
     if (isset($_SESSION['email'])) {
-        header('Location: ../admin/admin_dashboard.php');
-        exit();
+        if($_SESSION['rol'] == 'ADM') {
+            header('Location: ./admin/admin_dashboard.php');
+            exit();
+        } elseif($_SESSION['rol'] == 'COO') {
+            header('Location: ./coordinador/coordinador_dashboard.php');
+            exit();
+        } else {
+            header('Location: ./profesor/profesor_dashboard.php');
+            exit();
+        }
     }
     $error = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,6 +28,7 @@
             if ($user) {
                 $_SESSION['email'] = $user['Email'];
                 $_SESSION['username'] = $user['Nombre'];
+                $_SESSION['rol'] = $user['ROL'];
                 if ($user['ROL'] == 'ADM') {
                     $ruta = './admin/admin_dashboard.php';
                 } elseif ($user['ROL'] == 'COO') {
@@ -35,11 +44,5 @@
         } catch (PDOException $e) {
             echo "Error de consulta: " . $e->getMessage();
         }
-    }
-
-    function logout() {
-        session_destroy();
-        header("Location: ../index.php");
-        exit();
     }
 ?>

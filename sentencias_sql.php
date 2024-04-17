@@ -15,7 +15,7 @@ try {
     $db = new PDO($conn, $fields["user"], $fields["pass"]);
 
     $stmt = $db->query("INSERT INTO `personal` (`DNI`, `Nombre`, `Apellidos`, `Email`, `ROL`, `Password`, `Telefono`) VALUES
-    ('012343l', 'Admin', 'Admin', 'admin@admin.com', 'ADM', 'Admin', 234567894)");
+    ('asdf234', 'Pedro', 'Ruiz Sanchez', 'profe@profe.com', 'PRO', 'profe', 1234562);");
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
