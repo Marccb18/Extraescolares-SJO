@@ -1,5 +1,6 @@
-<?php require('./config/conexion.php');?>
+
 <?php 
+    require('./config/conexion.php');
     require('./config/users_control.php');
 ?>
 <!DOCTYPE html>
