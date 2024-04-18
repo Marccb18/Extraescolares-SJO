@@ -1,6 +1,7 @@
 <?php
     require('./config/conexion.php');
     require_once('./config/users_control.php');
+    echo $conn
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     try {
+        $db = new PDO($conn, $fields['user'], $fields['pass']);
+        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement = $db->prepare("SELECT * FROM personal WHERE Email = :email AND Password = :password");
         $statement->execute(array(':email' => $username, ':password' => $password));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
@@ -45,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $error = "Email o contraseña incorrectos.";
         }
+        $db = null;
     } catch (PDOException $e) {
         echo "Error de consulta: " . $e->getMessage();
     }
