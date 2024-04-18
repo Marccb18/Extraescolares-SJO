@@ -194,3 +194,13 @@ body {
     padding: 0;
     color: rgba(113, 113, 122, 1);
 }
+
+#select-clases {
+    padding: 15px;
+    width: 175px;
+    outline: none;
+    margin: 0;
+    border: 2px solid rgba(228, 228, 231, 1);
+    border-radius: 6px;
+
+}

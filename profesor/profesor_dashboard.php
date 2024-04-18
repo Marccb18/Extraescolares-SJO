@@ -92,17 +92,13 @@
                     <p>Clases</p>
                     <select name="clases" id="select-clases">
                         <option value="">Todas</option>
+                        <?php
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
-                        <?php
-                            foreach ($materias as $materia) {
-                                echo "<div class='clase'>";
-                                echo "<p class='materia'>$materia[Nombre]</p>";
-                             
-                                echo "</div>";
-                            }
-                        ?>
         </div>
     </div>
 </body>
