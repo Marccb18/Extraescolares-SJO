@@ -29,6 +29,7 @@ body {
     flex-direction: column;
     background-color: white;
     border-right: 2px solid rgba(228, 228, 231, 1);
+    gap: 25px;
 }
 
 #titlelogo {
@@ -36,8 +37,8 @@ body {
     flex-wrap: nowrap;
     width: 100%;
     align-items: center;
-    padding-left: 30px;
-    gap: 5px;
+    padding-left: 10%;
+    gap: 7px;
     margin-top: 15px;
 }
 
@@ -67,36 +68,129 @@ body {
 
 #side-menu li {
     height: fit-content;
-    width: fit-content;
+    width: 90%;
     list-style: none;
+    margin-left: 5%;
+    background-color: white;
+    border-radius: 6px;
+}
+
+#side-menu .active {
+    background-color: rgba(244, 244, 245, 1);
 }
 
 #side-menu li a {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     text-decoration: none;
     color: black;
+    height: 40px;
+    padding-left: 12px;
+    font-family: Inter;
 }
 
 #side-menu li a img {
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     max-width: 25px;
+    max-height: 25px;
     aspect-ratio: 1/1;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
 #main {
-    font-size: 3rem;
-    margin-left: 22vw;
-    width: max-content;
+    margin-left: 20vw;
+    width: 100%;
     overflow: hidden;
     text-wrap: pretty;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+#content {
+    width: 95%;
+    margin-top: 20px;
+}
+
+#top-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+#top-content ul {
+    display: flex;
+    background-color: rgba(244, 244, 245, 1);
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+#top-content ul li {
+    height: fit-content;
+    width: fit-content;
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#top-content ul .active {
+    background-color: white;
+}
+
+#top-content ul .active a {
+    color: black;
+}
+
+#top-content ul li a {
+    text-decoration: none;
+    color: rgba(113, 113, 122, 1);
+    font-size: 0.9rem;
+}
+
+#pasar-lista {
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+#title {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 25px 0 20px 0;
+    border-bottom: 2px solid rgba(228, 228, 231, 1);
+}
+
+#title h3 {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-weight: 600;
+}
+
+#title p {
+    margin: 0;
+    padding: 0;
+    color: rgba(113, 113, 122, 1);
+}

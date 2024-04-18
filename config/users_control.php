@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
+            $_SESSION['id'] = $user['DNI'];
             $_SESSION['email'] = $user['Email'];
             $_SESSION['username'] = $user['Nombre'];
             $_SESSION['rol'] = $user['ROL'];
