@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     require('../config/conexion.php');
     
     if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
@@ -12,12 +11,12 @@
         logout();
     }
 
-    function showMaterias($db) {
-        $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = :id");
-        $showMaterias->execute(array($_SESSION['id'] => ':id'));
+        $db = new PDO($conn, $fields['user'], $fields['pass']);
+        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
         $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-        return $materias;
-    }
+        $db = null;
+
 
 
 ?>
@@ -97,9 +96,11 @@
                 </div>
             </div>
                         <?php
-                            $materias = showMaterias($db);
-                            foreach ($materias as $materia => $i) {
-                                echo "$materia == $i";
+                            foreach ($materias as $materia) {
+                                echo "<div class='clase'>";
+                                echo "<p class='materia'>$materia[Nombre]</p>";
+                             
+                                echo "</div>";
                             }
                         ?>
         </div>
