@@ -1,6 +1,6 @@
 <?php
     require('./config/conexion.php');
-    require('./config/users_control.php');
+    require_once('./config/users_control.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

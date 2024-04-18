@@ -1,15 +1,54 @@
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    width: 100%;
 }
 
-aside {
+#aside {
     width: 265px;
     height: 100vh;
     overflow: hidden;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid red;
+    background-color: white;
 }
 
-main {
-    font-size: 30rem;
+#titlelogo {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    border: 2px solid red;
+    align-items: center;
+    padding-left: 30px;
+    gap: 5px;
+}
+
+#side-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+}
+
+#side-menu li {
+    height: fit-content;
+    width: fit-content;
+    list-style: none;
+}
+
+#side-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#main {
+    font-size: 3rem;
+    margin-left: 285px;
+    width: max-content;
+    overflow: hidden;
+    text-wrap: pretty;
 }
