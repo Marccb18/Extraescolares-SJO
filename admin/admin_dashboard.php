@@ -2,7 +2,7 @@
     session_start();
 
     //Verificar si el usuario esta autenticado
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
         header('Location: ../index.php');
         exit();
     }

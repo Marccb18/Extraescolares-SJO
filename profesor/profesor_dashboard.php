@@ -1,7 +1,7 @@
 <?php
     session_start();
     
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
         header('Location: ../index.php');
         exit();
     }
@@ -50,6 +50,11 @@
                 </a>
             </li>
         </ul>
+
+
+        <form action="profesor_dashboard.php" method="post">
+            <input type="submit" value="logout" name="logout">
+        </form>
         
     </div>
     <div id="main">
