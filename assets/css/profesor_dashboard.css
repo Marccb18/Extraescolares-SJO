@@ -21,7 +21,7 @@ body {
 }
 
 #aside {
-    width: 265px;
+    width: 20vw;
     height: 100vh;
     overflow: hidden;
     position: fixed;
@@ -38,6 +38,7 @@ body {
     align-items: center;
     padding-left: 30px;
     gap: 5px;
+    margin-top: 15px;
 }
 
 #titlelogo img {
@@ -60,6 +61,8 @@ body {
     flex-direction: column;
     width: 100%;
     height: fit-content;
+    margin: 0;
+    padding: 0;
 }
 
 #side-menu li {
@@ -77,8 +80,10 @@ body {
 }
 
 #side-menu li a img {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
+    max-width: 25px;
+    aspect-ratio: 1/1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -89,7 +94,7 @@ body {
 
 #main {
     font-size: 3rem;
-    margin-left: 285px;
+    margin-left: 22vw;
     width: max-content;
     overflow: hidden;
     text-wrap: pretty;
