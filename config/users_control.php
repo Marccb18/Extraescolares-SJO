@@ -1,15 +1,17 @@
 <?php
     session_start();
-    
+    $rutas = array('admin/admin_dashboard.php',
+    'coordinador/coordinador_dashboard.php',
+    'profesor/profesor_dashboard.php');
     if (isset($_SESSION['email'])) {
         if($_SESSION['rol'] == 'ADM') {
-            header('Location: ./admin/admin_dashboard.php');
+            header("Location: ./$rutas[0]");
             exit();
         } elseif($_SESSION['rol'] == 'COO') {
-            header('Location: ./coordinador/coordinador_dashboard.php');
+            header("Location: ./$rutas[1]");
             exit();
         } else {
-            header('Location: ./profesor/profesor_dashboard.php');
+            header("Location: ./$rutas[2]");
             exit();
         }
     }
@@ -30,13 +32,13 @@
                 $_SESSION['username'] = $user['Nombre'];
                 $_SESSION['rol'] = $user['ROL'];
                 if ($user['ROL'] == 'ADM') {
-                    $ruta = './admin/admin_dashboard.php';
+                    $ruta = $rutas[0];
                 } elseif ($user['ROL'] == 'COO') {
-                    $ruta = "./coordinador/coordinador_dashboard.php";
+                    $ruta = $rutas[1];
                 } else {
-                    $ruta = "./profesor/profesor_dashboard.php";
+                    $ruta = $rutas[2];
                 }
-                header("Location: $ruta");
+                header("Location: ./$ruta");
                 exit();
             } else {
                 $error = "Email o contraseña incorrectos.";
