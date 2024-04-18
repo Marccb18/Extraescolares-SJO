@@ -21,35 +21,36 @@
 <body>
     <div id="aside">
         <div id="titlelogo">
-            <img src="../assets/img/logoSJO.png" alt="Logo SJO">
+            <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
             <li>
                 <a href="#">
-                    <img src="../assets/img/icon-home.png" alt="Home icon">
+                    <img src="../assets/img/icon-home.svg" alt="Home icon" style="margin-top: -3px;">
                     Inicio
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <img src="../assets/img/Vector.png" alt="Students icon">
+                    <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <img src="../assets/img/library.png" alt="Library icon">
+                    <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <img src="../assets/img/layout-grid.png" alt="Layout icon">
+                    <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>
             </li>
-        </ul>        
+        </ul>
+        
     </div>
     <div id="main">
         <p>

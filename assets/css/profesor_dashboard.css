@@ -1,8 +1,23 @@
+@font-face {
+    font-family: Inter;
+    src: url(../fonts/Inter-Medium.ttf);
+}
+@font-face {
+    font-family: Inter-B;
+    src: url(../fonts/Inter-SemiBold.ttf);
+}
+@font-face {
+    font-family: Inter-XB;
+    src: url(../fonts/Inter-Bold.ttf);
+}
+
+
+
 body {
     margin: 0;
     padding: 0;
     display: flex;
-    width: 100%;
+    font-family: Inter;
 }
 
 #aside {
@@ -12,18 +27,32 @@ body {
     position: fixed;
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
     background-color: white;
+    border-right: 2px solid rgba(228, 228, 231, 1);
 }
 
 #titlelogo {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
-    border: 2px solid red;
     align-items: center;
     padding-left: 30px;
     gap: 5px;
+}
+
+#titlelogo img {
+    height: 50px;
+    width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+#titlelogo p {
+    font-size: 0.9rem;
+    font-family: Inter-B;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 #side-menu {
@@ -43,6 +72,19 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+#side-menu li a img {
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 #main {
