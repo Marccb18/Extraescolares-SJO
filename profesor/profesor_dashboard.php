@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    require('../config/conexion.php');
     
     if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
         header('Location: ../index.php');
@@ -9,6 +11,15 @@
         require_once('../config/logout.php');
         logout();
     }
+
+    function showMaterias($db) {
+        $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = :id");
+        $showMaterias->execute(array($_SESSION['id'] => ':id'));
+        $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+        return $materias;
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,9 +36,9 @@
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li>
+            <li class="active">
                 <a href="#">
-                    <img src="../assets/img/icon-home.svg" alt="Home icon" style="margin-top: -3px;">
+                    <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
@@ -58,44 +69,40 @@
         
     </div>
     <div id="main">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, molestias? Sed repellendus blanditiis, illum, eligendi commodi saepe modi obcaecati porro quae quasi unde ad totam dolorum! Corporis aspernatur quia deserunt?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, ad aperiam dolore eum ipsum explicabo culpa natus vero asperiores repudiandae alias error voluptatem! Dicta, quidem nemo ab corporis harum porro?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quisquam beatae iure veritatis quia repudiandae dolores suscipit nisi explicabo, dicta corporis voluptatem, aperiam laborum. Maxime fugit sint nobis magnam repellat.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi impedit unde at sit reiciendis facilis voluptatibus totam qui distinctio doloribus facere natus porro, pariatur maiores? At, magni ut? Et, illo!
-
-        </p>
+        <div id="content">
+            <div id="top-content">
+                <ul>
+                    <li class="active">
+                        <a href="#">Clases</a>
+                    </li>
+                    <li >
+                        <a href="#">Alumnos</a>
+                    </li>
+                </ul>
+                <a href="#" id="pasar-lista">
+                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
+                    Pasar Lista
+                </a>
+            </div>
+            <div id="title">
+                <h3>Inicio</h3>
+                <p>Busca entre todas tus clases</p>
+            </div>
+            <div id="filter">
+                <div id="clases">
+                    <p>Clases</p>
+                    <select name="clases" id="select-clases">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+            </div>
+                        <?php
+                            $materias = showMaterias($db);
+                            foreach ($materias as $materia => $i) {
+                                echo "$materia == $i";
+                            }
+                        ?>
+        </div>
     </div>
 </body>
 </html>
