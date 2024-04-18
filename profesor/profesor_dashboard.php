@@ -16,9 +16,6 @@
         $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
         $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         $db = null;
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,13 +87,16 @@
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <select name="clases" id="select-clases">
-                        <option value="">Todas</option>
-                        <?php
-                            foreach ($materias as $materia) { ?>
-                                <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
-                        <?php } ?>
-                    </select>
+                    <div id="select-container">
+                        <select name="clases">
+                            <option value="">Todas</option>
+                            <?php
+                                foreach ($materias as $materia) { ?>
+                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
+                    </div>
                 </div>
             </div>
         </div>

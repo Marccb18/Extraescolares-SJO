@@ -88,11 +88,12 @@ body {
     height: 40px;
     padding-left: 12px;
     font-family: Inter;
+    font-size: 0.9rem;
 }
 
 #side-menu li a img {
-    height: 20px;
-    width: 20px;
+    height: 1.1rem;
+    width: 1.1rem;
     max-width: 25px;
     max-height: 25px;
     aspect-ratio: 1/1;
@@ -187,6 +188,7 @@ body {
     padding: 0;
     color: black;
     font-weight: 600;
+    font-size: 1.1rem;
 }
 
 #title p {
@@ -195,12 +197,36 @@ body {
     color: rgba(113, 113, 122, 1);
 }
 
-#select-clases {
-    padding: 15px;
-    width: 175px;
-    outline: none;
+#select-container {
+    display: inline-block;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
     margin: 0;
-    border: 2px solid rgba(228, 228, 231, 1);
     border-radius: 6px;
-
+    border: 2px solid rgba(228, 228, 231, 1);
 }
+
+#select-container select {
+    font-family: Inter;
+    appearance: none;
+    width: 10rem;
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    margin: 0;
+    padding: 0;
+    padding-left: 15px;
+}
+
+#select-container img { 
+    rotate: 180deg;
+    position: absolute;
+    right: 20px;
+    top: 32.5%;
+    pointer-events: none;
+}
+
