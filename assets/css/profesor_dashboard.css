@@ -259,16 +259,16 @@ body {
 }
 
 #date-container img {
+    width: 1.1rem;
     position: absolute;
     pointer-events: none;
-    top: 30%;
-    left: 10px;
+    top: 25%;
+    left: 15px;
     margin: 0;
     padding: 0;
 }
 
 #date-container input {
-    display: grid;
     appearance: none;
     font-family: Inter;
     background-color: white;
@@ -279,8 +279,7 @@ body {
     border-radius: 6px;
     margin: 0;
     padding: 0;
-    justify-content: space-around;
-    align-items: center;
+    text-align: center;
 }
 
 #date-container input[type="date"]::-webkit-calendar-picker-indicator {
