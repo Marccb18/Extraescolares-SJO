@@ -98,6 +98,13 @@
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
+                <div id="fecha">
+                    <p>Fecha</p>
+                    <div id="date-container">
+                        <img src="../assets/img/Calendar.svg" alt="Calendar">
+                        <input type="date">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
