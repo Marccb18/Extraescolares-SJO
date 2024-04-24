@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
 </head>
 <body>
     <div id="aside">
@@ -65,16 +65,6 @@
     </div>
     <div id="main">
         <div id="content">
-            <div id="top-content">
-                <ul>
-                    <li class="active">
-                        <a href="#">Clases</a>
-                    </li>
-                    <li >
-                        <a href="#">Alumnos</a>
-                    </li>
-                </ul>
-            </div>
             <div id="title">
                 <h3>Inicio</h3>
                 <p>Busca entre todas tus clases</p>
@@ -104,7 +94,9 @@
             <div id="main-content">
                 <?php 
                     foreach ($materias as $materia) { ?>
-                        <div></div>
+                        <div class="item">
+                            
+                        </div>
                 <?php }?>
             </div>
         </div>
