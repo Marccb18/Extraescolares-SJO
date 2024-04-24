@@ -102,7 +102,10 @@
                 </div>
             </div>
             <div id="main-content">
-                
+                <?php 
+                    foreach ($materias as $materia) { ?>
+                        <div></div>
+                <?php }?>
             </div>
         </div>
     </div>
