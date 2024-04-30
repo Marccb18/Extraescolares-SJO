@@ -237,3 +237,39 @@ body {
     background-color: transparent;
 }
 
+#main-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.item img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    width: 75%;
+    background-color: rgba(244, 244, 245, 1);
+}
+
+.itemtitle {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 0.9rem;
+}
+
+.itemsub {
+    margin: 0;
+    padding: 0;
+    text-wrap: nowrap;
+    color: rgba(113, 113, 122, 1);
+}

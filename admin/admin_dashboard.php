@@ -94,9 +94,37 @@
             <div id="main-content">
                 <?php 
                     foreach ($materias as $materia) { ?>
-                        <div class="item">
-                            
-                        </div>
+                        <a class="item" href="#">
+                            <img src="../assets/img/logoSJO.svg" alt="logo">
+                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                            <p class="itemsub"><?php
+                                switch ($materia['Dia']) {
+                                    case 'LUN':
+                                        echo 'Lunes ';
+                                        break;
+                                    case 'MAR':
+                                        echo 'Martes ';
+                                        break;
+                                    case 'MIE':
+                                        echo 'Miércoles ';
+                                        break;
+                                    case 'JUE':
+                                        echo 'Jueves ';
+                                        break;
+                                    case 'VIE':
+                                        echo 'Viernes ';
+                                        break;
+                                    case 'SAB':
+                                        echo 'Sábado ';
+                                        break;
+                                    case 'DOM';
+                                        echo 'Domingo ';
+                                        break;
+                                }?>
+                                · 
+                                <?= $materia['Hora'] ?>
+                            </p>
+                        </a>
                 <?php }?>
             </div>
         </div>
