@@ -122,7 +122,7 @@
                                         break;
                                 }?>
                                 · 
-                                <?= $materia['Hora'] ?>
+                                <?= date('H:i',strtotime($materia['Hora'])) ?>
                             </p>
                         </a>
                 <?php }?>

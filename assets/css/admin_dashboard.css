@@ -241,12 +241,13 @@ body {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+    margin-top: 35px;
 }
 
 .item {
     display: flex;
     flex-direction: column;
-    width: 150px;
+    width: 200px;
     gap: 5px;
     text-decoration: none;
 }
@@ -255,9 +256,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10%;
+    padding: 12%;
     width: 75%;
     background-color: rgba(244, 244, 245, 1);
+    border-radius: 1rem 1rem 0 0;
 }
 
 .itemtitle {
@@ -272,4 +274,5 @@ body {
     padding: 0;
     text-wrap: nowrap;
     color: rgba(113, 113, 122, 1);
+    font-size: 0.8rem;
 }
