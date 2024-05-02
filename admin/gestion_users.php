@@ -13,7 +13,7 @@
     }
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $showUsers = $db->query("SELECT * FROM personal");
     $db = null;
 ?>
