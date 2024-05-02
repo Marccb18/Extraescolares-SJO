@@ -7,6 +7,11 @@
         exit();
     }
 
+    if (isset($_POST['logout'])) {
+        require_once('../config/logout.php');
+        logout();
+    }
+
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $showClasses = $db->query("SELECT * FROM materia");
@@ -56,7 +61,7 @@
             </li>
         </ul>
 
-        <form action="profesor_dashboard.php" method="post">
+        <form action="admin_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         

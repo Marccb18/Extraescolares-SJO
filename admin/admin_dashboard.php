@@ -6,6 +6,11 @@
         header('Location: ../index.php');
         exit();
     }
+    
+    if (isset($_POST['logout'])) {
+        require_once('../config/logout.php');
+        logout();
+    }
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

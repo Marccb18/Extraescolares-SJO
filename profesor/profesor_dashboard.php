@@ -7,11 +7,16 @@
         exit();
     }
 
-        $db = new PDO($conn, $fields['user'], $fields['pass']);
-        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
-        $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-        $db = null;
+    if (isset($_POST['logout'])) {
+        require_once('../config/logout.php');
+        logout();
+    }
+
+    $db = new PDO($conn, $fields['user'], $fields['pass']);
+    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+    $db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +60,7 @@
         </ul>
 
 
-        <form action="../config/logout.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
