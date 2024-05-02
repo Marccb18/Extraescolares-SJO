@@ -80,63 +80,32 @@
     </div>
     <div id="main">
         <div id="content">
-            <div id="filter">
-                <div id="clases">
-                    <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
-                            <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
-                    </div>
-                </div>
+            <div id="title">
+                <h3>mondongo</h3>
+                <p>Wake up</p>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Faltas</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    <?php foreach ($alumnos as $alumno) {?>
+                        <tr>
+                            <td>
+                                <img src="../assets/img/user.svg" alt="user">
+                                <?= $alumno['Nombre'] ?>
+                            </td>
+                            <td><?= $alumno['Apellidos'] ?></td>
+                            <td>
+                            </td>
+                            <td>0</td>
+                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                        </tr>
+                    <?php } ?>
+                </table> 
             </div>
         </div>
     </div>
