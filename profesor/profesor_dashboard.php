@@ -1,26 +1,28 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
-        header('Location: ../index.php');
-        exit();
-    }
+session_start();
+require('../config/conexion.php');
 
-        $db = new PDO($conn, $fields['user'], $fields['pass']);
-        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
-        $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-        $db = null;
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
+    header('Location: ../index.php');
+    exit();
+}
+
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -55,10 +57,45 @@
         </ul>
 
 
-        <form action="../config/logout.php" method="post">
+        <!--         <form action="../config/logout.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form>
-        
+        </form> -->
+        <div>
+            <div class="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+            </div>
+            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
+            border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
+                <ul style="list-style-type: none;
+                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
+                    <li style="font-size: 14px; align-items: center;">
+                        <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="width: 16px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                        </a>
+                    </li>
+                    <li style="font-size: 14px;">
+                        <a href="../config/logout.php" style="display: flex;  align-items: center;
+                         justify-content: space-between; align-items: center;">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
+                                Cerrar Sesion
+                            </div>
+                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
     </div>
     <div id="main">
         <div id="content">
@@ -67,7 +104,7 @@
                     <li class="active">
                         <a href="#">Clases</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="#">Alumnos</a>
                     </li>
                 </ul>
@@ -87,8 +124,8 @@
                         <select name="clases">
                             <option value="">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -105,4 +142,5 @@
         </div>
     </div>
 </body>
+
 </html>
