@@ -292,6 +292,7 @@ body {
     background-color: transparent;
 }
 
+<<<<<<< HEAD
 .user-info-container {
     display: flex;
     justify-content: space-between;
@@ -327,3 +328,46 @@ body {
     transform: rotate(90deg);
     width: 16px;
 }
+=======
+
+#main-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.item img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12%;
+    width: 75%;
+    background-color: rgba(244, 244, 245, 1);
+    border-radius: 1rem 1rem 0 0;
+}
+
+.itemtitle {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 0.9rem;
+}
+
+.itemsub {
+    margin: 0;
+    padding: 0;
+    text-wrap: nowrap;
+    color: rgba(113, 113, 122, 1);
+    font-size: 0.8rem;
+}
+>>>>>>> 46ca93e901300633504952e4083ccbcb098a4275

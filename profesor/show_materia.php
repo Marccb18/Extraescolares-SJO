@@ -1,30 +1,43 @@
 <?php
     session_start();
     require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
+
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
         header('Location: ../index.php');
         exit();
     }
-    
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showMaterias = $db->query("SELECT * FROM materia");
-    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+
+    $class_id = $_GET['id'];
+    
+    $query = $db->prepare('SELECT * FROM materia WHERE ID = ?');
+    $query->execute([$class_id]);
+    $class = $query->fetch(PDO::FETCH_ASSOC);
+    
+    $query = $db->prepare('SELECT * FROM personal WHERE DNI = :id_profesor');
+    $query->bindParam(':id_profesor', $class['ID_Profesor']);
+    $query->execute();
+    $prof = $query->fetch(PDO::FETCH_ASSOC);
+
+    $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id_materia');
+    $query->bindParam(':id_materia', $class['ID']);
+    $query->execute();
+    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
     $db = null;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <title>Profesor Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
 </head>
 <body>
     <div id="aside">
@@ -40,9 +53,9 @@
                 </a>
             </li>
             <li>
-                <a href="./gestion_users.php">
+                <a href="#">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
-                    Usuarios
+                    Alumnos
                 </a>
             </li>
             <li>
@@ -59,19 +72,14 @@
             </li>
         </ul>
 
-        <form action="../config/logout.php" method="post">
+
+        <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
     </div>
     <div id="main">
         <div id="content">
-            <div id="topcontent">
-                <div id="title">
-                    <h3>Inicio</h3>
-                    <p>Busca entre todas las clases</p>
-                </div>
-            </div>
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
@@ -80,7 +88,7 @@
                             <option value="">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">

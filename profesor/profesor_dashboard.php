@@ -12,6 +12,16 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 $db = null;
+    if (isset($_POST['logout'])) {
+        require_once('../config/logout.php');
+        logout();
+    }
+
+    $db = new PDO($conn, $fields['user'], $fields['pass']);
+    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+    $db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,9 +67,9 @@ $db = null;
         </ul>
 
 
-        <!--         <form action="../config/logout.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> -->
+        </form> 
         <div>
             <div class="user-info-container">
                 <div class="user-info">
@@ -124,8 +134,8 @@ $db = null;
                         <select name="clases">
                             <option value="">Todas</option>
                             <?php
-                            foreach ($materias as $materia) { ?>
-                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                                foreach ($materias as $materia) { ?>
+                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -138,6 +148,42 @@ $db = null;
                         <input type="date">
                     </div>
                 </div>
+            </div>
+            <div id="main-content">
+                <?php 
+                    foreach ($materias as $materia) { ?>
+                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                            <img src="../assets/img/logoSJO.svg" alt="logo">
+                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                            <p class="itemsub"><?php
+                                switch ($materia['Dia']) {
+                                    case 'LUN':
+                                        echo 'Lunes ';
+                                        break;
+                                    case 'MAR':
+                                        echo 'Martes ';
+                                        break;
+                                    case 'MIE':
+                                        echo 'Miércoles ';
+                                        break;
+                                    case 'JUE':
+                                        echo 'Jueves ';
+                                        break;
+                                    case 'VIE':
+                                        echo 'Viernes ';
+                                        break;
+                                    case 'SAB':
+                                        echo 'Sábado ';
+                                        break;
+                                    case 'DOM';
+                                        echo 'Domingo ';
+                                        break;
+                                }?>
+                                · 
+                                <?= date('H:i',strtotime($materia['Hora'])) ?>
+                            </p>
+                        </a>
+                <?php }?>
             </div>
         </div>
     </div>
