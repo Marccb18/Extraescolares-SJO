@@ -102,7 +102,7 @@
                                 ?>
                             </td>
                             <td><a href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td><a href="#"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
