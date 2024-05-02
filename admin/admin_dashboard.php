@@ -6,10 +6,6 @@
         header('Location: ../index.php');
         exit();
     }
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -58,16 +54,18 @@
             </li>
         </ul>
 
-        <form action="profesor_dashboard.php" method="post">
+        <form action="../config/logout.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
     </div>
     <div id="main">
         <div id="content">
-            <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
+            <div id="topcontent">
+                <div id="title">
+                    <h3>Inicio</h3>
+                    <p>Busca entre todas las clases</p>
+                </div>
             </div>
             <div id="filter">
                 <div id="clases">
@@ -94,7 +92,7 @@
             <div id="main-content">
                 <?php 
                     foreach ($materias as $materia) { ?>
-                        <a class="item" href="#">
+                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
                             <p class="itemtitle"><?= $materia['Nombre'] ?></p>
                             <p class="itemsub"><?php

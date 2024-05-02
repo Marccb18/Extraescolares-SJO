@@ -9,7 +9,10 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showUsers = $db->query("SELECT * FROM personal");
+    $showClasses = $db->query("SELECT * FROM materia");
+
+    $query = $db->prepare('');
+    
     $db = null;
 ?>
 <!DOCTYPE html>
@@ -63,48 +66,26 @@
             <div id="topcontent">
                 <div id="title">
                     <h3>Usuarios</h3>
-                    <p>Busca entre todas los usuarios<p>
+                    <p>Busca entre todas las clases<p>
                 </div>
                 <a href="new_user.php" id="button-top">
                     <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
-                    Crear Usuario
+                    Crear Clase
                 </a>
             </div>
             <div class="main-content">
                 <table border="1">
                     <tr>
                         <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Rol</th>
+                        <th>Profesor</th>
+                        <th>Alumnos</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <?php foreach ($showUsers as $user) {?>
+                    <?php foreach ($showClasses as $class) {?>
                         <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $user['Nombre'] ?>
-                            </td>
-                            <td><?= $user['Apellidos'] ?></td>
-                            <td>
-                                <?php
-                                    switch ($user['ROL']) {
-                                        case 'PRO':
-                                            echo 'Profesor';
-                                            break;
-                                            
-                                        case 'COO':
-                                            echo 'Coordinador';
-                                            break;
-                                        
-                                        case 'ADM':
-                                            echo 'Administrador';
-                                            break;
-                                    }
-                                ?>
-                            </td>
-                            <td><a href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td><?= $class['Nombre'] ?></td>
+                            <td></td>
                         </tr>
                     <?php } ?>
                 </table>
