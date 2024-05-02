@@ -117,14 +117,20 @@ body {
     margin-top: 35px;
 }
 
+#topcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(228, 228, 231, 1);
+}
+
 #title {
     width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(228, 228, 231, 1);
 }
 
 #title h3 {
@@ -139,6 +145,20 @@ body {
     margin: 0;
     padding: 0;
     color: rgba(113, 113, 122, 1);
+}
+
+#crear-usuario {
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 12px 15px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-wrap: nowrap;
 }
 
 #filter {

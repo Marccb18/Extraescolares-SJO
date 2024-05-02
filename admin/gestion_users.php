@@ -64,9 +64,15 @@
     </div>
     <div id="main">
         <div id="content">
-            <div id="title">
-                <h3>Usuarios</h3>
-                <p>Busca entre todas los usuarios<p>
+            <div id="topcontent">
+                <div id="title">
+                    <h3>Usuarios</h3>
+                    <p>Busca entre todas los usuarios<p>
+                </div>
+                <a href="new_user.php" id="crear-usuario">
+                    <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
+                    Crear Usuario
+                </a>
             </div>
             <div class="main-content">
                 <table border="1">
