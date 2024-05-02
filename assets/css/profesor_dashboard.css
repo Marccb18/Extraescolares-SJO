@@ -292,6 +292,43 @@ body {
     background-color: transparent;
 }
 
+<<<<<<< HEAD
+.user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 226px;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #E4E4E7;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.user-info img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+}
+
+.vector-img {
+    transform: rotate(90deg);
+    width: 16px;
+}
+=======
 
 #main-content {
     display: flex;
@@ -333,3 +370,4 @@ body {
     color: rgba(113, 113, 122, 1);
     font-size: 0.8rem;
 }
+>>>>>>> 46ca93e901300633504952e4083ccbcb098a4275
