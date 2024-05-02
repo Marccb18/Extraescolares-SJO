@@ -13,8 +13,7 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showMaterias = $db->query("SELECT * FROM materia");
-    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+    $showUsers = $db->query("SELECT * FROM personal");
     $db = null;
 ?>
 <!DOCTYPE html>
@@ -66,38 +65,47 @@
     <div id="main">
         <div id="content">
             <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
+                <h3>Usuarios</h3>
+                <p>Busca entre todas los usuarios<p>
             </div>
-            <div id="filter">
-                <div id="clases">
-                    <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
-                            <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
-                    </div>
-                </div>
-            </div>
-            <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <div class="item">
-                            
-                        </div>
-                <?php }?>
+            <div class="main-content">
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Rol</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    <?php foreach ($showUsers as $user) {?>
+                        <tr>
+                            <td>
+                                <img src="../assets/img/user.svg" alt="user">
+                                <?= $user['Nombre'] ?>
+                            </td>
+                            <td><?= $user['Apellidos'] ?></td>
+                            <td>
+                                <?php
+                                    switch ($user['ROL']) {
+                                        case 'PRO':
+                                            echo 'Profesor';
+                                            break;
+                                            
+                                        case 'COO':
+                                            echo 'Coordinador';
+                                            break;
+                                        
+                                        case 'ADM':
+                                            echo 'Administrador';
+                                            break;
+                                    }
+                                ?>
+                            </td>
+                            <td><a href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
+                            <td><a href="#"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                        </tr>
+                    <?php } ?>
+                </table>
             </div>
         </div>
     </div>

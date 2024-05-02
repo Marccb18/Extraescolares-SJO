@@ -50,6 +50,7 @@ body {
 #titlelogo p {
     font-size: 0.9rem;
     font-family: Inter-B;
+    text-wrap: balance;
     margin: 0;
     padding: 0;
     display: flex;
