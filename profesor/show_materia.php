@@ -38,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 <body>
     <div id="aside">
