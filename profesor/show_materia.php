@@ -81,8 +81,12 @@
     <div id="main">
         <div id="content">
             <div id="title">
-                <h3>mondongo</h3>
-                <p>Wake up</p>
+                <php>
+                <h3><?=$class['Nombre']?></h3>
+                <p><?=$prof['Nombre']?></p>
+                <p><?=$prof['Apellidos']?></p>
+
+                </php>
             </div>
             <div id="main-content">
                                 <table border="1">
