@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 <body>
-    <h1>marta.sanchez@company.com</h1>
-    <h1>hashed_password890</h1>
     <form action="index.php" method="post">
         <?php if ($error != "") { ?>
             <div style="color: red;"><?php echo $error; ?></div>

@@ -21,7 +21,7 @@
 <body>
     <form action="insert_user.php" method="post">
         <p>DNI</p>
-        <input type="text" name="dni" value="">
+        <input type="text" name="dni" value="" maxlength="10">
         <p>Nombre</p>
         <input type="text" name="nombre" value="">
         <p>Apellidos</p>
@@ -31,7 +31,7 @@
         <p>Contraseña</p>
         <input type="text" name="password" value="">
         <p>Teléfono</p>
-        <input type="number" name="telefono" id="telefono" value="">
+        <input type="number" name="telefono" id="telefono" value="" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9">
         <p>Rol</p>
         <select name="rol" id="rol_id">
             <option value="PRO">Profesor</option>

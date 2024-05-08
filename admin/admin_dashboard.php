@@ -59,7 +59,7 @@
             </li>
         </ul>
 
-        <form action="../config/logout.php" method="post">
+        <form action="admin_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
