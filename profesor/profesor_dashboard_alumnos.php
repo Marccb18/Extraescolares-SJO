@@ -112,11 +112,11 @@ $db = null;
         <div id="content">
             <div id="top-content">
                 <ul>
-                    <li class="active">
+                    <li>
                         <a href="profesor_dashboard.php">Clases</a>
                     </li>
-                    <li>
-                        <a href="profesor_dashboard_alumnos.php">Alumnos</a>
+                    <li class="active">
+                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
                 <a href="#" id="pasar-lista">
@@ -126,29 +126,7 @@ $db = null;
             </div>
             <div id="title">
                 <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
-            </div>
-            <div id="filter">
-                <div id="clases">
-                    <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
-                            <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
-                    </div>
-                </div>
+                <p>Busca entre todes tus alumnes</p>
             </div>
             <div id="main-content">
                 <?php 
