@@ -6,22 +6,29 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
-
-$db = new PDO($conn, $fields['user'], $fields['pass']);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
-$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-$db = null;
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+if (isset($_POST['logout'])) {
+    require_once('../config/logout.php');
+    logout();
+    exit();
+}
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-    $db = null;
+
+    $query =  $db->prepare("SELECT * FROM alumno where ID_Materia IN (:id_materias)");
+    $id_materias = "";
+    foreach ($materias as $materia) {
+        $id_materias .= $materia['ID'] . ",";
+    }
+    $id_materias = substr($id_materias, 0, -1);
+    $query->bindParam(':id_materias',$id_materias);
+    $query->execute();
+    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,39 +136,14 @@ $db = null;
                 <p>Busca entre todes tus alumnes</p>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
+            <?php foreach ($alumnos as $alumno) {?>
+                    <tr>
+                        <td><?php echo $alumno['ID'];?></td>
+                        <td><?php echo $alumno['Nombre'];?></td>
+                        <td><?php echo $alumno['Apellidos'];?></td>
+                        <br>
+                        <br>
+                    </tr>
                 <?php }?>
             </div>
         </div>
