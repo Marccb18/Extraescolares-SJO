@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Sesión</title>
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="icon" href="./assets/img/logoSJO-fav.svg">
 </head>
 <body>
     <form action="index.php" method="post">
