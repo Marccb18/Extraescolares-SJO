@@ -95,7 +95,7 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Faltas</th>
-                        <th>Eliminar</th>
+                        <th>info</th>
                     </tr>
                     <?php foreach ($alumnos as $alumno) {?>
                         <tr>
@@ -106,8 +106,7 @@
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td>
                             </td>
-                            <td>0</td>
-                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td><a href="">info</a></td>
                         </tr>
                     <?php } ?>
                 </table> 
