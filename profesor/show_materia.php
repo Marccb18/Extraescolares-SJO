@@ -38,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 <body>
     <div id="aside">
@@ -81,8 +82,12 @@
     <div id="main">
         <div id="content">
             <div id="title">
-                <h3>mondongo</h3>
-                <p>Wake up</p>
+                <php>
+                <h3><?=$class['Nombre']?></h3>
+                <p><?=$prof['Nombre']?></p>
+                <p><?=$prof['Apellidos']?></p>
+
+                </php>
             </div>
             <div id="main-content">
                                 <table border="1">
@@ -90,7 +95,7 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Faltas</th>
-                        <th>Eliminar</th>
+                        <th>info</th>
                     </tr>
                     <?php foreach ($alumnos as $alumno) {?>
                         <tr>
@@ -101,8 +106,7 @@
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td>
                             </td>
-                            <td>0</td>
-                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td><a href="">info</a></td>
                         </tr>
                     <?php } ?>
                 </table> 

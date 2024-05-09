@@ -6,15 +6,31 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
-
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
+    exit();
 }
+
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+
+$listaMaterias = array(); // Array para almacenar los IDs de las materias
+
+$id_materias = array();
+
+foreach ($materias as $materia) {
+    array_push($id_materias,$materia['ID']);
+};
+$query =  $db->prepare("SELECT * FROM alumno where ID_Materia IN :id_materias");
+$query->bindParam(':id_materias', $id_materias);
+$query->execute();
+$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +79,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> 
+        </form>
         <div>
             <div class="user-info-container">
                 <div class="user-info">
@@ -72,10 +88,10 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
+            <div style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
             border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
                 <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
+                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;">
                     <li style="font-size: 14px; align-items: center;">
                         <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
                             <div style="display: flex;  align-items: center;">
@@ -92,7 +108,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
                             </div>
-                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
                         </a>
                     </li>
                 </ul>
@@ -105,11 +121,11 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         <div id="content">
             <div id="top-content">
                 <ul>
-                    <li class="active">
+                    <li>
                         <a href="profesor_dashboard.php">Clases</a>
                     </li>
-                    <li>
-                        <a href="profesor_dashboard_alumnos.php">Alumnos</a>
+                    <li class="active">
+                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
                 <a href="#" id="pasar-lista">
@@ -119,66 +135,44 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div id="title">
                 <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
-            </div>
-            <div id="filter">
-                <div id="clases">
-                    <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
-                            <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
-                    </div>
-                </div>
+                <p>Busca entre todes tus alumnes</p>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                <table border="1">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Materia</th>
+                        <th>Faltas</th>
+                        <th>info</th>
+                    </tr>
+                    <?php foreach ($alumnos as $alumno) { ?>
+                        <tr>
+                            <td>
+                                <img src="../assets/img/user.svg" alt="user">
+                                <?= $alumno['Nombre'] ?>
+                            </td>
+                            <td><?= $alumno['Apellidos'] ?></td>
+                            <td>
+                                <?php
+
+                                foreach ($materias as $materia) {
+                                        if ($materia['ID'] == $alumno['ID_Materia']) {
+                                            echo $materia['Nombre'] . "\n";
+                                        }
+                                    
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            </td>
+                            <td><a href="">info</a></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <?= $id_materias ?>
             </div>
+            <h1><?= $id_materias ?></h1>
         </div>
     </div>
 </body>
