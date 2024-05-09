@@ -165,9 +165,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         </tr>
                     <?php } ?>
                 </table>
-                <?= $id_materias ?>
             </div>
-            <h1><?= $id_materias ?></h1>
         </div>
     </div>
 </body>
