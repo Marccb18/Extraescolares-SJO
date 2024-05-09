@@ -14,9 +14,10 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showClasses = $db->query("SELECT * FROM materia");
+    $materias = $db->query("SELECT * FROM materia");
 
-    $query = $db->prepare('');
+
+
     
     $db = null;
 ?>
@@ -41,8 +42,8 @@
                     Inicio
                 </a>
             </li>
-            <li class="active">
-                <a href="#">
+            <li >
+                <a href="./gestion_users.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Usuarios
                 </a>
@@ -53,7 +54,7 @@
                     Sesiones
                 </a>
             </li>
-            <li>
+            <li class="active"> 
                 <a href="#">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
@@ -70,12 +71,12 @@
         <div id="content">
             <div id="topcontent">
                 <div id="title">
-                    <h3>Usuarios</h3>
-                    <p>Busca entre todas las clases<p>
+                    <h3>Materias</h3>
+                    <p>Busca entre todas las materias<p>
                 </div>
                 <a href="new_user.php" id="button-top">
                     <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
-                    Crear Clase
+                    Crear Materia
                 </a>
             </div>
             <div class="main-content">
@@ -87,9 +88,9 @@
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <?php foreach ($showClasses as $class) {?>
+                    <?php foreach ($materias as $materia) {?>
                         <tr>
-                            <td><?= $class['Nombre'] ?></td>
+                            <td><?= $materia['Nombre'] ?></td>
                             <td></td>
                         </tr>
                     <?php } ?>

@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>
