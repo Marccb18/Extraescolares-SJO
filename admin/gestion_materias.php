@@ -15,6 +15,13 @@
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $materias = $db->query("SELECT * FROM materia");
+    $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
+
+    $id_materias = array_column($materias,'ID');
+
+    $query = $db->prepare("SELECT * FROM personal WHERE DNI IN (" . implode(',', $id_materias) . ")");
+    $query->execute();
+    $profesores = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 

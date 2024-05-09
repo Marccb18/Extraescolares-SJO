@@ -25,6 +25,8 @@ $query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',
 $query->execute();
 $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$db = null;
+
 
 ?>
 <!DOCTYPE html>
