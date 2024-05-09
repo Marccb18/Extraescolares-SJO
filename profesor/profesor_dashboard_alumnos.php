@@ -25,6 +25,11 @@ $query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',
 $query->execute();
 $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$materiasMap = array();
+foreach($materias as $materia) {
+    $materiasMap[$materia['ID']] = $materia['Nombre'];
+}
+
 $db = null;
 
 
@@ -100,7 +105,7 @@ $db = null;
                     </li>
                     <li style="font-size: 14px;">
                         <a href="../config/logout.php" style="display: flex;  align-items: center;
-                         justify-content: space-between; align-items: center;">
+                        justify-content: space-between; align-items: center;">
                             <div style="display: flex;  align-items: center;">
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
@@ -151,15 +156,7 @@ $db = null;
                             </td>
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td>
-                                <?php
-
-                                foreach ($materias as $materia) {
-                                        if ($materia['ID'] == $alumno['ID_Materia']) {
-                                            echo $materia['Nombre'] . "\n";
-                                        }
-                                    
-                                }
-                                ?>
+                                <?= $materiasMap[$alumno['ID_Materia']] ?>
                             </td>
                             <td>
                             </td>
@@ -167,11 +164,8 @@ $db = null;
                         </tr>
                     <?php } ?>
                 </table>
-                <?= $id_materias ?>
             </div>
-            <h1><?= $id_materias ?></h1>
         </div>
     </div>
 </body>
-
 </html>

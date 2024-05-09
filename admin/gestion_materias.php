@@ -19,11 +19,18 @@
 
     $id_materias = array_column($materias,'ID');
 
-    $query = $db->prepare("SELECT * FROM personal WHERE DNI IN (" . implode(',', $id_materias) . ")");
+    $query = $db->prepare("SELECT * FROM personal WHERE ROL = 'PRO'");
     $query->execute();
     $profesores = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    $query = $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
+    $query->execute();
+    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    $profesores_map = array();
+    foreach ($profesores as $profesor) {
+        $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
+    }
 
     
     $db = null;
@@ -100,12 +107,37 @@
                     <?php foreach ($materias as $materia) {?>
                         <tr>
                             <td><?= $materia['Nombre'] ?></td>
-                            <td></td>
+                            <td>
+                                <?= $profesores_map[$materia['ID_Profesor']] ?? '-' ?>
+                            </td>
+                            <td>
+                                <?php 
+                                    $count = 0;
+                                    foreach ($alumnos as $alumno) {
+                                        if ($alumno['ID_Materia'] == $materia['ID']) {
+                                            $count++;
+                                        }
+                                    }
+                                    echo $count;
+                                ?>
+                            </td>
+                            <td>
+                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
+                                    <img src="../assets/img/pen.svg"" alt="">
+                                    Editar
+                                </a>
+                            </td>
+                            <td>
+                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
+                                    <img src="../assets/img/trash.svg" alt="">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </table>
             </div>
-        </div>
+        </div>  
     </div>
 </body>
 </html>
