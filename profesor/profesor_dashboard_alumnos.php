@@ -15,18 +15,13 @@ if (isset($_POST['logout'])) {
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+$showMaterias = $db->prepare("SELECT * FROM materia WHERE ID_Profesor = :profesor_id");
+$showMaterias->execute(array(':profesor_id' => $_SESSION['id']));
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
-$listaMaterias = array(); // Array para almacenar los IDs de las materias
+$id_materias = array_column($materias, 'ID');
 
-$id_materias = array();
-
-foreach ($materias as $materia) {
-    array_push($id_materias,$materia['ID']);
-};
-$query =  $db->prepare("SELECT * FROM alumno where ID_Materia IN :id_materias");
-$query->bindParam(':id_materias', $id_materias);
+$query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
 $query->execute();
 $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
