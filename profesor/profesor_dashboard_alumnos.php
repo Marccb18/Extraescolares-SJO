@@ -12,21 +12,23 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
-    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
-    $query =  $db->prepare("SELECT * FROM alumno where ID_Materia IN (:id_materias)");
-    $id_materias = "";
-    foreach ($materias as $materia) {
-        $id_materias .= $materia['ID'] . ",";
-    }
-    $id_materias = substr($id_materias, 0, -1);
-    $query->bindParam(':id_materias',$id_materias);
-    $query->execute();
-    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+$listaMaterias = array(); // Array para almacenar los IDs de las materias
+
+$id_materias = array();
+
+foreach ($materias as $materia) {
+    array_push($id_materias,$materia['ID']);
+};
+$query =  $db->prepare("SELECT * FROM alumno where ID_Materia IN :id_materias");
+$query->bindParam(':id_materias', $id_materias);
+$query->execute();
+$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -77,7 +79,7 @@ if (isset($_POST['logout'])) {
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> 
+        </form>
         <div>
             <div class="user-info-container">
                 <div class="user-info">
@@ -86,10 +88,10 @@ if (isset($_POST['logout'])) {
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
+            <div style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
             border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
                 <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
+                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;">
                     <li style="font-size: 14px; align-items: center;">
                         <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
                             <div style="display: flex;  align-items: center;">
@@ -106,7 +108,7 @@ if (isset($_POST['logout'])) {
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
                             </div>
-                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
                         </a>
                     </li>
                 </ul>
@@ -136,16 +138,41 @@ if (isset($_POST['logout'])) {
                 <p>Busca entre todes tus alumnes</p>
             </div>
             <div id="main-content">
-            <?php foreach ($alumnos as $alumno) {?>
+                <table border="1">
                     <tr>
-                        <td><?php echo $alumno['ID'];?></td>
-                        <td><?php echo $alumno['Nombre'];?></td>
-                        <td><?php echo $alumno['Apellidos'];?></td>
-                        <br>
-                        <br>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Materia</th>
+                        <th>Faltas</th>
+                        <th>info</th>
                     </tr>
-                <?php }?>
+                    <?php foreach ($alumnos as $alumno) { ?>
+                        <tr>
+                            <td>
+                                <img src="../assets/img/user.svg" alt="user">
+                                <?= $alumno['Nombre'] ?>
+                            </td>
+                            <td><?= $alumno['Apellidos'] ?></td>
+                            <td>
+                                <?php
+
+                                foreach ($materias as $materia) {
+                                        if ($materia['ID'] == $alumno['ID_Materia']) {
+                                            echo $materia['Nombre'] . "\n";
+                                        }
+                                    
+                                }
+                                ?>
+                            </td>
+                            <td>
+                            </td>
+                            <td><a href="">info</a></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <?= $id_materias ?>
             </div>
+            <h1><?= $id_materias ?></h1>
         </div>
     </div>
 </body>

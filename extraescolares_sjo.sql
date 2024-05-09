@@ -151,7 +151,7 @@ INSERT INTO `personal` (`DNI`, `Nombre`, `Apellidos`, `Email`, `ROL`, `Password`
 ('00123456C', 'Pedro', 'Ruiz Sanchez', 'pedro.ruiz@company.com', 'COO', 'hashed_password789', 234567890),
 ('11223344E', 'Luis', 'Blanco Torres', 'luis.blanco@company.com', 'ADM', 'hashed_password345', 456789012),
 ('12345678A', 'Juan', 'Perez Garcia', 'juan.perez@company.com', 'PRO', 'hashed_password123', 123456789),
-('22110033J', 'Marta', 'Sanchez Gonzalez', 'marta.sanchez@company.com', 'PRO', '  ', 901234567),
+('22110033J', 'Marta', 'Sanchez Gonzalez', 'marta.sanchez@company.com', 'PRO', 'hashed_password890', 901234567),
 ('33221100G', 'David', 'Garcia Alonso', 'david.garcia@company.com', 'PRO', 'hashed_password901', 678901234),
 ('44112233H', 'Laura', 'Lopez Jimenez', 'laura.lopez@company.com', 'ADM', 'hashed_password234', 789012345),
 ('55443322F', 'Sofia', 'Diaz Hernandez', 'sofia.diaz@company.com', 'COO', 'hashed_password678', 567890123),
