@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require('../config/conexion.php');
 
     if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM' ) {
         header('Location: ../index.php');
@@ -9,6 +10,13 @@
         require_once('../config/logout.php');
         logout();
     }
+
+    $db = new PDO($conn, $fields['user'], $fields['pass']);
+    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $profesores = $db->query("SELECT * FROM personal WHERE ROL = 'PRO'");
+    $profesores = $profesores->fetchAll(PDO::FETCH_ASSOC);
+
+    $db = null;
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +43,11 @@
         <p>Hora</p>
         <input type="time" name="hora" id="hora">
         <p>Profesor</p>
+        <select name="profesor" id="profesor">
+            <?php foreach ($profesores as $profesor) { ?>
+                <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
+            <?php } ?>
+        </select>
     </form>
 </body>
 </html>
