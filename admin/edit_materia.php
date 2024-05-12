@@ -2,10 +2,11 @@
     session_start();
     require('../config/conexion.php');
 
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM' ) {
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
         header('Location: ../index.php');
         exit();
     }
+
     if (isset($_POST['logout'])) {
         require_once('../config/logout.php');
         logout();
@@ -13,7 +14,14 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $profesores = $db->query("SELECT * FROM personal WHERE ROL = 'PRO'");
+
+    $materia_id = $_GET['id'];
+
+    $query = $db->prepare('SELECT FROM materia WHERE ID = ?');
+    $query->execute([$materia_id]);
+    $materia = $query->fetch(PDO::FETCH_ASSOC);
+
+    $profesores = $db->query("SELECT * FROM personal WHERE ROL = 'PRO' ");
     $profesores = $profesores->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;
@@ -24,15 +32,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Materia</title>
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+    <title>Editar Usuario</title>
 </head>
 <body>
-    <form action="insert_materia.php" method="post">
+    <form action="update_materia.php" method="post">
+        <input type="hidden" name="id" value="<?= $materia_id ?>">
         <p>Nombre</p>
         <input type="text" name="nombre" value="" id="">
         <p>Dia</p>
         <select name="dia" id="dia">
-            <option value="LUN">Lunes</option>
+        <option value="LUN">Lunes</option>
             <option value="MAR">Martes</option>
             <option value="MIE">Miércoles</option>
             <option value="JUE">Jueves</option>
@@ -49,7 +59,7 @@
             <?php } ?>
         </select>
         <br><br>
-        <input type="submit" value="Crear">
+        <input type="submit" value="Confirmar">
     </form>
 </body>
 </html>

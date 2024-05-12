@@ -24,9 +24,8 @@
             $query->bindParam(':rol', $rol);
             $query->execute();
             
-            // Aquí puedes realizar acciones adicionales después de la inserción, si es necesario
             $db = null;
-            header('Location: admin_dashboard.php');
+            header('Location: gestion_users.php');
             exit();
         } catch (PDOException $e) {
             echo "Error al insertar el registro: " . $e->getMessage();
