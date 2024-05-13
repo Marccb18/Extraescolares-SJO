@@ -44,8 +44,8 @@
     <table border="1">
         <?php foreach ($alumnos as $alumno) { ?>
             <tr>
-                <td class="materis"><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></td>
-                <td class="materis"><a href="" onclick="<?php alumnoNuevo($alumno) ?>">Añadir</a></td>
+                    <td class="materis"><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></td>
+                    <td ><a href="" onclick="<?php alumnoNuevo($alumno) ?>">Añadir</a></td>
             </tr>
         <?php } ?>
     </table>
