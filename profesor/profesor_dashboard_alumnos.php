@@ -25,8 +25,12 @@ $query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',
 $query->execute();
 $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
+$showFaltas->execute();
+$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
+
 $materiasMap = array();
-foreach($materias as $materia) {
+foreach ($materias as $materia) {
     $materiasMap[$materia['ID']] = $materia['Nombre'];
 }
 
@@ -151,6 +155,15 @@ $db = null;
                                 <?= $materiasMap[$alumno['ID_Materia']] ?>
                             </td>
                             <td>
+                                <?php
+                                $count = 0;
+                                foreach ($Faltas as $Falta) {
+                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
+                                        $count++;
+                                    }
+                                }
+                                echo $count;
+                                ?>
                             </td>
                         </tr>
                     <?php } ?>
@@ -159,4 +172,5 @@ $db = null;
         </div>
     </div>
 </body>
+
 </html>

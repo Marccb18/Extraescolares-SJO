@@ -27,6 +27,10 @@
     $query->execute();
     $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    $showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia = :id_materia");
+    $showFaltas->bindParam(':id_materia', $class['ID']);
+    $showFaltas->execute();
+    $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;
 ?>
@@ -98,6 +102,16 @@
                             </td>
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td>
+                            <?php
+                                $count = 0;
+                                foreach ($Faltas as $Falta) {
+                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
+                                        $count++;
+                                    }
+                                }
+                                echo $count;
+                                ?>
+
                             </td>
                         </tr>
                     <?php } ?>

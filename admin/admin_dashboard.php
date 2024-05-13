@@ -17,6 +17,8 @@
     $showMaterias = $db->query("SELECT * FROM materia");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     $db = null;
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -11,6 +11,16 @@ if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
 }
+function getDayOfWeek() {
+    $timestamp = time();
+  
+    $formatter = new IntlDateFormatter('es-ES', IntlDateFormatter::SHORT); // 'es-ES' for Spanish (Spain)
+    $dayOfWeek = mb_strtoupper(mb_substr($formatter->format($timestamp), 0, 3), 'UTF-8');
+    
+    return $dayOfWeek;
+  
+  }
+  
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
@@ -106,14 +116,10 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="pasar-lista">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
             </div>
             <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
+                <h3>Tus clases de hoy <?php echo getDayOfWeek() ?> </h3>
+                <p>Escoge una clase para pasar lista</p>
             </div>
             <div id="filter">
                 <div id="clases">
