@@ -12,13 +12,21 @@ if (isset($_POST['logout'])) {
     logout();
 }
 function getDayOfWeek() {
-    $timestamp = time();
+
+    $dayOfWeek = date('w');
   
-    $formatter = new IntlDateFormatter('es-ES', IntlDateFormatter::SHORT); // 'es-ES' for Spanish (Spain)
-    $dayOfWeek = mb_strtoupper(mb_substr($formatter->format($timestamp), 0, 3), 'UTF-8');
+    // Define an array with Spanish day names (first 3 letters)
+    $spanishDays = array("dom", "lun", "mar", "mie", "jue", "vie", "sab");
     
-    return $dayOfWeek;
-  
+    // Check if dayOfWeek is within the valid range (0-6)
+    if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
+      // Return the first 3 letters in uppercase from the array
+      return strtoupper($spanishDays[$dayOfWeek]);
+    } else {
+      // Handle invalid day (optional, you can throw an exception or return a default value)
+      return "ERR";
+    }
+    
   }
   
 $db = new PDO($conn, $fields['user'], $fields['pass']);
@@ -118,7 +126,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
             <div id="title">
-                <h3>Tus clases de hoy <?php echo getDayOfWeek() ?> </h3>
+                <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
             <div id="filter">
@@ -145,7 +153,9 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div id="main-content">
                 <?php 
-                    foreach ($materias as $materia) { ?>
+                    foreach ($materias as $materia) {
+                        if $materia['dia'] ?>
+
                         <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
                             <p class="itemtitle"><?= $materia['Nombre'] ?></p>
