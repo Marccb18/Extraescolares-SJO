@@ -1,7 +1,7 @@
 let search = document.getElementById('search');
 let optionsMateris = document.getElementsByClassName('materis');
 
-search.addEventListener('keyup', e => {
+search?.addEventListener('keyup', e => {
     let keyword ='';
 
     if (e.key === 'Escape' || search.value === '') {
