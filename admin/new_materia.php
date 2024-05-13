@@ -27,7 +27,7 @@
     <title>Crear Materia</title>
 </head>
 <body>
-    <form action="insert_materia.php">
+    <form action="insert_materia.php" method="post">
         <p>Nombre</p>
         <input type="text" name="nombre" value="" id="">
         <p>Dia</p>
@@ -48,6 +48,8 @@
                 <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
             <?php } ?>
         </select>
+        <br><br>
+        <input type="submit" value="Crear">
     </form>
 </body>
 </html>
