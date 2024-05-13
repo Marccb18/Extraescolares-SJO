@@ -70,14 +70,7 @@ $db = null;
                     Sesiones
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <img src="../assets/img/layout-grid.svg" alt="Layout icon">
-                    Materias
-                </a>
-            </li>
         </ul>
-
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
@@ -146,7 +139,6 @@ $db = null;
                         <th>Apellidos</th>
                         <th>Materia</th>
                         <th>Faltas</th>
-                        <th>info</th>
                     </tr>
                     <?php foreach ($alumnos as $alumno) { ?>
                         <tr>
@@ -160,7 +152,6 @@ $db = null;
                             </td>
                             <td>
                             </td>
-                            <td><a href="">info</a></td>
                         </tr>
                     <?php } ?>
                 </table>
