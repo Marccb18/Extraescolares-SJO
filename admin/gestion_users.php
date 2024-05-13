@@ -24,6 +24,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+
 </head>
 <body>
     <div id="aside">
@@ -51,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>

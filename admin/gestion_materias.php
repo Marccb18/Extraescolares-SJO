@@ -14,9 +14,24 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showClasses = $db->query("SELECT * FROM materia");
+    $materias = $db->query("SELECT * FROM materia");
+    $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = $db->prepare('');
+    $id_materias = array_column($materias,'ID');
+
+    $query = $db->prepare("SELECT * FROM personal WHERE ROL = 'PRO'");
+    $query->execute();
+    $profesores = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $query = $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
+    $query->execute();
+    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $profesores_map = array();
+    foreach ($profesores as $profesor) {
+        $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
+    }
+
     
     $db = null;
 ?>
@@ -27,6 +42,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+
 </head>
 <body>
     <div id="aside">
@@ -41,8 +58,8 @@
                     Inicio
                 </a>
             </li>
-            <li class="active">
-                <a href="#">
+            <li >
+                <a href="./gestion_users.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Usuarios
                 </a>
@@ -53,7 +70,7 @@
                     Sesiones
                 </a>
             </li>
-            <li>
+            <li class="active"> 
                 <a href="#">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
@@ -70,12 +87,12 @@
         <div id="content">
             <div id="topcontent">
                 <div id="title">
-                    <h3>Usuarios</h3>
-                    <p>Busca entre todas las clases<p>
+                    <h3>Materias</h3>
+                    <p>Busca entre todas las materias<p>
                 </div>
-                <a href="new_user.php" id="button-top">
-                    <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
-                    Crear Clase
+                <a href="new_materia.php" id="button-top">
+                    <img src="../assets/img/plus-circled.svg" alt="Crear Materia">
+                    Crear Materia
                 </a>
             </div>
             <div class="main-content">
@@ -87,15 +104,40 @@
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <?php foreach ($showClasses as $class) {?>
+                    <?php foreach ($materias as $materia) {?>
                         <tr>
-                            <td><?= $class['Nombre'] ?></td>
-                            <td></td>
+                            <td><?= $materia['Nombre'] ?></td>
+                            <td>
+                                <?= $profesores_map[$materia['ID_Profesor']] ?? '-' ?>
+                            </td>
+                            <td>
+                                <?php 
+                                    $count = 0;
+                                    foreach ($alumnos as $alumno) {
+                                        if ($alumno['ID_Materia'] == $materia['ID']) {
+                                            $count++;
+                                        }
+                                    }
+                                    echo $count;
+                                ?>
+                            </td>
+                            <td>
+                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
+                                    <img src="../assets/img/pen.svg"" alt="">
+                                    Editar
+                                </a>
+                            </td>
+                            <td>
+                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
+                                    <img src="../assets/img/trash.svg" alt="">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </table>
             </div>
-        </div>
+        </div>  
     </div>
 </body>
 </html>

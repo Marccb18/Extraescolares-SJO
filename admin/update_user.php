@@ -27,7 +27,7 @@
             $query->execute();
 
             $db = null;
-            header('Location: admin_dashboard.php');
+            header('Location: gestion_users.php');
             exit();
 
         } catch (PDOException $e) {
@@ -35,7 +35,7 @@
         }
     } else {
         $db = null;
-        header('Location: admin_dashboard.php');
+        header('Location: gestion_users.php');
         exit();
     }
 

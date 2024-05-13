@@ -21,6 +21,12 @@
     $query->execute([$user_id]);
     $user = $query->fetch(PDO::FETCH_ASSOC);
     $db = null;
+
+    function comprobarOpcion($v, $user) {
+        if ($v == $user['ROL']) {
+            echo 'selected';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +34,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+
     <title>Editar Usuario</title>
 </head>
 <body>
@@ -45,9 +53,9 @@
         <input type="number" name="telefono" id="telefono" value="<?= $user['Telefono'] ?>">
         <p>Rol</p>
         <select name="rol" id="rol_id">
-            <option value="PRO">Profesor</option>
-            <option value="COO">Coordinador</option>
-            <option value="ADM">Administrador</option>
+            <option value="PRO" <?php comprobarOpcion('PRO',$user) ?> >Profesor</option>
+            <option value="COO" <?php comprobarOpcion('COO',$user) ?> >Coordinador</option>
+            <option value="ADM" <?php comprobarOpcion('ADM',$user) ?> >Administrador</option>
         </select>
         <input type="submit" value="Confirmar">
     </form>
