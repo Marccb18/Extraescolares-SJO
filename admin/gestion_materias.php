@@ -90,8 +90,8 @@
                     <h3>Materias</h3>
                     <p>Busca entre todas las materias<p>
                 </div>
-                <a href="new_user.php" id="button-top">
-                    <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
+                <a href="new_materia.php" id="button-top">
+                    <img src="../assets/img/plus-circled.svg" alt="Crear Materia">
                     Crear Materia
                 </a>
             </div>
