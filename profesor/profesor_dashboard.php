@@ -63,40 +63,40 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> 
+        </form>
         <div>
-            <div class="user-info-container">
+            <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
-            border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
-                <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
-                    <li style="font-size: 14px; align-items: center;">
-                        <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
+            <div class="optionsProfile" id="optionsProfile" onclick="showOptions()">
+                <ul>
+                    <li>
+                        <a href="">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="width: 16px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
                                 Ver Perfil
                             </div>
-                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                            <img src="../assets/img/chevron-right.svg" alt="">
                         </a>
                     </li>
-                    <li style="font-size: 14px;">
-                        <a href="../config/logout.php" style="display: flex;  align-items: center;
-                         justify-content: space-between; align-items: center;">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
-                                Cerrar Sesion
-                            </div>
-                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
-                        </a>
+                    <li>
+                        <form action="profesor_dashboard.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
+
         </div>
 
 
@@ -128,8 +128,8 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                         <select name="clases">
                             <option value="">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -144,43 +144,44 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                <?php
+                foreach ($materias as $materia) { ?>
+                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                        <img src="../assets/img/logoSJO.svg" alt="logo">
+                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                        <p class="itemsub"><?php
+                                            switch ($materia['Dia']) {
+                                                case 'LUN':
+                                                    echo 'Lunes ';
+                                                    break;
+                                                case 'MAR':
+                                                    echo 'Martes ';
+                                                    break;
+                                                case 'MIE':
+                                                    echo 'Miércoles ';
+                                                    break;
+                                                case 'JUE':
+                                                    echo 'Jueves ';
+                                                    break;
+                                                case 'VIE':
+                                                    echo 'Viernes ';
+                                                    break;
+                                                case 'SAB':
+                                                    echo 'Sábado ';
+                                                    break;
+                                                case 'DOM';
+                                                    echo 'Domingo ';
+                                                    break;
+                                            } ?>
+                            ·
+                            <?= date('H:i', strtotime($materia['Hora'])) ?>
+                        </p>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 
 </html>
