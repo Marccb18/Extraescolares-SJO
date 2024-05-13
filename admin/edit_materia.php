@@ -17,14 +17,23 @@
 
     $materia_id = $_GET['id'];
 
-    $query = $db->prepare('SELECT FROM materia WHERE ID = ?');
-    $query->execute([$materia_id]);
+    $query = $db->prepare('SELECT * FROM materia WHERE ID = :id');
+    $query->bindParam(':id', $materia_id);
+    $query->execute();
     $materia = $query->fetch(PDO::FETCH_ASSOC);
 
     $profesores = $db->query("SELECT * FROM personal WHERE ROL = 'PRO' ");
     $profesores = $profesores->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;
+
+    function comprobarOption($v, $x) {
+        if ($v == $x) {
+            echo 'selected';
+        }
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,25 +46,25 @@
 </head>
 <body>
     <form action="update_materia.php" method="post">
-        <input type="hidden" name="id" value="<?= $materia_id ?>">
+        <input type="hidden" name="id" value=<?= $materia_id ?> >
         <p>Nombre</p>
-        <input type="text" name="nombre" value="" id="">
+        <input type="text" name="nombre" value="<?= $materia['Nombre'] ?>" id="nombre">
         <p>Dia</p>
         <select name="dia" id="dia">
-        <option value="LUN">Lunes</option>
-            <option value="MAR">Martes</option>
-            <option value="MIE">Miércoles</option>
-            <option value="JUE">Jueves</option>
-            <option value="VIE">Viernes</option>
-            <option value="SAB">Sábado</option>
-            <option value="DOM">Domingo</option>
+            <option value="LUN" <?php comprobarOption('LUN', $materia['Dia']) ?> >Lunes</option>
+            <option value="MAR" <?php comprobarOption('MAR', $materia['Dia']) ?> >Martes</option>
+            <option value="MIE" <?php comprobarOption('MIE', $materia['Dia']) ?> >Miércoles</option>
+            <option value="JUE" <?php comprobarOption('JUE', $materia['Dia']) ?> >Jueves</option>
+            <option value="VIE" <?php comprobarOption('VIE', $materia['Dia']) ?> >Viernes</option>
+            <option value="SAB" <?php comprobarOption('SAB', $materia['Dia']) ?> >Sábado</option>
+            <option value="DOM" <?php comprobarOption('DOM', $materia['Dia']) ?> >Domingo</option>
         </select>
         <p>Hora</p>
-        <input type="time" name="hora" id="hora">
+        <input type="time" name="hora" id="hora" value="<?= $materia['Hora'] ?>">
         <p>Profesor</p>
         <select name="profesor" id="profesor">
             <?php foreach ($profesores as $profesor) { ?>
-                <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
+                <option value="<?= $profesor['DNI'] ?>" <?php comprobarOption($profesor['DNI'], $materia['ID_Profesor']) ?> ><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
             <?php } ?>
         </select>
         <br><br>
