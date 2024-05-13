@@ -56,7 +56,7 @@ $db = null;
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -75,7 +75,7 @@ $db = null;
             </li>
         </ul>
 
-        
+
         <form action="coord_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
@@ -100,27 +100,43 @@ $db = null;
                     </tr>
                     <?php foreach ($alumnos as $alumno) { ?>
                         <form method="post">
-                        <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $alumno['Nombre'] ?>
-                            </td>
-                            <td><?= $alumno['Apellidos'] ?></td>
-                            <td>
-                                    <input type="checkbox" name="my_checkbox" id="my_checkbox"> Falta<br>
-                                    <br>
-
-                            </td>
-                        </tr>
-                        
-                    <?php } ?>
+                            <tr>
+                                <td>
+                                    <img src="../assets/img/user.svg" alt="user">
+                                    <?= $alumno['Nombre'] ?>
+                                </td>
+                                <td><?= $alumno['Apellidos'] ?></td>
+                                <td>
+                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>"> Falta<br>
+                                </td>
+                            </tr>
+                        <?php } ?>
                 </table>
                 <input type="submit" name="submit_button" value="Submit">
-                        </form>
-
+                </form>
             </div>
         </div>
     </div>
 </body>
-
 </html>
+<?php
+$currentDate = date('Y-m-d');
+// $currentDate = '2020-04-6';
+if (isset($_POST['submit_button'])) {
+    if (!empty($_POST['selected_alumnos'])) {
+        $selectedStudents = $_POST['selected_alumnos'];
+        $db = new PDO($conn, $fields['user'], $fields['pass']);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        foreach ($selectedStudents as $stud) {
+            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
+            $query->bindParam(':id_alumno', $stud);
+            $query->bindParam(':id_materia', $class_id);
+            $query->bindParam(':fecha', $currentDate);
+            $query->execute();
+            $prof = $query->fetch(PDO::FETCH_ASSOC);
+        }
+    }
+}
+$db = null;
+?>

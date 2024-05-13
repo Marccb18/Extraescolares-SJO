@@ -11,24 +11,24 @@ if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
 }
-function getDayOfWeek() {
+function getDayOfWeek()
+{
 
     $dayOfWeek = date('w');
-  
+
     // Define an array with Spanish day names (first 3 letters)
     $spanishDays = array("dom", "lun", "mar", "mie", "jue", "vie", "sab");
-    
+
     // Check if dayOfWeek is within the valid range (0-6)
     if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
-      // Return the first 3 letters in uppercase from the array
-      return strtoupper($spanishDays[$dayOfWeek]);
+        // Return the first 3 letters in uppercase from the array
+        return strtoupper($spanishDays[$dayOfWeek]);
     } else {
-      // Handle invalid day (optional, you can throw an exception or return a default value)
-      return "ERR";
+        // Handle invalid day (optional, you can throw an exception or return a default value)
+        return "ERR";
     }
-    
-  }
-  
+}
+
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
@@ -53,7 +53,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -75,7 +75,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> 
+        </form>
         <div>
             <div class="user-info-container">
                 <div class="user-info">
@@ -84,10 +84,10 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
+            <div style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
             border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
                 <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
+                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;">
                     <li style="font-size: 14px; align-items: center;">
                         <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
                             <div style="display: flex;  align-items: center;">
@@ -104,7 +104,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
                             </div>
-                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
                         </a>
                     </li>
                 </ul>
@@ -129,65 +129,26 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
-            <div id="filter">
-                <div id="clases">
-                    <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
-                            <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
-                    </div>
-                </div>
-            </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) {
-                        if $materia['dia'] ?>
+                <?php
+                $count = 0;
+                foreach ($materias as $materia) {
+                    if ($materia['Dia'] == getDayOfWeek()
+                    ) { $count++;?>
 
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                        <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
                             <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
+                            <p class="itemsub">
+                                <?= $materia['Dia'] ?>
+                                <?= date('H:i', strtotime($materia['Hora'])) ?>
                             </p>
+
                         </a>
-                <?php }?>
+                        
+                <?php }
+                } if($count==0){ echo '<h2>no hay materias hoy</h2>';} $matid=$materias[0]['ID'];
+                if ($count==1){  header("Location: pasar_lista.php?id=$matid ");}?>
             </div>
         </div>
     </div>

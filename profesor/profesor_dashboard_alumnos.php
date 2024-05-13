@@ -57,7 +57,7 @@ $db = null;
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -127,7 +127,7 @@ $db = null;
                         <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="#" id="pasar-lista">
+                <a href="select_pasar_lista.php" id="pasar-lista">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>
