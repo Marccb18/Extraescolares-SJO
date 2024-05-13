@@ -65,7 +65,7 @@ $db = null;
 
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
-        </form> 
+        </form>
         <div>
             <div class="user-info-container">
                 <div class="user-info">
@@ -74,28 +74,30 @@ $db = null;
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div  style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
+            <div style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
             border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
                 <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;" >
-                    <li style="font-size: 14px; align-items: center;">
-                        <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
+                padding: 0; margin: 0; display: flex; flex-direction: column;
+                 justify-content: space-around; height: 100%;">
+                    <li style="font-size: 14px;">
+                        <a href="" style="display: flex;  align-items: center; justify-content: space-between; text-decoration: none;">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="width: 16px;">
+                                <img src="../assets/img/person.svg" alt="" style="width: 16px; margin-right: 8px;">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
                         </a>
                     </li>
                     <li style="font-size: 14px;">
-                        <a href="../config/logout.php" style="display: flex;  align-items: center;
-                         justify-content: space-between; align-items: center;">
+                    <form action="profesor_dashboard.php" method="post">
+                    <button type="submit" name="logout" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none; border: none; background: none; cursor: pointer; padding: 0; outline: none; width: 100%;">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
+                                <img src="../assets/img/logout.svg" alt="" style="width: 16px;  margin-right: 8px;">
                                 Cerrar Sesion
                             </div>
-                           <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
-                        </a>
+                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                        </button>  
+                    </form> 
                     </li>
                 </ul>
             </div>
@@ -130,8 +132,8 @@ $db = null;
                         <select name="clases">
                             <option value="">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -146,40 +148,40 @@ $db = null;
                 </div>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                <?php
+                foreach ($materias as $materia) { ?>
+                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                        <img src="../assets/img/logoSJO.svg" alt="logo">
+                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                        <p class="itemsub"><?php
+                                            switch ($materia['Dia']) {
+                                                case 'LUN':
+                                                    echo 'Lunes ';
+                                                    break;
+                                                case 'MAR':
+                                                    echo 'Martes ';
+                                                    break;
+                                                case 'MIE':
+                                                    echo 'Miércoles ';
+                                                    break;
+                                                case 'JUE':
+                                                    echo 'Jueves ';
+                                                    break;
+                                                case 'VIE':
+                                                    echo 'Viernes ';
+                                                    break;
+                                                case 'SAB':
+                                                    echo 'Sábado ';
+                                                    break;
+                                                case 'DOM';
+                                                    echo 'Domingo ';
+                                                    break;
+                                            } ?>
+                            ·
+                            <?= date('H:i', strtotime($materia['Hora'])) ?>
+                        </p>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>

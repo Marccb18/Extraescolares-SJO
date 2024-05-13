@@ -292,7 +292,6 @@ body {
     background-color: transparent;
 }
 
-<<<<<<< HEAD
 .user-info-container {
     display: flex;
     justify-content: space-between;
@@ -328,7 +327,6 @@ body {
     transform: rotate(90deg);
     width: 16px;
 }
-=======
 
 #main-content {
     display: flex;
@@ -370,4 +368,3 @@ body {
     color: rgba(113, 113, 122, 1);
     font-size: 0.8rem;
 }
->>>>>>> 46ca93e901300633504952e4083ccbcb098a4275
