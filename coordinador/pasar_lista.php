@@ -45,8 +45,8 @@ $db = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <title>Coord Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -58,7 +58,7 @@ $db = null;
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="profesor_dashboard.php">
+                <a href="coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -78,7 +78,7 @@ $db = null;
         </ul>
 
 
-        <form action="prof_dashboard.php" method="post">
+        <form action="coord_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
 
@@ -155,7 +155,7 @@ if (isset($_POST['submit_button'])) {
             }
         }
     }
-    header("Location: profesor_dashboard.php");
+    header("Loccoord.php");
     exit();
 }
 $db = null;
