@@ -6,6 +6,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
+$currentDate = date('Y-m-d');
 
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
@@ -27,8 +28,9 @@ $query->bindParam(':id_materia', $class['ID']);
 $query->execute();
 $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia = :id_materia");
+$showFaltas = $db->prepare("SELECT * FROM faltas WHERE (ID_Materia = :id_materia AND Fecha = :Fecha)");
 $showFaltas->bindParam(':id_materia', $class['ID']);
+$showFaltas->bindParam(':Fecha', $currentDate);
 $showFaltas->execute();
 $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 
@@ -76,7 +78,7 @@ $db = null;
         </ul>
 
 
-        <form action="coord_dashboard.php" method="post">
+        <form action="prof_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
 
@@ -98,7 +100,13 @@ $db = null;
                         <th>Apellidos</th>
                         <th>Falta</th>
                     </tr>
-                    <?php foreach ($alumnos as $alumno) { ?>
+                    <?php foreach ($alumnos as $alumno) {
+                        $check = '';
+                        foreach ($Faltas as $falta) {
+                            if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
+                                $check = 'Checked    ';
+                            }
+                        } ?>
                         <form method="post">
                             <tr>
                                 <td>
@@ -107,7 +115,7 @@ $db = null;
                                 </td>
                                 <td><?= $alumno['Apellidos'] ?></td>
                                 <td>
-                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>"> Falta<br>
+                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?>> Falta<br>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -118,15 +126,15 @@ $db = null;
         </div>
     </div>
 </body>
+
 </html>
 <?php
-$currentDate = date('Y-m-d');
 // $currentDate = '2020-04-6';
 if (isset($_POST['submit_button'])) {
+    $db = new PDO($conn, $fields['user'], $fields['pass']);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (!empty($_POST['selected_alumnos'])) {
         $selectedStudents = $_POST['selected_alumnos'];
-        $db = new PDO($conn, $fields['user'], $fields['pass']);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         foreach ($selectedStudents as $stud) {
             $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
@@ -134,9 +142,21 @@ if (isset($_POST['submit_button'])) {
             $query->bindParam(':id_materia', $class_id);
             $query->bindParam(':fecha', $currentDate);
             $query->execute();
-            $prof = $query->fetch(PDO::FETCH_ASSOC);
+        }
+    } else {
+        foreach ($alumnos as $alumno) {
+            foreach ($Faltas as $falta) {
+                if ($alumno['ID'] == $falta['ID_Alumno']) {
+                    $query = $db->prepare('DELETE FROM faltas WHERE ID_Alumno = :id_alumno AND Fecha = :fecha');
+                    $query->bindParam(':id_alumno', $alumno['ID']);
+                    $query->bindParam(':fecha', $currentDate);
+                    $query->execute();
+                }
+            }
         }
     }
+    header("Location: profesor_dashboard.php");
+    exit();
 }
 $db = null;
 ?>

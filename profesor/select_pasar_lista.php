@@ -16,15 +16,11 @@ function getDayOfWeek()
 
     $dayOfWeek = date('w');
 
-    // Define an array with Spanish day names (first 3 letters)
     $spanishDays = array("dom", "lun", "mar", "mie", "jue", "vie", "sab");
 
-    // Check if dayOfWeek is within the valid range (0-6)
     if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
-        // Return the first 3 letters in uppercase from the array
         return strtoupper($spanishDays[$dayOfWeek]);
     } else {
-        // Handle invalid day (optional, you can throw an exception or return a default value)
         return "ERR";
     }
 }
@@ -133,7 +129,8 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {
-                    if ($materia['Dia'] == getDayOfWeek()
+                    // if ($materia['Dia'] == getDayOfWeek()
+                    if ($materia['Dia'] == 'LUN'
                     ) { $count++;?>
 
                         <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
