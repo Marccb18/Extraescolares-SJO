@@ -74,7 +74,7 @@ $db = null;
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div class="optionsProfile" id="optionsProfile" onclick="showOptions()">
+            <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
                         <a href="">
