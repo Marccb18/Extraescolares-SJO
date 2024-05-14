@@ -27,7 +27,7 @@ function getDayOfWeek()
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+$showMaterias = $db->query("SELECT * FROM materia ");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -36,8 +36,8 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <title>Coord Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -49,7 +49,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="profesor_dashboard.php">
+                <a href="coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -69,7 +69,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         </ul>
 
 
-        <form action="profesor_dashboard.php" method="post">
+        <form action="coord_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         <div>
@@ -114,25 +114,24 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
             <div id="top-content">
                 <ul>
                     <li class="active">
-                        <a href="profesor_dashboard.php">Clases</a>
+                        <a href="coord_dashboard.php">Clases</a>
                     </li>
                     <li>
-                        <a href="profesor_dashboard_alumnos.php">Alumnos</a>
+                        <a href="coord_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
             </div>
             <div id="title">
-                <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
+                <h3>Clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
             <div id="main-content">
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {
-                    if (
-                        $materia['Dia'] == getDayOfWeek()
-                    ) {
-                        $count++; ?>
+                    if ($materia['Dia'] == getDayOfWeek()
+                    ) { $count++;?>
+
                         <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
                             <p class="itemtitle"><?= $materia['Nombre'] ?></p>
@@ -142,16 +141,10 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                             </p>
 
                         </a>
-
+                        
                 <?php }
-                }
-                if ($count == 0) {
-                    echo '<h2>no hay materias hoy</h2>';
-                }
-                $matid = $materias[0]['ID'];
-                if ($count == 1) {
-                    header("Location: pasar_lista.php?id=$matid ");
-                } ?>
+                } if($count==0){ echo '<h2>no hay materias hoy</h2>';} $matid=$materias[0]['ID'];
+                if ($count==1){  header("Location: pasar_lista.php?id=$matid ");}?>
             </div>
         </div>
     </div>
