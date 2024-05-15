@@ -76,9 +76,6 @@ $db = null;
             </li>
         </ul>
 
-        <form action="profesor_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
         <div>
             <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
@@ -99,7 +96,7 @@ $db = null;
                         </a>
                     </li>
                     <li>
-                        <form action="profesor_dashboard.php" method="post">
+                        <form action="profesor_dashboard_alumnos.php" method="post">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">

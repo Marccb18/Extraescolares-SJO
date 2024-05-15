@@ -56,10 +56,6 @@ $db = null;
             </li>
         </ul>
 
-
-        <form action="profesor_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
         <div>
             <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
