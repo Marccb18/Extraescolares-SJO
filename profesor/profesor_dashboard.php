@@ -106,7 +106,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php?" id="pasar-lista">
+                <a href="select_pasar_lista.php" id="pasar-lista">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>

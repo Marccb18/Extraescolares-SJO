@@ -39,9 +39,9 @@ $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 $db = null;
 
 if ($_SESSION['id'] != $prof['DNI']) {
-    header('Location: profesor_dashboard.php  ');
+    header('Location: profesor_dashboard.php');
     exit();
-}
+ }
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +109,7 @@ if ($_SESSION['id'] != $prof['DNI']) {
                         $check = '';
                         foreach ($Faltas as $falta) {
                             if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
-                                $check = 'Checked    ';
+                                $check = 'Checked';
                             }
                         } ?>
                         <form method="post">

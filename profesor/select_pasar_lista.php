@@ -27,8 +27,20 @@ function getDayOfWeek()
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]' ORDER BY Hora ASC");
-$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+$query = $db->prepare("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]' and Dia = :dia ORDER BY Hora ASC");
+$query->bindParam(':dia', getDayOfWeek());
+$query->execute();
+$materias = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$db = null;
+
+$cantidad_materias = count($materias);
+$id_materia = $materias[0]['ID'];
+if ($cantidad_materias == 1) {
+    header("Location: pasar_lista.php?id=$id_materia");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +88,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
             <div class="user-info-container">
                 <div class="user-info">
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
-                    <p><?php echo $_SESSION['username'] ?></p>
+                    <p><?= $_SESSION['username'] ?></p>
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
@@ -129,9 +141,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {
-                    if (
-                        $materia['Dia'] == getDayOfWeek()
-                    ) {
+                    if ( $materia['Dia'] == getDayOfWeek()) {
                         $count++; ?>
                         <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
@@ -140,18 +150,13 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                                 <?= $materia['Dia'] ?>
                                 <?= date('H:i', strtotime($materia['Hora'])) ?>
                             </p>
-
                         </a>
-
                 <?php }
                 }
                 if ($count == 0) {
                     echo '<h2>no hay materias hoy</h2>';
                 }
-                $matid = $materias[0]['ID'];
-                if ($count == 1) {
-                    header("Location: pasar_lista.php?id=$matid ");
-                } ?>
+                ?>
             </div>
         </div>
     </div>

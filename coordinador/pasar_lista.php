@@ -155,7 +155,7 @@ if (isset($_POST['submit_button'])) {
             }
         }
     }
-    header("Loccoord.php");
+    header("coord_dashboard.php");
     exit();
 }
 $db = null;
