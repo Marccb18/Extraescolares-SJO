@@ -2,7 +2,7 @@
     session_start();
     require('../config/conexion.php');
 
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
         header('Location: ../index.php');
         exit();
     }
@@ -32,8 +32,6 @@
     $showFaltas->execute();
     $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 
-
-
     $db = null;
 ?>
 
@@ -42,8 +40,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <title>Coord Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 <body>
@@ -74,7 +72,7 @@
         </ul>
 
 
-        <form action="coord_dashboard.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
@@ -113,6 +111,7 @@
                                 }
                                 echo $count;
                                 ?>
+
                             </td>
                         </tr>
                     <?php } ?>

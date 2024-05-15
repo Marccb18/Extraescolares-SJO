@@ -6,36 +6,40 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
+
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
-    exit();
+}
+function getDayOfWeek()
+{
+
+    $dayOfWeek = date('w');
+
+    $spanishDays = array("dom", "lun", "mar", "mie", "jue", "vie", "sab");
+
+    if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
+        return strtoupper($spanishDays[$dayOfWeek]);
+    } else {
+        return "ERR";
+    }
 }
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$showMaterias = $db->prepare("SELECT * FROM materia WHERE ID_Profesor = :profesor_id");
-$showMaterias->execute(array(':profesor_id' => $_SESSION['id']));
-$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-
-$id_materias = array_column($materias, 'ID');
-
-$query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
+$query = $db->prepare("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]' and Dia = :dia ORDER BY Hora ASC");
+$query->bindParam(':dia', getDayOfWeek());
 $query->execute();
-$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
-
-$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$showFaltas->execute();
-$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
-
-$materiasMap = array();
-foreach ($materias as $materia) {
-    $materiasMap[$materia['ID']] = $materia['Nombre'];
-}
+$materias = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $db = null;
 
+$cantidad_materias = count($materias);
+$id_materia = $materias[0]['ID'];
+if ($cantidad_materias == 1) {
+    header("Location: pasar_lista.php?id=$id_materia");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -76,6 +80,7 @@ $db = null;
             </li>
         </ul>
 
+
         <form action="profesor_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
@@ -83,7 +88,7 @@ $db = null;
             <div class="user-info-container">
                 <div class="user-info">
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
-                    <p><?php echo $_SESSION['username'] ?></p>
+                    <p><?= $_SESSION['username'] ?></p>
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
@@ -102,7 +107,7 @@ $db = null;
                     </li>
                     <li style="font-size: 14px;">
                         <a href="../config/logout.php" style="display: flex;  align-items: center;
-                        justify-content: space-between; align-items: center;">
+                         justify-content: space-between; align-items: center;">
                             <div style="display: flex;  align-items: center;">
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
@@ -120,54 +125,38 @@ $db = null;
         <div id="content">
             <div id="top-content">
                 <ul>
-                    <li>
+                    <li class="active">
                         <a href="profesor_dashboard.php">Clases</a>
                     </li>
-                    <li class="active">
-                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
+                    <li>
+                        <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="pasar-lista">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
             </div>
             <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todes tus alumnes</p>
+                <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
+                <p>Escoge una clase para pasar lista</p>
             </div>
             <div id="main-content">
-                <table border="1">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Materia</th>
-                        <th>Faltas</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) { ?>
-                        <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $alumno['Nombre'] ?>
-                            </td>
-                            <td><?= $alumno['Apellidos'] ?></td>
-                            <td>
-                                <?= $materiasMap[$alumno['ID_Materia']] ?>
-                            </td>
-                            <td>
-                                <?php
-                                $count = 0;
-                                foreach ($Faltas as $Falta) {
-                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
-                                        $count++;
-                                    }
-                                }
-                                echo $count;
-                                ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+                <?php
+                $count = 0;
+                foreach ($materias as $materia) {
+                    if ( $materia['Dia'] == getDayOfWeek()) {
+                        $count++; ?>
+                        <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
+                            <img src="../assets/img/logoSJO.svg" alt="logo">
+                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                            <p class="itemsub">
+                                <?= $materia['Dia'] ?>
+                                <?= date('H:i', strtotime($materia['Hora'])) ?>
+                            </p>
+                        </a>
+                <?php }
+                }
+                if ($count == 0) {
+                    echo '<h2>no hay materias hoy</h2>';
+                }
+                ?>
             </div>
         </div>
     </div>

@@ -6,37 +6,29 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
+
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
-    exit();
+}
+function getDayOfWeek()
+{
+
+    $dayOfWeek = date('w');
+
+    $spanishDays = array("dom", "lun", "mar", "mie", "jue", "vie", "sab");
+
+    if ($dayOfWeek >= 0 && $dayOfWeek <= 6) {
+        return strtoupper($spanishDays[$dayOfWeek]);
+    } else {
+        return "ERR";
+    }
 }
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$showMaterias = $db->prepare("SELECT * FROM materia WHERE ID_Profesor = :profesor_id");
-$showMaterias->execute(array(':profesor_id' => $_SESSION['id']));
+$showMaterias = $db->query("SELECT * FROM materia ");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-
-$id_materias = array_column($materias, 'ID');
-
-$query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$query->execute();
-$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
-
-$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$showFaltas->execute();
-$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
-
-$materiasMap = array();
-foreach ($materias as $materia) {
-    $materiasMap[$materia['ID']] = $materia['Nombre'];
-}
-
-$db = null;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +36,8 @@ $db = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <title>Coord Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -57,7 +49,7 @@ $db = null;
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="profesor_dashboard.php">
+                <a href="coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -76,7 +68,8 @@ $db = null;
             </li>
         </ul>
 
-        <form action="profesor_dashboard.php" method="post">
+
+        <form action="coord_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         <div>
@@ -102,7 +95,7 @@ $db = null;
                     </li>
                     <li style="font-size: 14px;">
                         <a href="../config/logout.php" style="display: flex;  align-items: center;
-                        justify-content: space-between; align-items: center;">
+                         justify-content: space-between; align-items: center;">
                             <div style="display: flex;  align-items: center;">
                                 <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
                                 Cerrar Sesion
@@ -120,54 +113,38 @@ $db = null;
         <div id="content">
             <div id="top-content">
                 <ul>
-                    <li>
-                        <a href="profesor_dashboard.php">Clases</a>
-                    </li>
                     <li class="active">
-                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
+                        <a href="coord_dashboard.php">Clases</a>
+                    </li>
+                    <li>
+                        <a href="coord_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="pasar-lista">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
             </div>
             <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todes tus alumnes</p>
+                <h3>Clases de hoy: <?php echo getDayOfWeek() ?> </h3>
+                <p>Escoge una clase para pasar lista</p>
             </div>
             <div id="main-content">
-                <table border="1">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Materia</th>
-                        <th>Faltas</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) { ?>
-                        <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $alumno['Nombre'] ?>
-                            </td>
-                            <td><?= $alumno['Apellidos'] ?></td>
-                            <td>
-                                <?= $materiasMap[$alumno['ID_Materia']] ?>
-                            </td>
-                            <td>
-                                <?php
-                                $count = 0;
-                                foreach ($Faltas as $Falta) {
-                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
-                                        $count++;
-                                    }
-                                }
-                                echo $count;
-                                ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+                <?php
+                $count = 0;
+                foreach ($materias as $materia) {
+                    if ($materia['Dia'] == getDayOfWeek()
+                    ) { $count++;?>
+
+                        <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
+                            <img src="../assets/img/logoSJO.svg" alt="logo">
+                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                            <p class="itemsub">
+                                <?= $materia['Dia'] ?>
+                                <?= date('H:i', strtotime($materia['Hora'])) ?>
+                            </p>
+
+                        </a>
+                        
+                <?php }
+                } if($count==0){ echo '<h2>no hay materias hoy</h2>';} $matid=$materias[0]['ID'];
+                if ($count==1){  header("Location: pasar_lista.php?id=$matid ");}?>
             </div>
         </div>
     </div>

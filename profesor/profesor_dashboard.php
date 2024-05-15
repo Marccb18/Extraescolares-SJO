@@ -35,7 +35,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -50,12 +50,6 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 <a href="#">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../assets/img/layout-grid.svg" alt="Layout icon">
-                    Materias
                 </a>
             </li>
         </ul>
@@ -112,7 +106,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="#" id="pasar-lista">
+                <a href="select_pasar_lista.php" id="pasar-lista">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>

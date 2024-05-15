@@ -2,7 +2,7 @@
     session_start();
     require('../config/conexion.php');
     
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
         header('Location: ../index.php');
         exit();
     }
@@ -17,16 +17,14 @@
     $showMaterias = $db->query("SELECT * FROM materia");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     $db = null;
-
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <title>Coord Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 
 </head>
@@ -63,7 +61,7 @@
             </li>
         </ul>
 
-        <form action="admin_dashboard.php" method="post">
+        <form action="coord_dashboard.php" method="post">
             <input type="submit" value="logout" name="logout">
         </form>
         
@@ -99,7 +97,6 @@
                 </div>
             </div>
             <div id="main-content">
-                <a href="prueba.php">prueba</a>
                 <?php 
                     foreach ($materias as $materia) { ?>
                         <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">

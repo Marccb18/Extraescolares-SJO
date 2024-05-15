@@ -2,7 +2,7 @@
 session_start();
 $rutas = array(
     'admin/admin_dashboard.php',
-    'coordinador/coordinador_dashboard.php',
+    'coordinador/coord_dashboard.php',
     'profesor/profesor_dashboard.php'
 );
 if (isset($_SESSION['email'])) {
