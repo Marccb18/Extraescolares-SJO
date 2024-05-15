@@ -32,11 +32,10 @@
                 $query->bindParam(':id_materia', $materia_id);
                 $query->bindParam(':id', $student);
                 $query->execute();
-
-                $db = null;
-                header('Location: gestion_materias.php');
-                exit();
             }
+            $db = null;
+            header('Location: gestion_materias.php');
+            exit();
         }
     }
 
