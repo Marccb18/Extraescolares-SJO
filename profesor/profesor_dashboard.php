@@ -15,6 +15,8 @@ $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +68,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div class="optionsProfile" id="optionsProfile" onclick="showOptions()">
+            <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
                         <a href="">

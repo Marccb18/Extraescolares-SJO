@@ -99,7 +99,6 @@
                 </div>
             </div>
             <div id="main-content">
-                <a href="prueba.php">prueba</a>
                 <?php 
                     foreach ($materias as $materia) { ?>
                         <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">

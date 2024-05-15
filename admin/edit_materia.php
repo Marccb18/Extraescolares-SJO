@@ -25,11 +25,17 @@
     $profesores = $db->query("SELECT * FROM personal WHERE ROL = 'PRO' ");
     $profesores = $profesores->fetchAll(PDO::FETCH_ASSOC);
 
+    $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id');
+    $query->bindParam(':id', $materia_id);
+    $query->execute();
+    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
     $db = null;
 
     function comprobarOption($v, $x) {
         if ($v == $x) {
             echo 'selected';
+
         }
     }
 
@@ -42,7 +48,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-    <title>Editar Usuario</title>
+    <title>Editar Materia</title>
 </head>
 <body>
     <form action="update_materia.php" method="post">
@@ -70,5 +76,20 @@
         <br><br>
         <input type="submit" value="Confirmar">
     </form>
+
+    <h3>Alumnos</h3>
+    <?php 
+        $num_alumnos = count($alumnos);
+        if ($num_alumnos == 0) { ?>
+            <p>No hay alumnos</p>
+    <?php 
+        } else {
+            foreach ($alumnos as $alumno) { ?>
+                <p><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
+    <?php
+            }
+        }
+    ?>
+    <a href="alumnos_materia.php?id=<?= $materia_id ?>">Gestionar alumnos</a>
 </body>
 </html>
