@@ -14,14 +14,23 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $class_id = $_GET['id'];
 
-$query = $db->prepare('SELECT * FROM materia WHERE ID = ?');
-$query->execute([$class_id]);
-$class = $query->fetch(PDO::FETCH_ASSOC);
-
-$query = $db->prepare('SELECT * FROM personal WHERE DNI = :id_profesor');
-$query->bindParam(':id_profesor', $class['ID_Profesor']);
+$query = $db->prepare("
+  SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
+         p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
+  FROM materia m
+  INNER JOIN personal p ON m.ID_Profesor = p.DNI
+  INNER JOIN matriculas mt ON m.ID = mt.ID_Materia
+  WHERE m.ID = :id_materia;
+");
+$query->bindParam(':id_materia', $class_id);
 $query->execute();
-$prof = $query->fetch(PDO::FETCH_ASSOC);
+
+$data = $query->fetch(PDO::FETCH_ASSOC);
+
+
+$prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos'], 'DNI' => $data['profesor_dni']]; // Assuming profesor data is nested within $class
+$class = ['Nombre' => $data['materia_nombre'], 'ID' => $data['materia_id'], 'ID_profesor' => $data['profesor_dni'],];
+
 
 $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id_materia');
 $query->bindParam(':id_materia', $class['ID']);
@@ -34,12 +43,39 @@ $showFaltas->bindParam(':Fecha', $currentDate);
 $showFaltas->execute();
 $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 
+if (isset($_POST['submit_button'])) {
+    foreach ($alumnos as $alumno) {
+        foreach ($Faltas as $falta) {
+            if ($alumno['ID'] == $falta['ID_Alumno']) {
+                $query = $db->prepare('DELETE FROM faltas WHERE ID_Alumno = :id_alumno AND Fecha = :fecha');
+                $query->bindParam(':id_alumno', $alumno['ID']);
+                $query->bindParam(':fecha', $currentDate);
+                $query->execute();
+            }
+        }
+    }
+    if (!empty($_POST['selected_alumnos'])) {
+        $selectedStudents = $_POST['selected_alumnos'];
+
+        foreach ($selectedStudents as $stud) {
+            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
+            $query->bindParam(':id_alumno', $stud);
+            $query->bindParam(':id_materia', $class_id);
+            $query->bindParam(':fecha', $currentDate);
+            $query->execute();
+        }
+    }
+    header("Location: profesor_dashboard.php");
+    $db = null;
+    exit();
+}
+
 $db = null;
 
 if ($_SESSION['id'] != $prof['DNI']) {
     header('Location: profesor_dashboard.php');
     exit();
- }
+}
 ?>
 
 <!DOCTYPE html>
@@ -131,35 +167,3 @@ if ($_SESSION['id'] != $prof['DNI']) {
 </body>
 
 </html>
-<?php
-// $currentDate = '2020-04-6';
-if (isset($_POST['submit_button'])) {
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if (!empty($_POST['selected_alumnos'])) {
-        $selectedStudents = $_POST['selected_alumnos'];
-
-        foreach ($selectedStudents as $stud) {
-            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
-            $query->bindParam(':id_alumno', $stud);
-            $query->bindParam(':id_materia', $class_id);
-            $query->bindParam(':fecha', $currentDate);
-            $query->execute();
-        }
-    } else {
-        foreach ($alumnos as $alumno) {
-            foreach ($Faltas as $falta) {
-                if ($alumno['ID'] == $falta['ID_Alumno']) {
-                    $query = $db->prepare('DELETE FROM faltas WHERE ID_Alumno = :id_alumno AND Fecha = :fecha');
-                    $query->bindParam(':id_alumno', $alumno['ID']);
-                    $query->bindParam(':fecha', $currentDate);
-                    $query->execute();
-                }
-            }
-        }
-    }
-    header("Location: profesor_dashboard.php");
-    exit();
-}
-$db = null;
-?>
