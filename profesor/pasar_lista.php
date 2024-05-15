@@ -34,8 +34,6 @@ $showFaltas->bindParam(':Fecha', $currentDate);
 $showFaltas->execute();
 $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 $db = null;
 
 if ($_SESSION['id'] != $prof['DNI']) {
