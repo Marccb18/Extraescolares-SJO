@@ -80,35 +80,34 @@ $db = null;
             <input type="submit" value="logout" name="logout">
         </form>
         <div>
-            <div class="user-info-container">
+            <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
                 <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
             </div>
-            <div style="margin-top: 8px; height: 80px; border: 1px solid #E0E0E0; 
-            border-radius: 8px; padding: 8px; width: 226px; box-sizing: border-box; margin-left: 16px;">
-                <ul style="list-style-type: none;
-                padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; height: 100%;">
-                    <li style="font-size: 14px; align-items: center;">
-                        <a href="" style="display: flex;  align-items: center; justify-content: space-between;">
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="width: 16px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
                                 Ver Perfil
                             </div>
-                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
+                            <img src="../assets/img/chevron-right.svg" alt="">
                         </a>
                     </li>
-                    <li style="font-size: 14px;">
-                        <a href="../config/logout.php" style="display: flex;  align-items: center;
-                        justify-content: space-between; align-items: center;">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/logout.svg" alt="" style="width: 16px;">
-                                Cerrar Sesion
-                            </div>
-                            <img src="../assets/img/chevron-right.svg" alt="" style="width: 16px;">
-                        </a>
+                    <li>
+                        <form action="profesor_dashboard.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -172,5 +171,6 @@ $db = null;
         </div>
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 
 </html>

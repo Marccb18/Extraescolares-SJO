@@ -62,11 +62,40 @@
                 </a>
             </li>
         </ul>
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="admin_dashboard.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-        <form action="admin_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
     </div>
     <div id="main">
         <div id="content">
@@ -137,4 +166,5 @@
         </div>
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>
