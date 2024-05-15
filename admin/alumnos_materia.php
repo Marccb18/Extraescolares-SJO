@@ -24,12 +24,6 @@
 
 
     $db = null;
-
-    $alumnos_nuevos = array();
-
-    function alumnoNuevo($alumno) {
-        $alumnos_nuevos[] = $alumno['ID'];
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +36,10 @@
     <h1>Hola</h1>
     <input type="search" name="" id="search">
     <table border="1">
+            <tr>
+                <th>Nombre</th>
+                <th>Añadir</th>
+            </tr>
         <?php foreach ($alumnos as $alumno) { ?>
             <tr>
                     <td class="materis"><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></td>
