@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./gestion_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
