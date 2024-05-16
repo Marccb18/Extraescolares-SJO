@@ -118,8 +118,6 @@ if ($cantidad_materias == 1) {
                 </ul>
             </div>
         </div>
-
-
     </div>
     <div id="main">
         <div id="content">
