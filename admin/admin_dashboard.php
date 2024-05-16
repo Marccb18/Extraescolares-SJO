@@ -102,7 +102,7 @@
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" onclick="selectClases()" id="select_clases" class="select-filter">
+                        <select name="clases" onclick="applyFilters()" id="select_clases" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
@@ -115,7 +115,7 @@
                 <div id="fecha">
                     <p>Dia</p>
                     <div class="select-container">
-                        <select name="diasemana" class="select-filter" id="select_dias" onclick="selectDias()">
+                        <select name="diasemana" class="select-filter" id="select_dias" onclick="applyFilters()">
                             <option class="optionDia" value="Todos">Todos</option>
                             <option class="optionDia" value="Lunes">Lunes</option>
                             <option class="optionDia" value="Martes">Martes</option>

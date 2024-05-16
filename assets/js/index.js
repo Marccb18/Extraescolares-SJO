@@ -35,37 +35,21 @@ let optionsDias = document.getElementsByClassName('optionDia');
 let items = document.getElementsByClassName('itemtitle');
 let itemsday = document.getElementsByClassName('itemsub')
 
-function selectClases(){
-    for (let opt of optionsClases) {
-        if (opt.selected == true){
-            for (let item of items) {
-                if (opt.value == 'Todas') {
-                    item.parentElement.style.display = 'flex';
-                }
-                else if (item.textContent != opt.value) {
-                    item.parentElement.style.display = 'none';
-                } else {
-                    item.parentElement.style.display = 'flex';
-                }
-            }
-        }
+
+
+function applyFilters() {
+    let selectedClase = document.getElementById('select_clases').value;
+    console.log(selectedClase);
+    let selectedDia = document.getElementById('select_dias').value;
+    console.log(selectedDia);
+
+    for (let item of items) {
+        let clase = item.textContent;
+        let dia = item.parentElement.querySelector('.itemsub').textContent;
+
+        let showItem = (selectedClase === 'Todas' || clase === selectedClase) && 
+                       (selectedDia === 'Todos' || dia.includes(selectedDia));
+
+        item.parentElement.style.display = showItem ? 'flex' : 'none';
     }
 }
-
-function selectDias() {
-    for (let opt of optionsDias) {
-        if (opt.selected == true) {
-            for (let item of itemsday) {
-                let itemText = item.textContent || item.innerText;
-                if (opt.value == 'Todos') {
-                    item.parentElement.style.display = 'flex';
-                } else if (itemText.includes(opt.value)) {
-                    item.parentElement.style.display = 'flex';
-                } else {
-                    item.parentElement.style.display = 'none';
-                }
-            }
-        }
-    }
-}
-
