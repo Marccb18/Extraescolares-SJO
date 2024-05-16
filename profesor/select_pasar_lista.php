@@ -24,19 +24,18 @@ function getDayOfWeek()
         return "ERR";
     }
 }
-
+$day = getDayOfWeek();
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $query = $db->prepare("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]' and Dia = :dia ORDER BY Hora ASC");
-$query->bindParam(':dia', getDayOfWeek());
+$query->bindParam(':dia', $day);
 $query->execute();
 $materias = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $db = null;
-
 $cantidad_materias = count($materias);
-$id_materia = $materias[0]['ID'];
 if ($cantidad_materias == 1) {
+    $id_materia = $materias[0]['ID'];
     header("Location: pasar_lista.php?id=$id_materia");
     exit();
 }
@@ -70,6 +69,7 @@ if ($cantidad_materias == 1) {
                 <a href="#">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
+                    
                 </a>
             </li>
             <li>
