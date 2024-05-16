@@ -30,8 +30,6 @@ profile.addEventListener('click', () => {
 }
 );
 
-let select_clases = document.getElementById('select_clases');
-let select_dia = document.getElementById('diasemana');
 let optionsClases = document.getElementsByClassName('optionClase');
 let optionsDias = document.getElementsByClassName('optionDia');
 let items = document.getElementsByClassName('itemtitle');
@@ -58,15 +56,16 @@ function selectDias() {
     for (let opt of optionsDias) {
         if (opt.selected == true) {
             for (let item of itemsday) {
+                let itemText = item.textContent || item.innerText;
                 if (opt.value == 'Todos') {
                     item.parentElement.style.display = 'flex';
-                }
-                else if (item.textContent == opt.value) {
-                    item.parentElement.style.display = 'none';
-                } else {
+                } else if (itemText.includes(opt.value)) {
                     item.parentElement.style.display = 'flex';
+                } else {
+                    item.parentElement.style.display = 'none';
                 }
             }
         }
     }
 }
+

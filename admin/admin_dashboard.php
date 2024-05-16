@@ -101,8 +101,8 @@
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases" onclick="selectClases()" id="select_clases">
+                    <div class="select-container">
+                        <select name="clases" onclick="selectClases()" id="select_clases" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
@@ -113,11 +113,10 @@
                     </div>
                 </div>
                 <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <select name="diasemana" id="diasemana">
-                            <option value="Todos" class="optionDia"></option>
+                    <p>Dia</p>
+                    <div class="select-container">
+                        <select name="diasemana" class="select-filter" id="select_dias" onclick="selectDias()">
+                            <option class="optionDia" value="Todos">Todos</option>
                             <option class="optionDia" value="Lunes">Lunes</option>
                             <option class="optionDia" value="Martes">Martes</option>
                             <option class="optionDia" value="Miércoles">Miércoles</option>
@@ -126,6 +125,7 @@
                             <option class="optionDia" value="Sábado">Sábado</option>
                             <option class="optionDia" value="Domingo">Domingo</option>
                         </select>
+                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
             </div>

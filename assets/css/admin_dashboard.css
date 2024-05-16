@@ -181,7 +181,7 @@ body {
     gap: 10px;
 }
 
-#select-container {
+.select-container {
     display: inline-block;
     position: relative;
     width: fit-content;
@@ -193,7 +193,7 @@ body {
     border: 2px solid rgba(228, 228, 231, 1);
 }
 
-#select-container select {
+.select-filter {
     font-family: Inter;
     appearance: none;
     width: 10rem;
@@ -206,7 +206,7 @@ body {
     padding-left: 15px;
 }
 
-#select-container img { 
+.select-container img { 
     rotate: 180deg;
     position: absolute;
     right: 20px;
