@@ -50,12 +50,6 @@
                 </a>
             </li>
             <li>
-                <a href="./gestion_sesiones.php">
-                    <img src="../assets/img/library.svg" alt="Library icon">
-                    Sesiones
-                </a>
-            </li>
-            <li>
                 <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
@@ -108,11 +102,11 @@
                 <div id="clases">
                     <p>Clases</p>
                     <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
+                        <select name="clases" onclick="selectClases()" id="select_clases">
+                            <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -122,7 +116,16 @@
                     <p>Fecha</p>
                     <div id="date-container">
                         <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
+                        <select name="diasemana" id="diasemana">
+                            <option value="Todos" class="optionDia"></option>
+                            <option class="optionDia" value="Lunes">Lunes</option>
+                            <option class="optionDia" value="Martes">Martes</option>
+                            <option class="optionDia" value="Miércoles">Miércoles</option>
+                            <option class="optionDia" value="Jueves">Jueves</option>
+                            <option class="optionDia" value="Viernes">Viernes</option>
+                            <option class="optionDia" value="Sábado">Sábado</option>
+                            <option class="optionDia" value="Domingo">Domingo</option>
+                        </select>
                     </div>
                 </div>
             </div>

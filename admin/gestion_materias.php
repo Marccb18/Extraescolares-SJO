@@ -64,12 +64,6 @@
                     Usuarios
                 </a>
             </li>
-            <li>
-                <a href="./gestion_sesiones.php">
-                    <img src="../assets/img/library.svg" alt="Library icon">
-                    Sesiones
-                </a>
-            </li>
             <li class="active"> 
                 <a href="#">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">

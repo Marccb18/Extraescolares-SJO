@@ -49,12 +49,6 @@ $db = null;
                 </a>
             </li>
             <li>
-                <a href="./gestion_sesiones.php">
-                    <img src="../assets/img/library.svg" alt="Library icon">
-                    Sesiones
-                </a>
-            </li>
-            <li>
                 <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias

@@ -29,3 +29,44 @@ profile.addEventListener('click', () => {
     }
 }
 );
+
+let select_clases = document.getElementById('select_clases');
+let select_dia = document.getElementById('diasemana');
+let optionsClases = document.getElementsByClassName('optionClase');
+let optionsDias = document.getElementsByClassName('optionDia');
+let items = document.getElementsByClassName('itemtitle');
+let itemsday = document.getElementsByClassName('itemsub')
+
+function selectClases(){
+    for (let opt of optionsClases) {
+        if (opt.selected == true){
+            for (let item of items) {
+                if (opt.value == 'Todas') {
+                    item.parentElement.style.display = 'flex';
+                }
+                else if (item.textContent != opt.value) {
+                    item.parentElement.style.display = 'none';
+                } else {
+                    item.parentElement.style.display = 'flex';
+                }
+            }
+        }
+    }
+}
+
+function selectDias() {
+    for (let opt of optionsDias) {
+        if (opt.selected == true) {
+            for (let item of itemsday) {
+                if (opt.value == 'Todos') {
+                    item.parentElement.style.display = 'flex';
+                }
+                else if (item.textContent == opt.value) {
+                    item.parentElement.style.display = 'none';
+                } else {
+                    item.parentElement.style.display = 'flex';
+                }
+            }
+        }
+    }
+}
