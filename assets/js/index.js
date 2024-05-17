@@ -48,7 +48,7 @@ function applyFilters() {
         let dia = item.parentElement.querySelector('.itemsub').textContent;
 
         let showItem = (selectedClase === 'Todas' || clase === selectedClase) && 
-                       (selectedDia === 'Todos' || dia.includes(selectedDia));
+                        (selectedDia === 'Todos' || dia.includes(selectedDia));
 
         item.parentElement.style.display = showItem ? 'flex' : 'none';
     }
