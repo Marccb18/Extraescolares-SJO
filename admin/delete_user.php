@@ -9,6 +9,6 @@
     $query = $db->prepare(('DELETE FROM personal WHERE DNI = ?'));
     $query->execute([$user_id]);
     $db = null;
-    header('Location: admin_dashboard.php');
+    header('Location: gestion_users.php');
     exit()
 ?>

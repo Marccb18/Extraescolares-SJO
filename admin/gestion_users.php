@@ -14,7 +14,7 @@ if (isset($_POST['logout'])) {
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$showUsers = $db->query("SELECT * FROM personal");
+$showUsers = $db->query("SELECT * FROM personal ORDER BY Apellidos");
 $db = null;
 ?>
 <!DOCTYPE html>
@@ -93,16 +93,23 @@ $db = null;
     </div>
     <div id="main">
         <div id="content">
-            <div id="topcontent">
-                <div id="title">
-                    <h3>Usuarios</h3>
-                    <p>Busca entre todas los usuarios
-                    <p>
-                </div>
-                <a href="new_user.php" id="button-top">
-                    <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
-                    Crear Usuario
+            <div id="top-content">
+                <ul>
+                    <li class="active">
+                        <a href="./gestion_users.php">Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="./gestion_alumnos.php">Alumnos</a>
+                    </li>
+                </ul>
+                <a href="./new_user.php" id="button-top">
+                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
+                    Añadir Usuario
                 </a>
+            </div>
+            <div id="title">
+                <h3>Usuarios</h3>
+                <p>Busca entre todos los usuarios</p>
             </div>
             <div class="main-content">
                 <table border="1">

@@ -35,7 +35,6 @@
     function comprobarOption($v, $x) {
         if ($v == $x) {
             echo 'selected';
-
         }
     }
 

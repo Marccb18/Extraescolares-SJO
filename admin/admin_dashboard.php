@@ -17,7 +17,6 @@
     $showMaterias = $db->query("SELECT * FROM materia");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     $db = null;
-
     
 ?>
 <!DOCTYPE html>
@@ -93,7 +92,7 @@
     <div id="main">
         <div id="content">
             <div id="topcontent">
-                <div id="title">
+                <div id="title" style="border: none; padding: 0;">
                     <h3>Inicio</h3>
                     <p>Busca entre todas las clases</p>
                 </div>

@@ -1,7 +1,7 @@
 <?php
     session_start();
     require('../config/conexion.php');
-    
+
     if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
         header('Location: ../index.php');
         exit();
@@ -13,26 +13,10 @@
     }
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $materias = $db->query("SELECT * FROM materia");
-    $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
-
-    $id_materias = array_column($materias,'ID');
-
-    $query = $db->prepare("SELECT * FROM personal WHERE ROL = 'PRO'");
-    $query->execute();
-    $profesores = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    $query = $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-    $query->execute();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query = $db->query("SELECT a.ID, a.Nombre, a.Apellidos, m.ID AS ID_Materia, m.Nombre AS NombreMateria FROM alumno a LEFT JOIN materia m ON a.ID_Materia = m.ID ORDER BY a.Apellidos;");
     $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    $profesores_map = array();
-    foreach ($profesores as $profesor) {
-        $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
-    }
-
-    
     $db = null;
 ?>
 <!DOCTYPE html>
@@ -40,13 +24,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Gestionar alumnos</title>
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-
 </head>
 <body>
-    <div id="aside">
+<div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
@@ -58,19 +41,20 @@
                     Inicio
                 </a>
             </li>
-            <li >
-                <a href="./gestion_users.php">
+            <li class="active">
+                <a href="#">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Usuarios
                 </a>
             </li>
-            <li class="active"> 
-                <a href="#">
+            <li>
+                <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>
             </li>
         </ul>
+
         <div>
             <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
@@ -91,9 +75,9 @@
                         </a>
                     </li>
                     <li>
-                        <form action="gestion_materias.php" method="post">
+                        <form action="gestion_users.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -104,64 +88,50 @@
                 </ul>
             </div>
         </div>
-        
+
     </div>
     <div id="main">
         <div id="content">
-            <div id="topcontent">
-                <div id="title" style="border: none; padding: 0;">
-                    <h3>Materias</h3>
-                    <p>Busca entre todas las materias<p>
-                </div>
-                <a href="new_materia.php" id="button-top">
-                    <img src="../assets/img/plus-circled.svg" alt="Crear Materia">
-                    Crear Materia
+            <div id="top-content">
+                <ul>
+                    <li>
+                        <a href="./gestion_users.php">Usuarios</a>
+                    </li>
+                    <li class="active">
+                        <a href="./gestion_alumnos.php">Alumnos</a>
+                    </li>
+                </ul>
+                <a href="./new_alumno.php" id="button-top">
+                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
+                    Añadir Alumno
                 </a>
+            </div>
+            <div id="title">
+                <h3>Alumnos</h3>
+                <p>Busca entre todos los alumnos</p>
             </div>
             <div class="main-content">
                 <table border="1">
                     <tr>
                         <th>Nombre</th>
-                        <th>Profesor</th>
-                        <th>Alumnos</th>
+                        <th>Apellidos</th>
+                        <th>Materia</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
-                    <?php foreach ($materias as $materia) {?>
+                    <?php foreach($alumnos as $alumno) { ?>
                         <tr>
-                            <td><?= $materia['Nombre'] ?></td>
-                            <td>
-                                <?= $profesores_map[$materia['ID_Profesor']] ?? '-' ?>
-                            </td>
-                            <td>
-                                <?php 
-                                    $count = 0;
-                                    foreach ($alumnos as $alumno) {
-                                        if ($alumno['ID_Materia'] == $materia['ID']) {
-                                            $count++;
-                                        }
-                                    }
-                                    echo $count;
-                                ?>
-                            </td>
-                            <td>
-                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
-                                    <img src="../assets/img/pen.svg"" alt="">
-                                    Editar
-                                </a>
-                            </td>
-                            <td>
-                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
-                                    <img src="../assets/img/trash.svg" alt="">
-                                    Eliminar
-                                </a>
-                            </td>
+                            <td><?= $alumno['Nombre'] ?></td>
+                            <td><?= $alumno['Apellidos'] ?></td>
+                            <td><?= $alumno['NombreMateria'] ?></td>
+                            <td><a href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
+                            <td><a href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
             </div>
-        </div>  
+        </div>
     </div>
 </body>
-<script src="../assets/js/index.js"></script>
+</body>
 </html>
