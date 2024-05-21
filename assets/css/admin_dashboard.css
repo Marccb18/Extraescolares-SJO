@@ -314,6 +314,13 @@ body {
     background-color: transparent;
 }
 
+#main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 35px;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
