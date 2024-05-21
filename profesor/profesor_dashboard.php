@@ -25,7 +25,7 @@ $db = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -62,7 +62,7 @@ $db = null;
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
-                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
             </div>
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
@@ -89,7 +89,6 @@ $db = null;
                 </ul>
             </div>
         </div>
-        
     </div>
     <div id="main">
         <div id="content">
@@ -102,7 +101,7 @@ $db = null;
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="pasar-lista">
+                <a href="select_pasar_lista.php" id="top-button">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>

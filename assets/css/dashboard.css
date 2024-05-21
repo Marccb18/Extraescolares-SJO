@@ -50,7 +50,6 @@ body {
 #titlelogo p {
     font-size: 0.9rem;
     font-family: Inter-B;
-    text-wrap: balance;
     margin: 0;
     padding: 0;
     display: flex;
@@ -116,6 +115,15 @@ body {
 #content {
     width: 95%;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#topcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(228, 228, 231, 1);
 }
 
 #top-content {
@@ -159,7 +167,7 @@ body {
     font-size: 0.9rem;
 }
 
-#pasar-lista {
+#top-button {
     color: white;
     background-color: black;
     border-radius: 6px;
@@ -196,6 +204,20 @@ body {
     color: rgba(113, 113, 122, 1);
 }
 
+#button-top {
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 12px 15px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-wrap: nowrap;
+}
+
 #filter {
     display: flex;
     flex-wrap: nowrap;
@@ -216,7 +238,7 @@ body {
     gap: 10px;
 }
 
-#select-container {
+.select-container {
     display: inline-block;
     position: relative;
     width: fit-content;
@@ -228,7 +250,7 @@ body {
     border: 2px solid rgba(228, 228, 231, 1);
 }
 
-#select-container select {
+.select-filter {
     font-family: Inter;
     appearance: none;
     width: 10rem;
@@ -241,7 +263,7 @@ body {
     padding-left: 15px;
 }
 
-#select-container img { 
+.select-container img { 
     rotate: 180deg;
     position: absolute;
     right: 20px;
@@ -292,48 +314,18 @@ body {
     background-color: transparent;
 }
 
-.user-info-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 226px;
-    margin: 0 auto;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid #E4E4E7;
-    padding: 0 20px;
-    box-sizing: border-box;
-
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.user-info img {
-    width: 20px;
-    margin-right: 10px;
-}
-
-.user-info p {
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-}
-
-.vector-img {
-    transform: rotate(90deg);
-    width: 16px;
-}
-
 #main-content {
     display: flex;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 3%;
     margin-top: 35px;
-    margin-bottom: 35px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 .item {
@@ -342,6 +334,7 @@ body {
     width: 200px;
     gap: 5px;
     text-decoration: none;
+    margin-bottom: 30px;
 }
 
 .item img {
@@ -368,6 +361,7 @@ body {
     color: rgba(113, 113, 122, 1);
     font-size: 0.8rem;
 }
+
 
 .optionsProfile {
     display: none;
@@ -413,4 +407,108 @@ body {
     padding: 0;
     outline: none;
     width: 100%;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #E4E4E7;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.user-info-container > img {
+    rotate: 90deg;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.user-info img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+}
+
+.vector-img {
+    transform: rotate(90deg);
+    width: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 96%;
+    margin-top: 30px;
+}
+
+table th {
+    color: rgba(113, 113, 122, 1);
+    font-weight: 400;
+    font-size: 0.9rem;
+    width: fit-content;
+}
+
+table a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+table th {
+    padding-bottom: 8px;
+}
+
+table tr {
+    text-align: left;
+}
+
+table td p {
+    padding: 0;
+    margin: 0;
+}
+
+table td {
+    border-bottom: 1.5px solid rgba(228, 228, 231, 1);
+    padding: 10px 0;
+    max-width: 80px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button-table {
+    color: white;
+    background-color: #d20707;
+    padding: 10px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+}
+
+table td:has(.button-table) {
+    width: fit-content;
+    padding: 10px 0;
+}
+
+.th-buttons {
+    padding-left: 2%;
+    width: 12%;
 }

@@ -24,7 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
     <div id="aside">
@@ -58,12 +58,39 @@
                 </a>
             </li>
         </ul>
-
-
-        <form action="profesor_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="gestion_materias.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="main">
         <div id="content">
@@ -76,7 +103,7 @@
                         <a href="#">Alumnos</a>
                     </li>
                 </ul>
-                <a href="#" id="pasar-lista">
+                <a href="#" id="top-button">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>
@@ -107,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div id="main-content">
+            <div class="main-content">
                 <?php 
                     foreach ($materias as $materia) { ?>
                         <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">

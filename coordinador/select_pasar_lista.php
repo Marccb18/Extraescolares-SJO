@@ -37,7 +37,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coord Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -125,7 +125,7 @@ $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
                 <h3>Clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
-            <div id="main-content">
+            <div class="main-content">
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {
