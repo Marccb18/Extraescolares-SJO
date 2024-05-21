@@ -61,7 +61,7 @@
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
-                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
             </div>
             <div class="optionsProfile" id="optionsProfile">
                 <ul>

@@ -52,7 +52,7 @@
     <h1>Hola</h1>
     <input type="search" name="" id="search">
     <form method="post">
-        <table border="1">
+        <table>
                 <tr>
                     <th>Nombre</th>
                     <th>Añadir</th>

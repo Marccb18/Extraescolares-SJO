@@ -425,7 +425,10 @@ table a {
     border: 1px solid #E4E4E7;
     padding: 0 20px;
     box-sizing: border-box;
+}
 
+.user-info-container > img {
+    rotate: 90deg;
 }
 
 .user-info {
@@ -448,4 +451,9 @@ table a {
 .vector-img {
     transform: rotate(90deg);
     width: 16px;
+}
+
+table td {
+    border-bottom: 1px solid rgba(228, 228, 231, 1);
+    padding: 10px 0;
 }

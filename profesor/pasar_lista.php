@@ -133,7 +133,7 @@ if ($_SESSION['id'] != $prof['DNI']) {
                 </php>
             </div>
             <div id="main-content">
-                <table border="1">
+                <table>
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>

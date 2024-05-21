@@ -112,7 +112,7 @@ $db = null;
                 <p>Busca entre todos los usuarios</p>
             </div>
             <div class="main-content">
-                <table border="1">
+                <table>
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
