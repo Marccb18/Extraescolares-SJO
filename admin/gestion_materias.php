@@ -77,7 +77,7 @@
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
-                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
             </div>
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
@@ -124,8 +124,8 @@
                         <th>Nombre</th>
                         <th>Profesor</th>
                         <th>Alumnos</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th class="th-buttons">Editar</th>
+                        <th class="th-buttons">Eliminar</th>
                     </tr>
                     <?php foreach ($materias as $materia) {?>
                         <tr>
@@ -145,13 +145,13 @@
                                 ?>
                             </td>
                             <td>
-                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
+                                <a style="background-color: #000;" class="button-table" href="edit_materia.php?id=<?= $materia['ID'] ?>">
                                     <img src="../assets/img/pen.svg"" alt="">
                                     Editar
                                 </a>
                             </td>
-                            <td>
-                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
+                            <td style="padding-right: 0; width: 12%;">
+                                <a class="button-table" href="delete_materia.php?id=<?= $materia['ID'] ?>">
                                     <img src="../assets/img/trash.svg" alt="">
                                     Eliminar
                                 </a>

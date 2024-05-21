@@ -62,7 +62,7 @@ $db = null;
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
-                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
             </div>
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
@@ -117,14 +117,16 @@ $db = null;
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Rol</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th class="th-buttons">Editar</th>
+                        <th class="th-buttons">Eliminar</th>
                     </tr>
                     <?php foreach ($showUsers as $user) { ?>
                         <tr>
                             <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $user['Nombre'] ?>
+                                <p>
+                                    <img src="../assets/img/user.svg" alt="user">
+                                    <?= $user['Nombre'] ?>
+                                </p>
                             </td>
                             <td><?= $user['Apellidos'] ?></td>
                             <td>
@@ -144,8 +146,8 @@ $db = null;
                                 }
                                 ?>
                             </td>
-                            <td><a href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td><a href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td><a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
+                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
