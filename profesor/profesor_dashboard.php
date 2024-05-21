@@ -55,7 +55,6 @@ $db = null;
                 </a>
             </li>
         </ul>
-
         <div>
             <div class="user-info-container" id="user-info-container">
                 <div class="user-info">

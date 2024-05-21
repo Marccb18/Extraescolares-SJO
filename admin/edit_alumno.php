@@ -41,6 +41,7 @@
 </head>
 <body>
     <form action="update_alumno.php" method="post">
+        <input type="hidden" name="id" id="id" value="<?= $id ?>">
         <p>Nombre</p>
         <input type="text" name="nombre" id="nombre" value="<?= $alumno['Nombre'] ?>">
         <p>Apellidos</p>

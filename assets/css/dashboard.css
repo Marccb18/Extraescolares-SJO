@@ -370,9 +370,9 @@ body {
     border: 1px solid #E0E0E0;
     border-radius: 8px;
     padding: 8px;
-    width: 226px;
+    width: 90%;
     box-sizing: border-box;
-    margin-left: 16px;
+    margin-left: 5%;
 }
 
 .optionsProfile ul {
@@ -420,7 +420,10 @@ body {
     border: 1px solid #E4E4E7;
     padding: 0 20px;
     box-sizing: border-box;
+    cursor: pointer;
 }
+
+
 
 .user-info-container > img {
     rotate: 90deg;
