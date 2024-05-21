@@ -456,4 +456,6 @@ table a {
 table td {
     border-bottom: 1px solid rgba(228, 228, 231, 1);
     padding: 10px 0;
+    margin: 0 auto;
+    text-align: left;
 }
