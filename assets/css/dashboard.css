@@ -515,3 +515,17 @@ table td:has(.button-table) {
     padding-left: 2%;
     width: 12%;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+}
+
+form p {
+    margin: 0;
+    padding: 0;
+}
