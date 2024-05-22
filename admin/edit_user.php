@@ -60,4 +60,5 @@
         <input type="submit" value="Confirmar">
     </form>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

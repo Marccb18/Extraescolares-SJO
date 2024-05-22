@@ -68,4 +68,5 @@
     </form>
     <script src="../assets/js/index.js"></script>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>
