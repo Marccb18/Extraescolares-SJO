@@ -91,4 +91,5 @@
     ?>
     <a href="alumnos_materia.php?id=<?= $materia_id ?>">Gestionar alumnos</a>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

@@ -47,4 +47,5 @@
         <p> - <?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
     <?php } ?>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

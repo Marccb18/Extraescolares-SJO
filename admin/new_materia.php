@@ -52,4 +52,5 @@
         <input type="submit" value="Crear">
     </form>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

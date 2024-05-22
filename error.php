@@ -19,4 +19,5 @@
     <p><?php echo $error; ?></p>
     <a href="./index.php">Volver al inicio</a>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

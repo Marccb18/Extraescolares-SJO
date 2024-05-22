@@ -54,4 +54,5 @@
         <input type="submit" value="Guardar">
     </form>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>
