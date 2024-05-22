@@ -27,7 +27,6 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-
 </head>
 <body>
     <div id="aside">
@@ -36,7 +35,7 @@
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
+            <li>
                 <a href="#">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -66,7 +65,7 @@
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="">
+                        <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
                                 <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
                                 Ver Perfil
@@ -169,3 +168,4 @@
 </body>
 <script src="../assets/js/index.js"></script>
 </html>
+
