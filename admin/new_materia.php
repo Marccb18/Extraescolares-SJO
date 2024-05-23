@@ -25,6 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Materia</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
     <form action="insert_materia.php" method="post">
@@ -48,7 +49,6 @@
                 <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
             <?php } ?>
         </select>
-        <br><br>
         <input type="submit" value="Crear">
     </form>
 </body>
