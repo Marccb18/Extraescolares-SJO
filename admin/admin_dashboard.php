@@ -36,7 +36,7 @@
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="./admin_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
