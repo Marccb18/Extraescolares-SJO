@@ -14,7 +14,7 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $materias = $db->query("SELECT * FROM materia");
+    $materias = $db->query("SELECT * FROM materia ORDER BY Nombre");
     $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
 
     $id_materias = array_column($materias,'ID');

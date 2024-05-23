@@ -37,8 +37,6 @@
             echo 'selected';
         }
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +102,7 @@
                         </a>
                     </li>
                     <li>
-                        <form action="admin_dashboard.php" method="post">
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -122,51 +120,51 @@
         <div id="content">
             <div id="topcontent">
                 <div id="title" style="border: none; padding: 0;">
-                    <h3>Editar Alumno</h3>
-                    <p>Edita al alumno <?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
+                    <h3>Editar Materia</h3>
+                    <p>Edita la materia de <?= $materia['Nombre']?></p>
                 </div>
             </div>
-            <div id="main-content">
-            <form action="update_materia.php" method="post">
-        <input type="hidden" name="id" value=<?= $materia_id ?> >
-        <p>Nombre</p>
-        <input type="text" name="nombre" value="<?= $materia['Nombre'] ?>" id="nombre">
-        <p>Dia</p>
-        <select name="dia" id="dia">
-            <option value="LUN" <?php comprobarOption('LUN', $materia['Dia']) ?> >Lunes</option>
-            <option value="MAR" <?php comprobarOption('MAR', $materia['Dia']) ?> >Martes</option>
-            <option value="MIE" <?php comprobarOption('MIE', $materia['Dia']) ?> >Miércoles</option>
-            <option value="JUE" <?php comprobarOption('JUE', $materia['Dia']) ?> >Jueves</option>
-            <option value="VIE" <?php comprobarOption('VIE', $materia['Dia']) ?> >Viernes</option>
-            <option value="SAB" <?php comprobarOption('SAB', $materia['Dia']) ?> >Sábado</option>
-            <option value="DOM" <?php comprobarOption('DOM', $materia['Dia']) ?> >Domingo</option>
-        </select>
-        <p>Hora</p>
-        <input type="time" name="hora" id="hora" value="<?= $materia['Hora'] ?>">
-        <p>Profesor</p>
-        <select name="profesor" id="profesor">
-            <?php foreach ($profesores as $profesor) { ?>
-                <option value="<?= $profesor['DNI'] ?>" <?php comprobarOption($profesor['DNI'], $materia['ID_Profesor']) ?> ><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
-            <?php } ?>
-        </select>
-        <br><br>
-        <input type="submit" value="Confirmar">
-    </form>
-
-    <h3>Alumnos</h3>
-    <?php 
-        $num_alumnos = count($alumnos);
-        if ($num_alumnos == 0) { ?>
-            <p>No hay alumnos</p>
-    <?php 
-        } else {
-            foreach ($alumnos as $alumno) { ?>
-                <p><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
-    <?php
-            }
-        }
-    ?>
-    <a href="alumnos_materia.php?id=<?= $materia_id ?>">Gestionar alumnos</a>
+            <div id="main-content" style="flex-direction: column;">
+                <form action="update_materia.php" method="post">
+                    <input type="hidden" name="id" value=<?= $materia_id ?> >
+                    <p>Nombre</p>
+                    <input type="text" name="nombre" value="<?= $materia['Nombre'] ?>" id="nombre">
+                    <p>Dia</p>
+                    <select name="dia" id="dia">
+                        <option value="LUN" <?php comprobarOption('LUN', $materia['Dia']) ?> >Lunes</option>
+                        <option value="MAR" <?php comprobarOption('MAR', $materia['Dia']) ?> >Martes</option>
+                        <option value="MIE" <?php comprobarOption('MIE', $materia['Dia']) ?> >Miércoles</option>
+                        <option value="JUE" <?php comprobarOption('JUE', $materia['Dia']) ?> >Jueves</option>
+                        <option value="VIE" <?php comprobarOption('VIE', $materia['Dia']) ?> >Viernes</option>
+                        <option value="SAB" <?php comprobarOption('SAB', $materia['Dia']) ?> >Sábado</option>
+                        <option value="DOM" <?php comprobarOption('DOM', $materia['Dia']) ?> >Domingo</option>
+                    </select>
+                    <p>Hora</p>
+                    <input type="time" name="hora" id="hora" value="<?= $materia['Hora'] ?>">
+                    <p>Profesor</p>
+                    <select name="profesor" id="profesor">
+                    <?php foreach ($profesores as $profesor) { ?>
+                    <option value="<?= $profesor['DNI'] ?>" <?php comprobarOption($profesor['DNI'], $materia['ID_Profesor']) ?> ><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
+                    <?php } ?>
+                    </select>
+                    <input type="submit" value="Confirmar">
+                </form>
+                <div>
+                    <h3>Alumnos</h3>
+                    <?php 
+                        $num_alumnos = count($alumnos);
+                        if ($num_alumnos == 0) { ?>
+                            <p>No hay alumnos</p>
+                    <?php 
+                        } else {
+                            foreach ($alumnos as $alumno) { ?>
+                                <p><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
+                    <?php
+                            }
+                        }
+                    ?>
+                    <a href="alumnos_materia.php?id=<?= $materia_id ?>">Gestionar alumnos</a>
+                </div>
             </div>
         </div>
     </div>

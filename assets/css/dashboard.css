@@ -423,6 +423,13 @@ body {
     cursor: pointer;
 }
 
+#logout-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
 
 
 .user-info-container > img {

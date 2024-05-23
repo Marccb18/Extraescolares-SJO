@@ -26,7 +26,6 @@ $db = null;
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-
 </head>
 
 <body>

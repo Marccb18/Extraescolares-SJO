@@ -6,6 +6,7 @@
         header('Location: ../index.php');
         exit();
     }
+
     if (isset($_POST['logout'])) {
         require_once('../config/logout.php');
         logout();
@@ -16,7 +17,7 @@
 
     $id = $_GET['id'];
 
-    $query = $db->prepare('SELECT a.Nombre, a.Apellidos, a.ID_Materia, m.Nombre as NombreMateria FROM alumno a LEFT JOIN materia m ON a.ID_Materia = m.ID WHERE a.ID = :id ');
+    $query = $db->prepare('SELECT a.Nombre, a.Apellidos, a.ID_Materia, m.Nombre as NombreMateria FROM alumno a LEFT JOIN materia m ON a.ID_Materia = m.ID WHERE a.ID = :id');
     $query->bindParam(':id', $id);
     $query->execute();
     $alumno = $query->fetch(PDO::FETCH_ASSOC);
@@ -95,7 +96,7 @@
                         </a>
                     </li>
                     <li>
-                        <form action="admin_dashboard.php" method="post">
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">

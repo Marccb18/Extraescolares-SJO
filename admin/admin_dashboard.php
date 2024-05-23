@@ -35,7 +35,7 @@
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li>
+            <li class="active">
                 <a href="#">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li>
-                        <form action="admin_dashboard.php" method="post">
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">

@@ -85,8 +85,8 @@
                         </a>
                     </li>
                     <li>
-                        <form action="admin_dashboard.php" method="post">
-                            <button type="submit" name="logout">
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
+                            <button type="submit" name="logout" style="display: flex; justify-content: space-between;">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
@@ -103,8 +103,8 @@
         <div id="content">
             <div id="topcontent">
                 <div id="title" style="border: none; padding: 0;">
-                    <h3>Editar Alumno</h3>
-                    <p>Edita al alumno <?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
+                    <h3>Editar usuario</h3>
+                    <p>Edita al usuario <?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
                 </div>
             </div>
             <div id="main-content">
