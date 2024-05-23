@@ -109,22 +109,15 @@ $db = null;
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases" onclick="applyFilters()">
-                            <option value="">Todas</option>
+                    <div class="select-container">
+                        <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
+                            <option class="optionClase" value="Todas">Todas</option>
                             <?php
-                            foreach ($materias as $materia) { ?>
-                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                                foreach ($materias as $materia) { ?>
+                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
                     </div>
                 </div>
             </div>
