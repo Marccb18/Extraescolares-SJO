@@ -321,6 +321,13 @@ body {
     margin-top: 35px;
 }
 
+#main-content:has(form) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    margin-top: 24px;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
