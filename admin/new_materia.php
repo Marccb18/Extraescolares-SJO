@@ -104,23 +104,29 @@
                     <p>Nombre</p>
                     <input type="text" name="nombre" value="" id="">
                     <p>Dia</p>
-                    <select name="dia" id="dia">
-                        <option value="LUN">Lunes</option>
-                        <option value="MAR">Martes</option>
-                        <option value="MIE">Miércoles</option>
-                        <option value="JUE">Jueves</option>
-                        <option value="VIE">Viernes</option>
-                        <option value="SAB">Sábado</option>
-                        <option value="DOM">Domingo</option>
-                    </select>
+                    <div class="form-select">
+                        <select name="dia" id="dia">
+                            <option value="LUN">Lunes</option>
+                            <option value="MAR">Martes</option>
+                            <option value="MIE">Miércoles</option>
+                            <option value="JUE">Jueves</option>
+                            <option value="VIE">Viernes</option>
+                            <option value="SAB">Sábado</option>
+                            <option value="DOM">Domingo</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <p>Hora</p>
                     <input type="time" name="hora" id="hora">
                     <p>Profesor</p>
-                    <select name="profesor" id="profesor">
-                        <?php foreach ($profesores as $profesor) { ?>
-                            <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
-                        <?php } ?>
-                    </select>
+                    <div class="form-select">
+                        <select name="profesor" id="profesor">
+                            <?php foreach ($profesores as $profesor) { ?>
+                                <option value="<?= $profesor['DNI'] ?>"><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <input type="submit" value="Crear">
                 </form>
             </div>

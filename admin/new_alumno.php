@@ -116,11 +116,13 @@
                     <p>Apellidos</p>
                     <input type="text" name="apellidos" id="apellidos">
                     <p>Asignatura</p>
-                    <select name="materia" id="select">
-                        <?php foreach($materias as $materia) { ?>
-                            <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
-                        <?php } ?>
-                    </select>
+                    <div class="form-select">
+                        <select name="materia" id="select">
+                            <?php foreach($materias as $materia) { ?>
+                                <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <input type="submit" value="Crear">
                 </form>
             </div>

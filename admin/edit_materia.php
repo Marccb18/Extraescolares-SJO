@@ -130,23 +130,29 @@
                     <p>Nombre</p>
                     <input type="text" name="nombre" value="<?= $materia['Nombre'] ?>" id="nombre">
                     <p>Dia</p>
-                    <select name="dia" id="dia">
-                        <option value="LUN" <?php comprobarOption('LUN', $materia['Dia']) ?> >Lunes</option>
-                        <option value="MAR" <?php comprobarOption('MAR', $materia['Dia']) ?> >Martes</option>
-                        <option value="MIE" <?php comprobarOption('MIE', $materia['Dia']) ?> >Miércoles</option>
-                        <option value="JUE" <?php comprobarOption('JUE', $materia['Dia']) ?> >Jueves</option>
-                        <option value="VIE" <?php comprobarOption('VIE', $materia['Dia']) ?> >Viernes</option>
-                        <option value="SAB" <?php comprobarOption('SAB', $materia['Dia']) ?> >Sábado</option>
-                        <option value="DOM" <?php comprobarOption('DOM', $materia['Dia']) ?> >Domingo</option>
-                    </select>
+                    <div class="form-select">
+                        <select name="dia" id="dia">
+                            <option value="LUN" <?php comprobarOption('LUN', $materia['Dia']) ?> >Lunes</option>
+                            <option value="MAR" <?php comprobarOption('MAR', $materia['Dia']) ?> >Martes</option>
+                            <option value="MIE" <?php comprobarOption('MIE', $materia['Dia']) ?> >Miércoles</option>
+                            <option value="JUE" <?php comprobarOption('JUE', $materia['Dia']) ?> >Jueves</option>
+                            <option value="VIE" <?php comprobarOption('VIE', $materia['Dia']) ?> >Viernes</option>
+                            <option value="SAB" <?php comprobarOption('SAB', $materia['Dia']) ?> >Sábado</option>
+                            <option value="DOM" <?php comprobarOption('DOM', $materia['Dia']) ?> >Domingo</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <p>Hora</p>
                     <input type="time" name="hora" id="hora" value="<?= $materia['Hora'] ?>">
                     <p>Profesor</p>
-                    <select name="profesor" id="profesor">
-                    <?php foreach ($profesores as $profesor) { ?>
-                    <option value="<?= $profesor['DNI'] ?>" <?php comprobarOption($profesor['DNI'], $materia['ID_Profesor']) ?> ><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
-                    <?php } ?>
-                    </select>
+                    <div class="form-select">
+                        <select name="profesor" id="profesor">
+                            <?php foreach ($profesores as $profesor) { ?>
+                            <option value="<?= $profesor['DNI'] ?>" <?php comprobarOption($profesor['DNI'], $materia['ID_Profesor']) ?> ><?= $profesor['Nombre'] . ' ' . $profesor['Apellidos'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <input type="submit" value="Confirmar">
                 </form>
                 <div>

@@ -121,11 +121,13 @@
                     <p>Teléfono</p>
                     <input type="number" name="telefono" id="telefono" value="<?= $user['Telefono'] ?>">
                     <p>Rol</p>
-                    <select name="rol" id="rol_id">
-                        <option value="PRO" <?php comprobarOpcion('PRO',$user) ?> >Profesor</option>
-                        <option value="COO" <?php comprobarOpcion('COO',$user) ?> >Coordinador</option>
-                        <option value="ADM" <?php comprobarOpcion('ADM',$user) ?> >Administrador</option>
-                    </select>
+                    <div class="form-select">
+                        <select name="rol" id="rol_id">
+                            <option value="PRO" <?php comprobarOpcion('PRO',$user) ?> >Profesor</option>
+                            <option value="COO" <?php comprobarOpcion('COO',$user) ?> >Coordinador</option>
+                            <option value="ADM" <?php comprobarOpcion('ADM',$user) ?> >Administrador</option>
+                        </select>
+                    </div>
                     <input type="submit" value="Confirmar">
                 </form>
             </div>
