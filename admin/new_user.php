@@ -118,11 +118,14 @@
                     <p>Teléfono</p>
                     <input type="number" name="telefono" id="telefono" value="" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9">
                     <p>Rol</p>
-                    <select name="rol" id="rol_id">
-                        <option value="PRO">Profesor</option>
-                        <option value="COO">Coordinador</option>
-                        <option value="ADM">Administrador</option>
-                    </select>
+                    <div class="form-select">
+                        <select name="rol" id="rol_id">
+                            <option value="PRO">Profesor</option>
+                            <option value="COO">Coordinador</option>
+                            <option value="ADM">Administrador</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <input type="submit" value="Confirmar">
                 </form>
             </div>

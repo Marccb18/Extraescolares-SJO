@@ -616,3 +616,7 @@ form input[type=submit] {
     cursor: pointer;
     margin-top: 5px;
 }
+
+form input[type=email], form input[type=number] {
+    text-indent: 10px;
+}
