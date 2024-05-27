@@ -12,6 +12,7 @@
         $password = $_POST['password'];
         $telefono = $_POST['telefono'];
         $rol = $_POST['rol'];
+        $origin = $_POST['origin'];
 
         try {
             $query = $db->prepare("UPDATE personal SET Nombre = :nombre, Apellidos = :apellidos, Email = :email, Password = :password, Telefono = :telefono, ROL = :rol WHERE DNI = :user_id");
@@ -27,8 +28,13 @@
             $query->execute();
 
             $db = null;
-            header('Location: gestion_users.php');
-            exit();
+            if ($origin == 'edit_user') {
+                header('Location: gestion_users.php');
+                exit();
+            } else {
+                header('Location: perfil.php');
+                exit();
+            }
 
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
