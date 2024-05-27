@@ -25,7 +25,7 @@ $db = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-    <title>asd</title>
+    <title>Perfil || <?php echo $perfil[0]['Nombre'] ?></title>
 </head>
 <body>
 <div id="aside">
@@ -34,8 +34,8 @@ $db = null;
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
-                <a href="#">
+            <li>
+                <a href="./admin_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -87,6 +87,26 @@ $db = null;
             </div>
         </div>
     </div>
+<div id="main">
+    <div id="content">
+        <h3>Centa</h3>
+        <p>Perfil de <?php echo $perfil[0]['Nombre'] ?></p>
+        <div id="main-content">
+            <div id="profile-info">
+                <div id="profile-img">
+                    <img src="../assets/img/logoSJO.svg" alt="Profile img">
+                </div>
+                <div id="profile-data">
+                    <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['DNI'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['Email'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['ROL'] ?>" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../assets/js/index.js"></script>
 </html>
