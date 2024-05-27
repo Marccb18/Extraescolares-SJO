@@ -25,20 +25,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Alumno</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
-    <form action="insert_alumno.php" method="post">
-        <p>Nombre</p>
-        <input type="text" name="nombre" id="nombre">
-        <p>Apellidos</p>
-        <input type="text" name="apellidos" id="apellidos">
-        <select name="materia" id="select">
-            <?php foreach($materias as $materia) { ?>
-                <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
-            <?php } ?>
-        </select>
-        <input type="submit" value="Crear">
-    </form>
+<body>
+<div id="aside">
+        <div id="titlelogo">
+            <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
+            <p>Sant Josep Obrer</p>
+        </div>
+        <ul id="side-menu">
+            <li>
+                <a href="./admin_dashboard.php">
+                    <img src="../assets/img/icon-home.svg" alt="Home icon">
+                    Inicio
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">
+                    <img src="../assets/img/Vector.svg" alt="Students icon">
+                    Usuarios
+                </a>
+            </li>
+            <li>
+                <a href="./gestion_materias.php">
+                    <img src="../assets/img/layout-grid.svg" alt="Layout icon">
+                    Materias
+                </a>
+            </li>
+        </ul>
+
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="./perfil.php">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="gestion_users.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="content">
+            <div id="top-content">
+                <ul>
+                    <li>
+                        <a href="./gestion_users.php">Usuarios</a>
+                    </li>
+                    <li class="active">
+                        <a href="./gestion_alumnos.php">Alumnos</a>
+                    </li>
+                </ul>
+                <a href="./new_alumno.php" id="button-top">
+                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
+                    Añadir Alumno
+                </a>
+            </div>
+            <div id="title">
+                <h3>Alumnos</h3>
+                <p>Busca entre todos los alumnos</p>
+            </div>
+            <div id="main-content">
+                <form action="insert_alumno.php" method="post">
+                    <p>Nombre</p>
+                    <input type="text" name="nombre" id="nombre">
+                    <p>Apellidos</p>
+                    <input type="text" name="apellidos" id="apellidos">
+                    <p>Asignatura</p>
+                    <div class="form-select">
+                        <select name="materia" id="select">
+                            <?php foreach($materias as $materia) { ?>
+                                <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <input type="submit" value="Crear">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
 </body>
 <script src="../assets/js/index.js"></script>
 </html>

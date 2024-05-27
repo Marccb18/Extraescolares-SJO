@@ -58,7 +58,7 @@
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="./admin_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -126,11 +126,14 @@
                     <p>Apellidos</p>
                     <input type="text" name="apellidos" id="apellidos" value="<?= $alumno['Apellidos'] ?>">
                     <p>Materia</p>
-                    <select name="materia" id="select">
-                    <?php foreach($materias as $materia) { ?>
-                        <option value="<?= $materia['ID'] ?>" <?php comprobarOption($materia['ID'], $alumno['ID_Materia']) ?> ><?= $materia['Nombre'] ?></option>
-                    <?php } ?>
-                    </select>
+                    <div class="form-select">
+                        <select name="materia">
+                        <?php foreach($materias as $materia) { ?>
+                            <option value="<?= $materia['ID'] ?>" <?php comprobarOption($materia['ID'], $alumno['ID_Materia']) ?> ><?= $materia['Nombre'] ?></option>
+                        <?php } ?>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
                     <input type="submit" value="Guardar">
                 </form>
             </div>

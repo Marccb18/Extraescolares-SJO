@@ -18,6 +18,12 @@ body {
     font-family: Inter;
 }
 
+option {
+    color: black;
+    outline: none;
+    
+}
+
 #aside {
     width: 20vw;
     height: 100vh;
@@ -70,7 +76,7 @@ body {
     list-style: none;
     margin-left: 5%;
     background-color: white;
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #side-menu .active {
@@ -142,7 +148,7 @@ body {
     list-style: none;
     margin: 0;
     padding: 4px;
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #top-content ul li {
@@ -170,7 +176,7 @@ body {
 #top-button {
     color: white;
     background-color: black;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -207,7 +213,7 @@ body {
 #button-top {
     color: white;
     background-color: black;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -246,7 +252,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     border: 2px solid rgba(228, 228, 231, 1);
 }
 
@@ -257,7 +263,7 @@ body {
     height: 2.5rem;
     border: none;
     outline: none;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     margin: 0;
     padding: 0;
     padding-left: 15px;
@@ -278,7 +284,7 @@ body {
     height: fit-content;
     margin: 0;
     border: 2px solid rgba(228, 228, 231, 1);
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #date-container img {
@@ -299,7 +305,7 @@ body {
     height: 2.5rem;
     border: none;
     outline: none;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -319,6 +325,13 @@ body {
     flex-wrap: wrap;
     gap: 3%;
     margin-top: 35px;
+}
+
+#main-content:has(form) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    margin-top: 24px;
 }
 
 .main-content {
@@ -416,7 +429,7 @@ body {
     width: 90%;
     margin: 0 auto;
     height: 40px;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     border: 1px solid #E4E4E7;
     padding: 0 20px;
     box-sizing: border-box;
@@ -504,7 +517,7 @@ table td {
     color: white;
     background-color: #d20707;
     padding: 10px 10px;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     font-size: 0.9rem;
     display: flex;
     justify-content: center;
@@ -526,13 +539,84 @@ table td:has(.button-table) {
 form {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    margin: 0;
+    width: 30%;
+    gap: 10px;
     padding: 0;
+    margin: 0;
 }
 
 form p {
     margin: 0;
     padding: 0;
+    font-size: 0.8rem;
+}
+
+form input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border: 2px solid rgba(228, 228, 231, 1);
+    border-radius: 0.45rem;
+    padding: 0;
+    appearance: none;
+    font-family: Inter;
+    padding: 9px 0;
+}
+
+form input[type=text] {
+    text-indent: 10px;
+}
+
+.form-select {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    border-radius: 0.45rem;
+    border: 2px solid rgba(228, 228, 231, 1);
+}
+
+.form-select select {
+    font-family: Inter;
+    appearance: none;
+    width: 100%;
+    height: fit-content;
+    border: none;
+    outline: none;
+    border-radius: 0.45rem;
+    margin: 0;
+    padding: 0;
+    padding: 10px 12px;
+}
+
+.form-select img {
+    rotate: 180deg;
+    position: absolute;
+    right: 20px;
+    top: 32.5%;
+    pointer-events: none;
+}
+
+form input[type=submit] {
+    background-color: #000;
+    color: rgb(255,255,255);
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    width: 101%;
+    border: 2px solid #000;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+form input[type=email], form input[type=number] {
+    text-indent: 10px;
 }
