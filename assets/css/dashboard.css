@@ -617,6 +617,17 @@ form input[type=submit] {
     margin-top: 5px;
 }
 
-form input[type=email], form input[type=number] {
+form input[type=email], form input[type=number], form input[type=password] {
     text-indent: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    appearance: none;
+}
+
+input[type="time"] {
+    text-indent: 5px;
 }

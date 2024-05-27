@@ -122,6 +122,7 @@
                                 <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
                     </div>
                     <input type="submit" value="Crear">
                 </form>

@@ -127,6 +127,7 @@
                             <option value="COO" <?php comprobarOpcion('COO',$user) ?> >Coordinador</option>
                             <option value="ADM" <?php comprobarOpcion('ADM',$user) ?> >Administrador</option>
                         </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
                     </div>
                     <input type="submit" value="Confirmar">
                 </form>
