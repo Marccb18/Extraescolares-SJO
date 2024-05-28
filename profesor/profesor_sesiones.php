@@ -10,7 +10,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
+    exit();
 }
+
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
@@ -20,23 +22,21 @@ $db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
+    <title>Sesiones</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
-
 <body>
-    <div id="aside">
+<div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
+            <li>
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -48,7 +48,7 @@ $db = null;
                     Alumnos
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="profesor_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
@@ -75,7 +75,7 @@ $db = null;
                         </a>
                     </li>
                     <li>
-                        <form action="profesor_dashboard.php" method="post" id="logout-form">
+                        <form action="profesor_sesiones.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -89,7 +89,8 @@ $db = null;
             </div>
         </div>
     </div>
-    <div id="main">
+
+  <div id="main">
         <div id="content">
             <div id="top-content">
                 <ul>
@@ -100,34 +101,23 @@ $db = null;
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="top-button">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
             </div>
             <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todas tus clases</p>
+                <h3>Sesiones</h3>
+                <p>Escoge la clase para ver sesiones</p>
             </div>
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
+                    <div class="select-container">
+                        <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
+                            <option class="optionClase" value="Todas">Todas</option>
                             <?php
-                            foreach ($materias as $materia) { ?>
-                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                                foreach ($materias as $materia) { ?>
+                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
-                    </div>
-                </div>
-                <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
                     </div>
                 </div>
             </div>
@@ -137,33 +127,6 @@ $db = null;
                     <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
                         <img src="../assets/img/logoSJO.svg" alt="logo">
                         <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                        <p class="itemsub"><?php
-                                            switch ($materia['Dia']) {
-                                                case 'LUN':
-                                                    echo 'Lunes ';
-                                                    break;
-                                                case 'MAR':
-                                                    echo 'Martes ';
-                                                    break;
-                                                case 'MIE':
-                                                    echo 'Miércoles ';
-                                                    break;
-                                                case 'JUE':
-                                                    echo 'Jueves ';
-                                                    break;
-                                                case 'VIE':
-                                                    echo 'Viernes ';
-                                                    break;
-                                                case 'SAB':
-                                                    echo 'Sábado ';
-                                                    break;
-                                                case 'DOM';
-                                                    echo 'Domingo ';
-                                                    break;
-                                            } ?>
-                            ·
-                            <?= date('H:i', strtotime($materia['Hora'])) ?>
-                        </p>
                     </a>
                 <?php } ?>
             </div>

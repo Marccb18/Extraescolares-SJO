@@ -17,6 +17,16 @@
 
     $user_id = $_GET['id'];
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_POST['perfil']) {
+            $origin = 'perfil';
+        } else {
+            $origin = 'edit_user';
+        }
+    } else {
+        $origin = 'edit_user';
+    }
+
     $query = $db->prepare('SELECT * FROM personal WHERE DNI = ?');
     $query->execute([$user_id]);
     $user = $query->fetch(PDO::FETCH_ASSOC);
@@ -44,6 +54,7 @@
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
+            <p><?php echo $origin ?></p>
         </div>
         <ul id="side-menu">
             <li class="active">
@@ -121,6 +132,7 @@
                     <p>Teléfono</p>
                     <input type="number" name="telefono" id="telefono" value="<?= $user['Telefono'] ?>">
                     <p>Rol</p>
+                    <input type="hidden" name="origin" value="<?= $origin ?>">
                     <div class="form-select">
                         <select name="rol" id="rol_id">
                             <option value="PRO" <?php comprobarOpcion('PRO',$user) ?> >Profesor</option>
