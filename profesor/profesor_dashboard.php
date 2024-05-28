@@ -25,7 +25,7 @@ $db = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/profesor_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 
@@ -55,23 +55,18 @@ $db = null;
                 </a>
             </li>
         </ul>
-
-
-        <form action="profesor_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
         <div>
             <div class="user-info-container" id="user-info-container">
                 <div class="user-info">
                     <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
                     <p><?php echo $_SESSION['username'] ?></p>
                 </div>
-                <img src="../assets/img/two-arrows.png" alt="Vector img" class="vector-img">
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
             </div>
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="">
+                        <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
                                 <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
                                 Ver Perfil
@@ -80,7 +75,7 @@ $db = null;
                         </a>
                     </li>
                     <li>
-                        <form action="profesor_dashboard.php" method="post">
+                        <form action="profesor_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -92,10 +87,7 @@ $db = null;
                     </li>
                 </ul>
             </div>
-
         </div>
-
-
     </div>
     <div id="main">
         <div id="content">
@@ -108,7 +100,7 @@ $db = null;
                         <a href="profesor_dashboard_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="select_pasar_lista.php" id="pasar-lista">
+                <a href="select_pasar_lista.php" id="top-button">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Pasar Lista
                 </a>

@@ -18,37 +18,56 @@
     
     $materia_id = $_GET['id'];
 
-    $query = $db->prepare('SELECT * FROM alumno');
+    $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia != :id_materia');
+    $query->bindParam(':id_materia', $materia_id);
     $query->execute();
     $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    if (isset($_POST['submit_button'])) {
+        if (!empty($_POST['selected_alumnos'])) {
+            $selectedStudents = $_POST['selected_alumnos'];
+
+            foreach ($selectedStudents as $student) {
+                $query = $db->prepare('UPDATE alumno SET ID_Materia = :id_materia WHERE ID = :id');
+                $query->bindParam(':id_materia', $materia_id);
+                $query->bindParam(':id', $student);
+                $query->execute();
+            }
+            $db = null;
+            header('Location: gestion_materias.php');
+            exit();
+        }
+    }
 
     $db = null;
-
-    $alumnos_nuevos = array();
-
-    function alumnoNuevo($alumno) {
-        $alumnos_nuevos[] = $alumno['ID'];
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar alumnos</title>
+    <title>Integrantes Materia</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
     <h1>Hola</h1>
     <input type="search" name="" id="search">
-    <table border="1">
-        <?php foreach ($alumnos as $alumno) { ?>
-            <tr>
-                    <td class="materis"><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></td>
-                    <td ><a href="" onclick="<?php alumnoNuevo($alumno) ?>">Añadir</a></td>
-            </tr>
-        <?php } ?>
-    </table>
+    <form method="post">
+        <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Añadir</th>
+                </tr>
+            <?php foreach ($alumnos as $alumno) { ?>
+                <tr>
+                        <td class="materis"><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></td>
+                        <td><input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>"></td>
+                </tr>
+            <?php } ?>
+        </table>
+        <input type="submit" name="submit_button" value="Confirmar">
+    </form>
     <script src="../assets/js/index.js"></script>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

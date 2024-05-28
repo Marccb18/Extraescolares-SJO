@@ -29,3 +29,27 @@ profile.addEventListener('click', () => {
     }
 }
 );
+
+let optionsClases = document.getElementsByClassName('optionClase');
+let optionsDias = document.getElementsByClassName('optionDia');
+let items = document.getElementsByClassName('itemtitle');
+let itemsday = document.getElementsByClassName('itemsub')
+
+
+
+function applyFilters() {
+    let selectedClase = document.getElementById('select_clases').value;
+    console.log(selectedClase);
+    let selectedDia = document.getElementById('select_dias').value;
+    console.log(selectedDia);
+
+    for (let item of items) {
+        let clase = item.textContent;
+        let dia = item.parentElement.querySelector('.itemsub').textContent;
+
+        let showItem = (selectedClase === 'Todas' || clase === selectedClase) && 
+                        (selectedDia === 'Todos' || dia.includes(selectedDia));
+
+        item.parentElement.style.display = showItem ? 'flex' : 'none';
+    }
+}

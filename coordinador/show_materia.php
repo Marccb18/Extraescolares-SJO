@@ -41,7 +41,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coord Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/coord_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 <body>
@@ -87,8 +87,8 @@
 
                 </php>
             </div>
-            <div id="main-content">
-                                <table border="1">
+            <div class="main-content">
+                                <table>
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -120,4 +120,5 @@
         </div>
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

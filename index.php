@@ -23,4 +23,5 @@
         <input type="submit" value="Iniciar Sesión">
     </form>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

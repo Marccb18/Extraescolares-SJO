@@ -17,7 +17,6 @@
     $showMaterias = $db->query("SELECT * FROM materia");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     $db = null;
-
     
 ?>
 <!DOCTYPE html>
@@ -26,9 +25,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
-
 </head>
 <body>
     <div id="aside">
@@ -38,7 +36,7 @@
         </div>
         <ul id="side-menu">
             <li class="active">
-                <a href="#">
+                <a href="./admin_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -50,28 +48,50 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <img src="../assets/img/library.svg" alt="Library icon">
-                    Sesiones
-                </a>
-            </li>
-            <li>
                 <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>
             </li>
         </ul>
-
-        <form action="admin_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="./perfil.php">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="main">
         <div id="content">
             <div id="topcontent">
-                <div id="title">
+                <div id="title" style="border: none; padding: 0;">
                     <h3>Inicio</h3>
                     <p>Busca entre todas las clases</p>
                 </div>
@@ -79,22 +99,31 @@
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
-                            <option value="">Todas</option>
+                    <div class="select-container">
+                        <select name="clases" onclick="applyFilters()" id="select_clases" class="select-filter">
+                            <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
                 <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
+                    <p>Dia</p>
+                    <div class="select-container">
+                        <select name="diasemana" class="select-filter" id="select_dias" onclick="applyFilters()">
+                            <option class="optionDia" value="Todos">Todos</option>
+                            <option class="optionDia" value="Lunes">Lunes</option>
+                            <option class="optionDia" value="Martes">Martes</option>
+                            <option class="optionDia" value="Miércoles">Miércoles</option>
+                            <option class="optionDia" value="Jueves">Jueves</option>
+                            <option class="optionDia" value="Viernes">Viernes</option>
+                            <option class="optionDia" value="Sábado">Sábado</option>
+                            <option class="optionDia" value="Domingo">Domingo</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
             </div>
@@ -137,4 +166,6 @@
         </div>
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>
+

@@ -1,33 +1,35 @@
 <?php
-session_start();
-require('../config/conexion.php');
+    session_start();
+    require('../config/conexion.php');
+    
+    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
+        header('Location: ../index.php');
+        exit();
+    }
+    if (isset($_POST['logout'])) {
+        require_once('../config/logout.php');
+        logout();
+    }
 
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
-    header('Location: ../index.php');
-    exit();
-}
+    $db = new PDO($conn, $fields['user'], $fields['pass']);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $materias = $db->query("SELECT ID, Nombre FROM materia");
+    $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
 
-if (isset($_POST['logout'])) {
-    require_once('../config/logout.php');
-    logout();
-}
-
-$db = new PDO($conn, $fields['user'], $fields['pass']);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$showUsers = $db->query("SELECT * FROM personal ORDER BY Apellidos");
-$db = null;
+    $db = null;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Usuarios</title>
+    <title>Crear Alumno</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
 <body>
-    <div id="aside">
+<body>
+<div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
@@ -86,71 +88,48 @@ $db = null;
                 </ul>
             </div>
         </div>
-
     </div>
     <div id="main">
         <div id="content">
             <div id="top-content">
                 <ul>
-                    <li class="active">
+                    <li>
                         <a href="./gestion_users.php">Usuarios</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="./gestion_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
-                <a href="./new_user.php" id="button-top">
+                <a href="./new_alumno.php" id="button-top">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Añadir Usuario
+                    Añadir Alumno
                 </a>
             </div>
             <div id="title">
-                <h3>Usuarios</h3>
-                <p>Busca entre todos los usuarios</p>
+                <h3>Alumnos</h3>
+                <p>Busca entre todos los alumnos</p>
             </div>
-            <div class="main-content">
-                <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Rol</th>
-                        <th class="th-buttons">Editar</th>
-                        <th class="th-buttons">Eliminar</th>
-                    </tr>
-                    <?php foreach ($showUsers as $user) { ?>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="../assets/img/user.svg" alt="user">
-                                    <?= $user['Nombre'] ?>
-                                </p>
-                            </td>
-                            <td><?= $user['Apellidos'] ?></td>
-                            <td>
-                                <?php
-                                switch ($user['ROL']) {
-                                    case 'PRO':
-                                        echo 'Profesor';
-                                        break;
-
-                                    case 'COO':
-                                        echo 'Coordinador';
-                                        break;
-
-                                    case 'ADM':
-                                        echo 'Administrador';
-                                        break;
-                                }
-                                ?>
-                            </td>
-                            <td><a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
-                        </tr>
-                    <?php } ?>
-                </table>
+            <div id="main-content">
+                <form action="insert_alumno.php" method="post">
+                    <p>Nombre</p>
+                    <input type="text" name="nombre" id="nombre">
+                    <p>Apellidos</p>
+                    <input type="text" name="apellidos" id="apellidos">
+                    <p>Asignatura</p>
+                    <div class="form-select">
+                        <select name="materia" id="select">
+                            <?php foreach($materias as $materia) { ?>
+                                <option value="<?= $materia['ID'] ?>"><?= $materia['Nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
+                    <input type="submit" value="Crear">
+                </form>
             </div>
         </div>
     </div>
+</body>
 </body>
 <script src="../assets/js/index.js"></script>
 </html>

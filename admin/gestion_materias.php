@@ -14,7 +14,7 @@
 
     $db = new PDO($conn, $fields['user'], $fields['pass']);
     $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $materias = $db->query("SELECT * FROM materia");
+    $materias = $db->query("SELECT * FROM materia ORDER BY Nombre");
     $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
 
     $id_materias = array_column($materias,'ID');
@@ -40,8 +40,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+    <title>Gestionar Materias</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 
 </head>
@@ -64,12 +64,6 @@
                     Usuarios
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <img src="../assets/img/library.svg" alt="Library icon">
-                    Sesiones
-                </a>
-            </li>
             <li class="active"> 
                 <a href="#">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
@@ -77,16 +71,44 @@
                 </a>
             </li>
         </ul>
-
-        <form action="admin_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="./perfil.php">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="gestion_materias.php" method="post">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="main">
         <div id="content">
             <div id="topcontent">
-                <div id="title">
+                <div id="title" style="border: none; padding: 0;">
                     <h3>Materias</h3>
                     <p>Busca entre todas las materias<p>
                 </div>
@@ -96,13 +118,13 @@
                 </a>
             </div>
             <div class="main-content">
-                <table border="1">
+                <table>
                     <tr>
                         <th>Nombre</th>
                         <th>Profesor</th>
                         <th>Alumnos</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th class="th-buttons">Editar</th>
+                        <th class="th-buttons">Eliminar</th>
                     </tr>
                     <?php foreach ($materias as $materia) {?>
                         <tr>
@@ -122,13 +144,13 @@
                                 ?>
                             </td>
                             <td>
-                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
+                                <a style="background-color: #000;" class="button-table" href="edit_materia.php?id=<?= $materia['ID'] ?>">
                                     <img src="../assets/img/pen.svg"" alt="">
                                     Editar
                                 </a>
                             </td>
-                            <td>
-                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
+                            <td style="padding-right: 0; width: 12%;">
+                                <a class="button-table" href="delete_materia.php?id=<?= $materia['ID'] ?>">
                                     <img src="../assets/img/trash.svg" alt="">
                                     Eliminar
                                 </a>
@@ -140,4 +162,5 @@
         </div>  
     </div>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>

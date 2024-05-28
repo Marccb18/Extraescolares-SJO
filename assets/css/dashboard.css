@@ -18,6 +18,12 @@ body {
     font-family: Inter;
 }
 
+option {
+    color: black;
+    outline: none;
+    
+}
+
 #aside {
     width: 20vw;
     height: 100vh;
@@ -50,7 +56,6 @@ body {
 #titlelogo p {
     font-size: 0.9rem;
     font-family: Inter-B;
-    text-wrap: balance;
     margin: 0;
     padding: 0;
     display: flex;
@@ -71,7 +76,7 @@ body {
     list-style: none;
     margin-left: 5%;
     background-color: white;
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #side-menu .active {
@@ -116,6 +121,15 @@ body {
 #content {
     width: 95%;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#topcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(228, 228, 231, 1);
 }
 
 #top-content {
@@ -134,7 +148,7 @@ body {
     list-style: none;
     margin: 0;
     padding: 4px;
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #top-content ul li {
@@ -159,10 +173,10 @@ body {
     font-size: 0.9rem;
 }
 
-#pasar-lista {
+#top-button {
     color: white;
     background-color: black;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -196,6 +210,20 @@ body {
     color: rgba(113, 113, 122, 1);
 }
 
+#button-top {
+    color: white;
+    background-color: black;
+    border-radius: 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 12px 15px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-wrap: nowrap;
+}
+
 #filter {
     display: flex;
     flex-wrap: nowrap;
@@ -216,7 +244,7 @@ body {
     gap: 10px;
 }
 
-#select-container {
+.select-container {
     display: inline-block;
     position: relative;
     width: fit-content;
@@ -224,24 +252,24 @@ body {
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     border: 2px solid rgba(228, 228, 231, 1);
 }
 
-#select-container select {
+.select-filter {
     font-family: Inter;
     appearance: none;
     width: 10rem;
     height: 2.5rem;
     border: none;
     outline: none;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     margin: 0;
     padding: 0;
     padding-left: 15px;
 }
 
-#select-container img { 
+.select-container img { 
     rotate: 180deg;
     position: absolute;
     right: 20px;
@@ -256,7 +284,7 @@ body {
     height: fit-content;
     margin: 0;
     border: 2px solid rgba(228, 228, 231, 1);
-    border-radius: 6px;
+    border-radius: 0.45rem;
 }
 
 #date-container img {
@@ -277,7 +305,7 @@ body {
     height: 2.5rem;
     border: none;
     outline: none;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -292,48 +320,25 @@ body {
     background-color: transparent;
 }
 
-.user-info-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 226px;
-    margin: 0 auto;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid #E4E4E7;
-    padding: 0 20px;
-    box-sizing: border-box;
-
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.user-info img {
-    width: 20px;
-    margin-right: 10px;
-}
-
-.user-info p {
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-}
-
-.vector-img {
-    transform: rotate(90deg);
-    width: 16px;
-}
-
 #main-content {
     display: flex;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 3%;
     margin-top: 35px;
-    margin-bottom: 35px;
+}
+
+#main-content:has(form) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    margin-top: 24px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 .item {
@@ -342,6 +347,7 @@ body {
     width: 200px;
     gap: 5px;
     text-decoration: none;
+    margin-bottom: 30px;
 }
 
 .item img {
@@ -369,6 +375,7 @@ body {
     font-size: 0.8rem;
 }
 
+
 .optionsProfile {
     display: none;
     margin-top: 8px;
@@ -376,9 +383,9 @@ body {
     border: 1px solid #E0E0E0;
     border-radius: 8px;
     padding: 8px;
-    width: 226px;
+    width: 90%;
     box-sizing: border-box;
-    margin-left: 16px;
+    margin-left: 5%;
 }
 
 .optionsProfile ul {
@@ -413,4 +420,214 @@ body {
     padding: 0;
     outline: none;
     width: 100%;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 0.45rem;
+    border: 1px solid #E4E4E7;
+    padding: 0 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#logout-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+
+.user-info-container > img {
+    rotate: 90deg;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.user-info img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+}
+
+.vector-img {
+    transform: rotate(90deg);
+    width: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 96%;
+    margin-top: 30px;
+}
+
+table th {
+    color: rgba(113, 113, 122, 1);
+    font-weight: 400;
+    font-size: 0.9rem;
+    width: fit-content;
+}
+
+table a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+table th {
+    padding-bottom: 8px;
+}
+
+table tr {
+    text-align: left;
+}
+
+table td p {
+    padding: 0;
+    margin: 0;
+}
+
+table td {
+    border-bottom: 1.5px solid rgba(228, 228, 231, 1);
+    padding: 10px 0;
+    max-width: 80px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button-table {
+    color: white;
+    background-color: #d20707;
+    padding: 10px 10px;
+    border-radius: 0.45rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+}
+
+table td:has(.button-table) {
+    width: fit-content;
+    padding: 10px 0;
+}
+
+.th-buttons {
+    padding-left: 2%;
+    width: 12%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+form p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+form input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border: 2px solid rgba(228, 228, 231, 1);
+    border-radius: 0.45rem;
+    padding: 0;
+    appearance: none;
+    font-family: Inter;
+    padding: 9px 0;
+}
+
+form input[type=text] {
+    text-indent: 10px;
+}
+
+.form-select {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    border-radius: 0.45rem;
+    border: 2px solid rgba(228, 228, 231, 1);
+}
+
+.form-select select {
+    font-family: Inter;
+    appearance: none;
+    width: 100%;
+    height: fit-content;
+    border: none;
+    outline: none;
+    border-radius: 0.45rem;
+    margin: 0;
+    padding: 0;
+    padding: 10px 12px;
+}
+
+.form-select img {
+    rotate: 180deg;
+    position: absolute;
+    right: 20px;
+    top: 32.5%;
+    pointer-events: none;
+}
+
+form input[type=submit] {
+    background-color: #000;
+    color: rgb(255,255,255);
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    width: 101%;
+    border: 2px solid #000;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+form input[type=email], form input[type=number], form input[type=password] {
+    text-indent: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    appearance: none;
+}
+
+input[type="time"] {
+    text-indent: 5px;
 }
