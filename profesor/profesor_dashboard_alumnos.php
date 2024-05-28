@@ -56,13 +56,13 @@ $db = null;
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
+            <li>
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="#">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
