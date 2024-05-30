@@ -12,7 +12,21 @@ if (isset($_POST['logout'])) {
     logout();
     exit();
 }
-
+$months = array(
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre",
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio"
+      );
+      
+  
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
@@ -122,13 +136,14 @@ $db = null;
                 </div>
             </div>
             <div id="main-content">
-                <?php
+                <?php foreach($months as $month) {  
+                    echo "<div><h2>$month</h2></div>";
                 foreach ($materias as $materia) { ?>
                     <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
                         <img src="../assets/img/logoSJO.svg" alt="logo">
                         <p class="itemtitle"><?= $materia['Nombre'] ?></p>
                     </a>
-                <?php } ?>
+                <?php }} ?>
             </div>
         </div>
     </div>
