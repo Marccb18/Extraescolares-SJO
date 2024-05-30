@@ -80,15 +80,14 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+    <link rel="stylesheet" href="../assets/css/pasar-lista.css">
 </head>
-
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -151,42 +150,41 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
     </div>
     <div id="main">
         <div id="content">
-            <div id="title">
+            <div id="title" style="padding-top: 0;">
                 <php>
                     <h3><?= $class['Nombre'] ?></h3>
                     <p><?= $prof['Nombre'] ?></p>
                     <p><?= $prof['Apellidos'] ?></p>
-
                 </php>
             </div>
-            <div class="main-content">
-                <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Falta</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) {
-                        $check = '';
-                        foreach ($Faltas as $falta) {
-                            if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
-                                $check = 'Checked';
-                            }
-                        } ?>
-                        <form method="post">
-                            <tr>
-                                <td>
-                                    <img src="../assets/img/user.svg" alt="user">
-                                    <?= $alumno['Nombre'] ?>
-                                </td>
-                                <td><?= $alumno['Apellidos'] ?></td>
-                                <td>
-                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?>> Falta<br>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                </table>
-                <input type="submit" name="submit_button" value="Submit">
+            <div id="main-content" style="margin-top: 0;">
+                <form action="pasar_lista.php?id=<?= $class_id  ?>" method="post" id="form-pasarlista">
+                    <table>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Falta</th>
+                        </tr>
+                        <?php foreach ($alumnos as $alumno) {
+                            $check = '';
+                            foreach ($Faltas as $falta) {
+                                if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
+                                    $check = 'Checked';
+                                }
+                            } ?>
+                                <tr>
+                                    <td>
+                                        <img src="../assets/img/user.svg" alt="user">
+                                        <?= $alumno['Nombre'] ?>
+                                    </td>
+                                    <td><?= $alumno['Apellidos'] ?></td>
+                                    <td style="padding-right: 0;text-overflow: unset; padding-left: 2%">
+                                        <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?> >
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                    </table>
+                    <input type="submit" name="submit_button" value="Submit" id="submit-button">
                 </form>
             </div>
         </div>
