@@ -112,8 +112,8 @@ $db = null;
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
+                    <div class="select-container">
+                        <select class="select-filter" name="clases">
                             <option value="">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>

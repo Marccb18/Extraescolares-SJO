@@ -522,7 +522,7 @@ table td p {
 }
 
 table td {
-    border-bottom: 1.5px solid rgba(228, 228, 231, 1);
+    border-top: 1.5px solid rgba(228, 228, 231, 1);
     padding: 10px 0;
     max-width: 80px;
     padding-right: 25px;
@@ -655,3 +655,4 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     appearance: none;
     opacity: 0;
 }
+
