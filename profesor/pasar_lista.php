@@ -15,12 +15,12 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $class_id = $_GET['id'];
 
 $query = $db->prepare("
-  SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
-  p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
-  FROM materia m
-  INNER JOIN personal p ON m.ID_Profesor = p.DNI
-  INNER JOIN matriculas mt ON m.ID = mt.ID_Materia
-  WHERE m.ID = :id_materia;
+SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
+p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
+FROM materia m
+INNER JOIN personal p ON m.ID_Profesor = p.DNI
+WHERE m.ID = :id_materia
+GROUP BY m.ID, m.Nombre, m.Dia, m.Hora, p.DNI, p.Nombre, p.Apellidos;
 ");
 $query->bindParam(':id_materia', $class_id);
 $query->execute();
@@ -28,7 +28,7 @@ $query->execute();
 $data = $query->fetch(PDO::FETCH_ASSOC);
 
 
-$prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos'], 'DNI' => $data['profesor_dni']]; // Assuming profesor data is nested within $class
+$prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos']];
 $class = ['Nombre' => $data['materia_nombre'], 'ID' => $data['materia_id'], 'ID_profesor' => $data['profesor_dni'],];
 
 
@@ -72,7 +72,7 @@ if (isset($_POST['submit_button'])) {
 
 $db = null;
 
-if ($_SESSION['id'] != $prof['DNI']) {
+if ($_SESSION['id'] !=  $class['ID_profesor']) {
     header('Location: profesor_dashboard.php');
     exit();
 }
