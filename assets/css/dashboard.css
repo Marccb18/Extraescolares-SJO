@@ -664,3 +664,41 @@ input[type="checkbox"] {
     cursor: pointer;
     border-radius: 0;
 }
+
+@media (width <= 480px) {
+    
+    #aside {
+        display: none;
+    }
+
+    #main {
+        margin: 0;
+        margin-left: 1vw;
+        padding: 0;
+    }
+
+    #content {
+        width: 90%;
+    }
+
+    #main-content, .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    #filter {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .select-container select {
+        width: 40vw;    
+    }
+
+    .item {
+        width: 40vw;
+    }
+}
