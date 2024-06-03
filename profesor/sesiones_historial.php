@@ -7,6 +7,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     exit();
 }
 $currentDate = date('d-m-Y');
+$currentMonth = date('m');
+if ($currentMonth >=9 && $currentMonth <=12) {
+    $currentYear = date('Y');
+} else {
+    $currentYear = date('Y') - 1;
+}
+$fechaInicio = '01-09-' . $currentYear;
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -134,15 +141,12 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                                 break;
                         } ?> a las <?php echo $data['Hora'] ?></h2>
            <div class="historic-cards">
-                <!-- la clases empiezan el 1 de septiembre hasta el 30 de junio -->
+                <p><?= $currentYear ?>-<?= $currentYear + 1 ?></p>
+                <p> <?php echo $currentYear ?></p>
                 <?php
-                
-                $date = new DateTime('2021-09-01');
-                $today = new DateTime($currentDate);
-                echo $date->format('d-m-Y');
-                while ($date <= $today) {
-                    $date->add(new DateInterval('P7D'));
-                    echo $date->format('d-m-Y');
+                while ($currentDate >= $fechaInicio) {
+                    $currentDate = date('d-m-Y', strtotime($currentDate . ' - 7 days'));
+                    echo "<p>$currentDate</p>";
                 }
                 ?>
 
