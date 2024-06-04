@@ -13,7 +13,7 @@ if ($currentMonth >=9 && $currentMonth <=12) {
 } else {
     $currentYear = date('Y') - 1;
 }
-$fechaInicio = '01-09-' . $currentYear;
+$fechaInicio = date('d-m-Y', strtotime('01-09-' . $currentYear));
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -36,7 +36,10 @@ $data = $query->fetch(PDO::FETCH_ASSOC);
 #historial de faltas desde el 1 de septiembre hasta la fecha actual teniendo en cuenta que solo hay una clase por semana
 $prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos'], 'DNI' => $data['profesor_dni']];
 $class = ['Nombre' => $data['materia_nombre'], 'ID' => $data['materia_id'], 'ID_profesor' => $data['profesor_dni'],];
-
+$dia_de_materia = $data['Dia'];
+$conversor = ['LUN' => 'monday', 'MAR' => 'tuesday', 'MIE' => 'wednesday', 'JUE' => 'thursday', 'VIE' => 'friday', 'SAB' => 'saturday', 'DOM' => 'sunday'];
+$dia_de_materia = $conversor[$dia_de_materia];
+$ultimaClase_dada = date('d-m-Y', strtotime('last ' . $dia_de_materia));
 $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id_materia');
 $query->bindParam(':id_materia', $class['ID']);
 $query->execute();
@@ -143,13 +146,26 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
            <div class="historic-cards">
                 <p><?= $currentYear ?>-<?= $currentYear + 1 ?></p>
                 <p> <?php echo $currentYear ?></p>
-                <?php
-                while ($currentDate >= $fechaInicio) {
-                    $currentDate = date('d-m-Y', strtotime($currentDate . ' - 7 days'));
-                    echo "<p>$currentDate</p>";
-                }
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                <?php       
+                     /* quiero coger el dia en nombre en el que estamos actualmente con date pasar a minuscula */
+                     $diaAcrtual = date('l');
+                        if (strtolower($diaAcrtual) == $dia_de_materia) {
+                            echo '<div class="historic-card">';
+                            echo '<p>'. $currentDate  .'</p>';
+                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($currentDate)) . '">Ver faltas</a>';
+                            echo '</div>';
+                        }
+                        while (strtotime($ultimaClase_dada) >= strtotime($fechaInicio)) {
+                            echo '<div class="historic-card">';
+                            echo '<p>' . $ultimaClase_dada . '</p>';
+                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($ultimaClase_dada)) . '">Ver faltas</a>';
+                            echo '</div>';
+            
+                            $ultimaClase_dada = date('d-m-Y', strtotime($ultimaClase_dada . ' - 7 days'));
+                        }
                 ?>
-
+                </div>
            </div>
         </div>
 
