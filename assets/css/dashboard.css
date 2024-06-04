@@ -676,10 +676,6 @@ input[type="checkbox"] {
     #aside {
         display: none;
     }
-
-    h3 {
-        letter-spacing: 0;
-    }
     
     select {
         background-color: white;
@@ -727,7 +723,6 @@ input[type="checkbox"] {
         background-color: white;
         border: none;
         outline: none;
-
     }
 
     #content {
@@ -760,5 +755,5 @@ input[type="checkbox"] {
         width: 40vw;
     }
 
-
+    
 }
