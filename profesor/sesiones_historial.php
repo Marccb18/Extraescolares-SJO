@@ -120,7 +120,8 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
     <div id="main">
         <div id="content">
             <h1>Historial de faltas</h1>
-            <h2>Clase de <?php switch ($data['Dia']) {
+            <h2><?= $data['materia_nombre'] ?>
+             <?php switch ($data['Dia']) {
                             case 'LUN':
                                 echo 'Lunes';
                                 break;
@@ -145,8 +146,13 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         } ?> a las <?php echo $data['Hora'] ?></h2>
            <div class="historic-cards">
                 <p><?= $currentYear ?>-<?= $currentYear + 1 ?></p>
-                <p> <?php echo $currentYear ?></p>
+                <div class="select-container">
+                    <input type="date" id="date" name="date" value="<?=date('Y-m-d', strtotime($currentDate)); ?>" min="<?= date('Y-m-d',strtotime($fechaInicio ))?>" max="<?= date('Y-m-d',strtotime($currentDate)) ?>">
+
+                </div>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                
+
                 <?php       
                      /* quiero coger el dia en nombre en el que estamos actualmente con date pasar a minuscula */
                      $diaAcrtual = date('l');
