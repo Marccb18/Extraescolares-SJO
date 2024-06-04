@@ -15,12 +15,12 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $class_id = $_GET['id'];
 
 $query = $db->prepare("
-  SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
-  p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
-  FROM materia m
-  INNER JOIN personal p ON m.ID_Profesor = p.DNI
-  INNER JOIN matriculas mt ON m.ID = mt.ID_Materia
-  WHERE m.ID = :id_materia;
+SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
+p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
+FROM materia m
+INNER JOIN personal p ON m.ID_Profesor = p.DNI
+WHERE m.ID = :id_materia
+GROUP BY m.ID, m.Nombre, m.Dia, m.Hora, p.DNI, p.Nombre, p.Apellidos;
 ");
 $query->bindParam(':id_materia', $class_id);
 $query->execute();
@@ -28,7 +28,7 @@ $query->execute();
 $data = $query->fetch(PDO::FETCH_ASSOC);
 
 
-$prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos'], 'DNI' => $data['profesor_dni']]; // Assuming profesor data is nested within $class
+$prof = ['Nombre' => $data['profesor_nombre'], 'Apellidos' => $data['profesor_apellidos']];
 $class = ['Nombre' => $data['materia_nombre'], 'ID' => $data['materia_id'], 'ID_profesor' => $data['profesor_dni'],];
 
 
@@ -72,7 +72,7 @@ if (isset($_POST['submit_button'])) {
 
 $db = null;
 
-if ($_SESSION['id'] != $prof['DNI']) {
+if ($_SESSION['id'] !=  $class['ID_profesor']) {
     header('Location: profesor_dashboard.php');
     exit();
 }
@@ -80,15 +80,14 @@ if ($_SESSION['id'] != $prof['DNI']) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+    <link rel="stylesheet" href="../assets/css/pasar-lista.css">
 </head>
-
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -151,46 +150,63 @@ if ($_SESSION['id'] != $prof['DNI']) {
     </div>
     <div id="main">
         <div id="content">
-            <div id="title">
+            <div id="title" style="padding-top: 0;">
                 <php>
                     <h3><?= $class['Nombre'] ?></h3>
                     <p><?= $prof['Nombre'] ?></p>
                     <p><?= $prof['Apellidos'] ?></p>
-
                 </php>
             </div>
-            <div class="main-content">
-                <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Falta</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) {
-                        $check = '';
-                        foreach ($Faltas as $falta) {
-                            if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
-                                $check = 'Checked';
-                            }
-                        } ?>
-                        <form method="post">
-                            <tr>
-                                <td>
-                                    <img src="../assets/img/user.svg" alt="user">
-                                    <?= $alumno['Nombre'] ?>
-                                </td>
-                                <td><?= $alumno['Apellidos'] ?></td>
-                                <td>
-                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?>> Falta<br>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                </table>
-                <input type="submit" name="submit_button" value="Submit">
+            <div id="main-content" style="margin-top: 0;">
+                <form action="pasar_lista.php?id=<?= $class_id  ?>" method="post" id="form-pasarlista">
+                    <table>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Falta</th>
+                        </tr>
+                        <?php foreach ($alumnos as $alumno) {
+                            $check = '';
+                            foreach ($Faltas as $falta) {
+                                if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
+                                    $check = 'Checked';
+                                }
+                            } ?>
+                                <tr>
+                                    <td>
+                                        <img src="../assets/img/user.svg" alt="user">
+                                        <?= $alumno['Nombre'] ?>
+                                    </td>
+                                    <td><?= $alumno['Apellidos'] ?></td>
+                                    <td style="padding-right: 0;text-overflow: unset; padding-left: 2%">
+                                        <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?> >
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                    </table>
+                    <input type="submit" name="submit_button" value="Submit" id="submit-button">
                 </form>
             </div>
         </div>
     </div>
-</body>
+<div id="mobile-menu">
+        <a href="./admin_dashboard.php" class="active">
+            <img src="../assets/img/icon-home.svg" alt="home-icon">
+        </a>
+        <a href="./gestion_users.php">
+            <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
+        </a>
+        <a href="./gestion_materias.php">
+            <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
+        </a>
+        <a href="./perfil.php">
+            <img src="../assets/img/person.svg" alt="person-icon">
+        </a>
+        <form action="admin_dashboard.php" method="post">
+            <button type="submit" name="logout">
+                <img src="../assets/img/logout.svg" alt="logout-icon">
+            </button>
+        </form>
+    </div>
 
 </html>

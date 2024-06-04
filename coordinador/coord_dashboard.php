@@ -60,25 +60,53 @@
                 </a>
             </li>
         </ul>
-
-        <form action="coord_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <a href="./perfil.php">
+                            <div style="display: flex;  align-items: center;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                Ver Perfil
+                            </div>
+                            <img src="../assets/img/chevron-right.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <form action="admin_dashboard.php" method="post" id="logout-form">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;" >
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>        
     </div>
     <div id="main">
-        <div id="content">
+        <div id="content" style="margin-top: 0;">
             <div style="border: 0;" id="topcontent">
                 <div id="title">
                     <h3>Inicio</h3>
                     <p>Busca entre todas las clases</p>
                 </div>
             </div>
-            <div id="filter">
+            <div id="filter" style="margin-top: 5px;">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
+                    <div class="select-container">
+                        <select name="clases" class="select-filter">
                             <option value="">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
@@ -134,6 +162,24 @@
             </div>
         </div>
     </div>
-</body>
+<div id="mobile-menu">
+        <a href="./admin_dashboard.php" class="active">
+            <img src="../assets/img/icon-home.svg" alt="home-icon">
+        </a>
+        <a href="./gestion_users.php">
+            <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
+        </a>
+        <a href="./gestion_materias.php">
+            <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
+        </a>
+        <a href="./perfil.php">
+            <img src="../assets/img/person.svg" alt="person-icon">
+        </a>
+        <form action="admin_dashboard.php" method="post">
+            <button type="submit" name="logout">
+                <img src="../assets/img/logout.svg" alt="logout-icon">
+            </button>
+        </form>
+    </div>
 <script src="../assets/js/index.js"></script>
 </html>

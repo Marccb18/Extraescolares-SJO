@@ -11,6 +11,10 @@
     src: url(../fonts/Inter-Bold.ttf);
 }
 
+* {
+    font-family: Inter;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -267,6 +271,8 @@ option {
     margin: 0;
     padding: 0;
     padding-left: 15px;
+    background-color: white;
+    color: #000;
 }
 
 .select-container img { 
@@ -407,6 +413,14 @@ option {
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
+    color: #000;
+    text-wrap: nowrap;
+    font-size: 0.9rem;
+}
+
+.optionsProfile ul li form {
+    width: 100%;
+    height: 100%;
 }
 
 .optionsProfile button {
@@ -420,6 +434,10 @@ option {
     padding: 0;
     outline: none;
     width: 100%;
+    text-wrap: nowrap;
+    font-size: 0.85rem;
+    font-family: Inter;
+
 }
 
 .user-info-container {
@@ -443,6 +461,7 @@ option {
     height: 100%;
     width: 100%;
 }
+
 
 
 .user-info-container > img {
@@ -504,7 +523,7 @@ table td p {
 }
 
 table td {
-    border-bottom: 1.5px solid rgba(228, 228, 231, 1);
+    border-top: 1.5px solid rgba(228, 228, 231, 1);
     padding: 10px 0;
     max-width: 80px;
     padding-right: 25px;
@@ -558,13 +577,13 @@ form input {
     border: 2px solid rgba(228, 228, 231, 1);
     border-radius: 0.45rem;
     padding: 0;
-    appearance: none;
     font-family: Inter;
     padding: 9px 0;
 }
 
 form input[type=text] {
     text-indent: 10px;
+    appearance: none;
 }
 
 .form-select {
@@ -630,4 +649,111 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="time"] {
     text-indent: 5px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+    appearance: none;
+    opacity: 0;
+}
+
+input[type="checkbox"] {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin: 0;
+    padding: 0;
+    pointer-events: all;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+#mobile-menu {
+    display: none;
+}
+
+@media (width <= 480px) {
+    
+    #aside {
+        display: none;
+    }
+    
+    select {
+        background-color: white;
+        color: #000;
+    }
+
+    #main {
+        margin: 0;
+        margin-left: 1vw;
+        padding: 0;
+    }
+
+    #mobile-menu {
+        display: flex;
+        position: fixed;
+        bottom: 0px;
+        width: 100vw;
+        background-color: rgb(255,255,255);
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    #mobile-menu a {
+        padding: 0.65rem;
+        margin: 0.25rem 0.3rem;
+        border-radius: 0.5rem;
+    }
+
+    .active {
+        background-color: rgba(228, 228, 231, 1);
+    }
+
+    #mobile-menu img {
+        height: 1.25rem;
+        aspect-ratio: 1/1;
+        pointer-events: none;
+    }
+
+    #mobile-menu form {
+        width: fit-content;
+    }
+
+    #mobile-menu form button {
+        width: fit-content;
+        background-color: white;
+        border: none;
+        outline: none;
+    }
+
+    #content {
+        width: 90%;
+        margin-top: 2vh;
+    }
+
+    #title {
+        gap: 3px;
+    }
+
+    #main-content, .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    #filter {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .select-container select {
+        width: 40vw;    
+    }
+
+    .item {
+        width: 40vw;
+    }
+
+    
 }

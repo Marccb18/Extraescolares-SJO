@@ -112,8 +112,8 @@ $db = null;
             <div id="filter">
                 <div id="clases">
                     <p>Clases</p>
-                    <div id="select-container">
-                        <select name="clases">
+                    <div class="select-container">
+                        <select class="select-filter" name="clases">
                             <option value="">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>
@@ -169,7 +169,25 @@ $db = null;
             </div>
         </div>
     </div>
-</body>
+<div id="mobile-menu">
+        <a href="./admin_dashboard.php" class="active">
+            <img src="../assets/img/icon-home.svg" alt="home-icon">
+        </a>
+        <a href="./gestion_users.php">
+            <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
+        </a>
+        <a href="./gestion_materias.php">
+            <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
+        </a>
+        <a href="./perfil.php">
+            <img src="../assets/img/person.svg" alt="person-icon">
+        </a>
+        <form action="admin_dashboard.php" method="post">
+            <button type="submit" name="logout">
+                <img src="../assets/img/logout.svg" alt="logout-icon">
+            </button>
+        </form>
+    </div>
 <script src="../assets/js/index.js"></script>
 
 </html>

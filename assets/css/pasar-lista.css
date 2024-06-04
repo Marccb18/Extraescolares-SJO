@@ -1,0 +1,15 @@
+#form-pasarlista {
+    width: 40vw;
+}
+
+#form-pasarlista td {
+    max-width: none;
+    width: max-content;
+}
+
+#submit-button {
+    width: 35%;
+    justify-self: center;
+    align-self: last baseline;
+    margin: 0 5% 0 0;
+}
