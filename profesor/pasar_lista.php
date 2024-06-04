@@ -10,7 +10,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
 if (isset($_GET['fecha'])) {
     $currentDate = $_GET['fecha'];
 } else {
-    $currentDate = date('d-m-Y');
+    $currentDate = date('Y-m-d');
 }
 
 
@@ -56,18 +56,22 @@ if (isset($_POST['submit_button'])) {
                 $query->bindParam(':id_alumno', $alumno['ID']);
                 $query->bindParam(':fecha', $currentDate);
                 $query->execute();
-            }
+            } 
         }
     }
     if (!empty($_POST['selected_alumnos'])) {
         $selectedStudents = $_POST['selected_alumnos'];
+        
 
         foreach ($selectedStudents as $stud) {
-            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
+            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia, :fecha )');
             $query->bindParam(':id_alumno', $stud);
             $query->bindParam(':id_materia', $class_id);
             $query->bindParam(':fecha', $currentDate);
             $query->execute();
+            error_log("Falta insertada " . $stud . " " . $class_id . " " . $currentDate);
+            header("Location: ../dattabase.php");
+            exit();
         }
     }
     header("Location: profesor_dashboard.php");
@@ -173,7 +177,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                         <?php foreach ($alumnos as $alumno) {
                             $check = '';
                             foreach ($Faltas as $falta) {
-                                if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] = $currentDate) {
+                                if ($alumno['ID'] == $falta['ID_Alumno'] and $falta['Fecha'] == $currentDate) {
                                     $check = 'Checked';
                                 }
                             } ?>
@@ -182,7 +186,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                                         <img src="../assets/img/user.svg" alt="user">
                                         <?= $alumno['Nombre'] ?>
                                     </td>
-                                    <td><?= $alumno['Apellidos'] ?></td>
+                                    <td><?= $alumno['Apellidos'] . " " . $alumno['ID'] . " " . $currentDate ?></td>
                                     <td style="padding-right: 0;text-overflow: unset; padding-left: 2%">
                                         <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?> >
                                     </td>
