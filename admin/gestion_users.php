@@ -15,6 +15,7 @@ if (isset($_POST['logout'])) {
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showUsers = $db->query("SELECT * FROM personal ORDER BY Apellidos");
+$showUsers = $showUsers->fetchAll(PDO::FETCH_ASSOC);
 $db = null;
 ?>
 <!DOCTYPE html>
@@ -109,7 +110,7 @@ $db = null;
                 <p>Busca entre todos los usuarios</p>
             </div>
             <div class="main-content">
-                <table>
+                <table id="table-desktop">
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -148,6 +149,22 @@ $db = null;
                         </tr>
                     <?php } ?>
                 </table>
+                <div id="table-mobile">
+                    <?php foreach ($showUsers as $user) { ?>
+                        <details>
+                            <summary>
+                                <p>
+                                    <img src="../assets/img/arrow-select.svg" alt="">
+                                    Nombre
+                                </p>
+                                <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
+                            </summary>
+                            <div>
+                                HOLA
+                            </div>
+                        </details>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
