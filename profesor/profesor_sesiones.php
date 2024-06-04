@@ -124,7 +124,7 @@ $db = null;
             <div id="main-content">
                 <?php
                 foreach ($materias as $materia) { ?>
-                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                    <a class="item" href="sesiones_historial.php?id=<?= $materia['ID'] ?>">
                         <img src="../assets/img/logoSJO.svg" alt="logo">
                         <p class="itemtitle"><?= $materia['Nombre'] ?></p>
                     </a>
