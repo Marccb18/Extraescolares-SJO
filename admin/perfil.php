@@ -117,7 +117,7 @@ $db = null;
         </div>
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php" class="active">
+        <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
         <a href="./gestion_users.php">
@@ -126,7 +126,7 @@ $db = null;
         <a href="./gestion_materias.php">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
-        <a href="./perfil.php">
+        <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
         <form action="admin_dashboard.php" method="post">
