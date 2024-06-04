@@ -101,10 +101,10 @@
                     <p>Clases</p>
                     <div class="select-container">
                         <select name="clases" onclick="applyFilters()" id="select_clases" class="select-filter">
-                            <option class="optionClase" value="Todas">Todas</option>
+                            <option class="optionClase" onclick="applyFilters()" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase"  onclick="applyFilters()"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">

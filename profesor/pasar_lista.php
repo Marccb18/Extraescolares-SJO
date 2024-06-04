@@ -6,7 +6,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
-$currentDate = date('Y-m-d');
+
+if (isset($_GET['fecha'])) {
+    $currentDate = $_GET['fecha'];
+} else {
+    $currentDate = date('d-m-Y');
+}
 
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
