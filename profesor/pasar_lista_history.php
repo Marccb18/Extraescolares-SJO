@@ -165,13 +165,13 @@ if ($_SESSION['id'] != $prof['DNI']) {
         </div>
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+        <a href="./prof_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./prof_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php" class="active">
+        <a href="./profesor_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">

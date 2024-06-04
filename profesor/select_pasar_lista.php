@@ -43,6 +43,7 @@ if ($cantidad_materias == 1) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +51,7 @@ if ($cantidad_materias == 1) {
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -67,7 +69,7 @@ if ($cantidad_materias == 1) {
                 <a href="#">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
-                    
+
                 </a>
             </li>
             <li>
@@ -99,7 +101,7 @@ if ($cantidad_materias == 1) {
                     <li>
                         <form action="gestion_materias.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -131,7 +133,7 @@ if ($cantidad_materias == 1) {
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {
-                    if ( $materia['Dia'] == getDayOfWeek()) {
+                    if ($materia['Dia'] == getDayOfWeek()) {
                         $count++; ?>
                         <a class="item" href="pasar_lista.php?id=<?= $materia['ID'] ?>">
                             <img src="../assets/img/logoSJO.svg" alt="logo">
@@ -150,14 +152,14 @@ if ($cantidad_materias == 1) {
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./prof_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./prof_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php" class="active">
+        <a href="./profesor_sesiones.php"  class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">

@@ -13,20 +13,20 @@ if (isset($_POST['logout'])) {
     exit();
 }
 $months = array(
-        "septiembre",
-        "octubre",
-        "noviembre",
-        "diciembre",
-        "enero",
-        "febrero",
-        "marzo",
-        "abril",
-        "mayo",
-        "junio",
-        "julio"
-      );
-      
-  
+    "septiembre",
+    "octubre",
+    "noviembre",
+    "diciembre",
+    "enero",
+    "febrero",
+    "marzo",
+    "abril",
+    "mayo",
+    "junio",
+    "julio"
+);
+
+
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
@@ -36,6 +36,7 @@ $db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,8 +44,9 @@ $db = null;
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
+
 <body>
-<div id="aside">
+    <div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
@@ -91,7 +93,7 @@ $db = null;
                     <li>
                         <form action="profesor_sesiones.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -104,7 +106,7 @@ $db = null;
         </div>
     </div>
 
-  <div id="main">
+    <div id="main">
         <div id="content">
             <div id="top-content">
                 <ul>
@@ -127,8 +129,8 @@ $db = null;
                         <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option class="optionClase" value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -136,25 +138,26 @@ $db = null;
                 </div>
             </div>
             <div id="main-content">
-                <?php foreach($months as $month) {  
+                <?php foreach ($months as $month) {
                     echo "<div><h2>$month</h2></div>";
-                foreach ($materias as $materia) { ?>
-                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                        <img src="../assets/img/logoSJO.svg" alt="logo">
-                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                    </a>
-                <?php }} ?>
+                    foreach ($materias as $materia) { ?>
+                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                            <img src="../assets/img/logoSJO.svg" alt="logo">
+                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                        </a>
+                <?php }
+                } ?>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./prof_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./prof_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php" class="active">
+        <a href="./profesor_sesiones.php"  class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
@@ -166,6 +169,6 @@ $db = null;
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
 
 </html>

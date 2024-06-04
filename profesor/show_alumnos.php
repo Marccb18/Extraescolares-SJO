@@ -1,31 +1,33 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
-        header('Location: ../index.php');
-        exit();
-    }
+session_start();
+require('../config/conexion.php');
 
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
+    header('Location: ../index.php');
+    exit();
+}
 
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
-    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-    $db = null;
+if (isset($_POST['logout'])) {
+    require_once('../config/logout.php');
+    logout();
+}
+
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
+$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -80,7 +82,7 @@
                     <li>
                         <form action="gestion_materias.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -99,7 +101,7 @@
                     <li class="active">
                         <a href="#">Clases</a>
                     </li>
-                    <li >
+                    <li>
                         <a href="#">Alumnos</a>
                     </li>
                 </ul>
@@ -119,8 +121,8 @@
                         <select name="clases">
                             <option value="">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -135,51 +137,51 @@
                 </div>
             </div>
             <div class="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                <?php
+                foreach ($materias as $materia) { ?>
+                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                        <img src="../assets/img/logoSJO.svg" alt="logo">
+                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                        <p class="itemsub"><?php
+                                            switch ($materia['Dia']) {
+                                                case 'LUN':
+                                                    echo 'Lunes ';
+                                                    break;
+                                                case 'MAR':
+                                                    echo 'Martes ';
+                                                    break;
+                                                case 'MIE':
+                                                    echo 'Miércoles ';
+                                                    break;
+                                                case 'JUE':
+                                                    echo 'Jueves ';
+                                                    break;
+                                                case 'VIE':
+                                                    echo 'Viernes ';
+                                                    break;
+                                                case 'SAB':
+                                                    echo 'Sábado ';
+                                                    break;
+                                                case 'DOM';
+                                                    echo 'Domingo ';
+                                                    break;
+                                            } ?>
+                            ·
+                            <?= date('H:i', strtotime($materia['Hora'])) ?>
+                        </p>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./prof_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php" class="active">
+        <a href="./prof_dashboard_alumnos.php"class="active">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php">
+        <a href="./profesor_sesiones.php" >
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
@@ -191,5 +193,6 @@
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>

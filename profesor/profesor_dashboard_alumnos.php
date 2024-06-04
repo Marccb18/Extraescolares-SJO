@@ -98,7 +98,7 @@ $db = null;
                     <li>
                         <form action="profesor_dashboard_alumnos.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -165,14 +165,14 @@ $db = null;
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./prof_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php" class="active">
+        <a href="./prof_dashboard_alumnos.php"class="active">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php">
+        <a href="./profesor_sesiones.php" >
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
@@ -184,6 +184,6 @@ $db = null;
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
 
 </html>

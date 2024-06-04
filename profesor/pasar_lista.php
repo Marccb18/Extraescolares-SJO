@@ -80,6 +80,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,6 +89,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
     <link rel="stylesheet" href="../assets/css/pasar-lista.css">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -136,7 +138,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                     <li>
                         <form action="gestion_materias.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -172,31 +174,31 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                                     $check = 'Checked';
                                 }
                             } ?>
-                                <tr>
-                                    <td>
-                                        <img src="../assets/img/user.svg" alt="user">
-                                        <?= $alumno['Nombre'] ?>
-                                    </td>
-                                    <td><?= $alumno['Apellidos'] ?></td>
-                                    <td style="padding-right: 0;text-overflow: unset; padding-left: 2%">
-                                        <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?> >
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <td>
+                                    <img src="../assets/img/user.svg" alt="user">
+                                    <?= $alumno['Nombre'] ?>
+                                </td>
+                                <td><?= $alumno['Apellidos'] ?></td>
+                                <td style="padding-right: 0;text-overflow: unset; padding-left: 2%">
+                                    <input type="checkbox" name="selected_alumnos[]" value="<?= $alumno['ID'] ?>" <?= $check ?>>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </table>
                     <input type="submit" name="submit_button" value="Submit" id="submit-button">
                 </form>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./prof_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./prof_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php" class="active">
+        <a href="./profesor_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
