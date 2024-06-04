@@ -125,7 +125,7 @@
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td><?= $alumno['NombreMateria'] ?></td>
                             <td><a class="button-table" style="background-color: #000;" href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td style="padding-right: 0"><a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>

@@ -144,7 +144,7 @@ $db = null;
                                 ?>
                             </td>
                             <td><a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td style="padding-right: 0"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -155,7 +155,7 @@ $db = null;
         <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php" class="active">
+        <a href="./gestion_users.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
         <a href="./gestion_materias.php">
