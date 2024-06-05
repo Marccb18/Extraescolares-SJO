@@ -150,9 +150,10 @@ $db = null;
                     <?php } ?>
                 </table>
                 <div id="table-mobile">
+                    <input type="search" name="" id="search">
                     <?php foreach ($showUsers as $user) { ?>
                         <details>
-                            <summary>
+                            <summary class="materis">
                                 <img src="../assets/img/arrow-select.svg" alt="">
                                 <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
                             </summary>
