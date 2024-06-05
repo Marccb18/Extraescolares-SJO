@@ -676,6 +676,10 @@ input[type="checkbox"] {
     #aside, #table-desktop {
         display: none;
     }
+
+    #button-top {
+        padding: 10px 15px;
+    }
     
     select {
         background-color: white;
