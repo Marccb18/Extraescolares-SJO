@@ -2,7 +2,7 @@ let search = document.getElementById('search');
 let optionsMateris = document.getElementsByClassName('materis');
 search?.addEventListener('keyup', e => {
     let keyword ='';
-    if (e.key === 'Escape' || search.value === '') {
+    if (e.key === 'Escape') {
         search.value = '';
         keyword = '';
         search.blur();
