@@ -667,7 +667,7 @@ input[type="checkbox"] {
     border-radius: 0;
 }
 
-#mobile-menu, #table_mobile {
+#mobile-menu, #table-mobile {
     display: none;
 }
 
@@ -787,6 +787,7 @@ input[type="checkbox"] {
         border: 2px solid rgba(228, 228, 231, 1);
         border-radius: 0.45rem;
         transition: border all .1s;
+        appearance: none;
     }
     
     summary img {
@@ -798,12 +799,17 @@ input[type="checkbox"] {
         
     }
 
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
     details summary {
         display: flex;
         cursor: pointer;
         align-items: center;
         gap: 5%;
         margin-left: 10px;
+        list-style: none;
     }
 
 }
