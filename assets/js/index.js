@@ -7,7 +7,7 @@ search?.addEventListener('keyup', e => {
         keyword = '';
         search.blur();
     } else {
-    keyword = search.value.toLowerCase();
+        keyword = search.value.toLowerCase();
     }
 
     for (let materi of optionsMateris) {

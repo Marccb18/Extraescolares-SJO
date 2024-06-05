@@ -150,7 +150,7 @@ $db = null;
                     <?php } ?>
                 </table>
                 <div id="table-mobile">
-                    <input type="search" name="" id="search">
+                    <input type="search" name="" id="search" placeholder="Buscar...">
                     <?php foreach ($showUsers as $user) { ?>
                         <details>
                             <summary class="materis">
@@ -158,7 +158,9 @@ $db = null;
                                 <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
                             </summary>
                             <div>
-                                HOLA
+                                <p>
+                                    Rol: <?= $user[''] ?>
+                                </p>
                             </div>
                         </details>
                     <?php } ?>

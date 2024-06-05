@@ -671,6 +671,18 @@ input[type="checkbox"] {
     display: none;
 }
 
+input[type=Search] {
+    background-color: white;
+    padding: 15px 10px 15px 10px;
+    border: none;
+    border: 2px solid rgba(228, 228, 231, 1);
+    border-radius: 0.45rem;
+}
+
+input[type=Search]::placeholder {
+    color: rgba(113, 113, 122, 1);
+}
+
 @media (width <= 480px) {
     
     #aside, #table-desktop {
@@ -796,6 +808,10 @@ input[type="checkbox"] {
     
     summary img {
         rotate: 90deg;
+    }
+
+    details[open] {
+        border: #000000 1.5px solid;
     }
 
     details[open] summary img {
