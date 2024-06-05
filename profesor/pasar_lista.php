@@ -10,7 +10,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
 if (isset($_GET['fecha'])) {
     $currentDate = $_GET['fecha'];
 } else {
-    $currentDate = date('d-m-Y');
+    $currentDate = date('Y-m-d');
 }
 
 
@@ -56,14 +56,15 @@ if (isset($_POST['submit_button'])) {
                 $query->bindParam(':id_alumno', $alumno['ID']);
                 $query->bindParam(':fecha', $currentDate);
                 $query->execute();
-            }
+            } 
         }
     }
     if (!empty($_POST['selected_alumnos'])) {
         $selectedStudents = $_POST['selected_alumnos'];
+        
 
         foreach ($selectedStudents as $stud) {
-            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia,:fecha )');
+            $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia, :fecha )');
             $query->bindParam(':id_alumno', $stud);
             $query->bindParam(':id_materia', $class_id);
             $query->bindParam(':fecha', $currentDate);
@@ -163,7 +164,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                 </php>
             </div>
             <div id="main-content" style="margin-top: 0;">
-                <form action="pasar_lista.php?id=<?= $class_id  ?>" method="post" id="form-pasarlista">
+                <form action="pasar_lista.php?id=<?= $class_id  ?>&fecha=<?= $currentDate ?>" method="post" id="form-pasarlista">
                     <table>
                         <tr>
                             <th>Nombre</th>
