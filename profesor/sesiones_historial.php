@@ -64,7 +64,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
+            <li>
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -76,7 +76,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                     Alumnos
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="#">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones

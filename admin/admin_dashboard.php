@@ -103,7 +103,7 @@
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option class="optionClase"  onclick="applyFilters()"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
