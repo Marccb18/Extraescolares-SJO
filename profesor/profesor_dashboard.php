@@ -170,10 +170,10 @@ $db = null;
         </div>
     </div>
     <div id="mobile-menu">
-        <a href="./prof_dashboard.php" class="active">
+        <a href="./profesor_dashboard.php" class="active">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./prof_dashboard_alumnos.php">
+        <a href="./profesor_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
         <a href="./profesor_sesiones.php" >

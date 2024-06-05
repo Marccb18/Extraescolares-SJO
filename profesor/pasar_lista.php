@@ -97,7 +97,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
 </head>
 
 <body>
-    <div id="aside">
+<div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
@@ -110,13 +110,13 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="profesor_dashboard_alumnos.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="profesor_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
@@ -142,7 +142,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                         </a>
                     </li>
                     <li>
-                        <form action="gestion_materias.php" method="post">
+                        <form action="profesor_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -155,8 +155,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
                 </ul>
             </div>
         </div>
-    </div>
-    <div id="main">
+    </div>    <div id="main">
         <div id="content">
             <div id="title" style="padding-top: 0;">
                 <php>
@@ -198,10 +197,10 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
         </div>
     </div>
     <div id="mobile-menu">
-        <a href="./prof_dashboard.php">
+        <a href="./profesor_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./prof_dashboard_alumnos.php">
+        <a href="./profesor_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
         <a href="./profesor_sesiones.php" class="active">
@@ -210,7 +209,7 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
         <a href="./perfil.php">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="admin_dashboard.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>

@@ -1,44 +1,45 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
+session_start();
+require('../config/conexion.php');
 
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
-        header('Location: ../index.php');
-        exit();
-    }
-
-
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $class_id = $_GET['id'];
-    
-    $query = $db->prepare('SELECT * FROM materia WHERE ID = ?');
-    $query->execute([$class_id]);
-    $class = $query->fetch(PDO::FETCH_ASSOC);
-    
-    $query = $db->prepare('SELECT * FROM personal WHERE DNI = :id_profesor');
-    $query->bindParam(':id_profesor', $class['ID_Profesor']);
-    $query->execute();
-    $prof = $query->fetch(PDO::FETCH_ASSOC);
-
-    $query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id_materia');
-    $query->bindParam(':id_materia', $class['ID']);
-    $query->execute();
-    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    $showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia = :id_materia");
-    $showFaltas->bindParam(':id_materia', $class['ID']);
-    $showFaltas->execute();
-    $Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
+    header('Location: ../index.php');
+    exit();
+}
 
 
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $db = null;
+$class_id = $_GET['id'];
+
+$query = $db->prepare('SELECT * FROM materia WHERE ID = ?');
+$query->execute([$class_id]);
+$class = $query->fetch(PDO::FETCH_ASSOC);
+
+$query = $db->prepare('SELECT * FROM personal WHERE DNI = :id_profesor');
+$query->bindParam(':id_profesor', $class['ID_Profesor']);
+$query->execute();
+$prof = $query->fetch(PDO::FETCH_ASSOC);
+
+$query = $db->prepare('SELECT * FROM alumno WHERE ID_Materia = :id_materia');
+$query->bindParam(':id_materia', $class['ID']);
+$query->execute();
+$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia = :id_materia");
+$showFaltas->bindParam(':id_materia', $class['ID']);
+$showFaltas->execute();
+$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+$db = null;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +47,7 @@
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -94,7 +96,7 @@
                     <li>
                         <form action="gestion_materias.php" method="post">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -104,15 +106,15 @@
                     </li>
                 </ul>
             </div>
-        </div>        
+        </div>
     </div>
     <div id="main">
         <div id="content">
             <div id="title">
                 <php>
-                <h3><?=$class['Nombre']?></h3>
-                <p><?=$prof['Nombre']?></p>
-                <p><?=$prof['Apellidos']?></p>
+                    <h3><?= $class['Nombre'] ?></h3>
+                    <p><?= $prof['Nombre'] ?></p>
+                    <p><?= $prof['Apellidos'] ?></p>
 
                 </php>
             </div>
@@ -123,7 +125,7 @@
                         <th>Apellidos</th>
                         <th>Faltas</th>
                     </tr>
-                    <?php foreach ($alumnos as $alumno) {?>
+                    <?php foreach ($alumnos as $alumno) { ?>
                         <tr>
                             <td>
                                 <img src="../assets/img/user.svg" alt="user">
@@ -131,7 +133,7 @@
                             </td>
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td>
-                            <?php
+                                <?php
                                 $count = 0;
                                 foreach ($Faltas as $Falta) {
                                     if ($Falta['ID_Alumno'] == $alumno['ID']) {
@@ -143,28 +145,29 @@
                             </td>
                         </tr>
                     <?php } ?>
-                </table> 
+                </table>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php" >
+    <div id="mobile-menu">
+        <a href="./profesor_dashboard.php" class="active">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./prof_dashboard_alumnos.php">
+        <a href="./profesor_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./profesor_sesiones.php"  class="active">
+        <a href="./profesor_sesiones.php" >
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="admin_dashboard.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>

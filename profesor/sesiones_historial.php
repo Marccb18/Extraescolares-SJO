@@ -174,7 +174,25 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                 </div>
            </div>
         </div>
-
+    </div>
+    <div id="mobile-menu">
+        <a href="./profesor_dashboard.php" >
+            <img src="../assets/img/icon-home.svg" alt="home-icon">
+        </a>
+        <a href="./profesor_dashboard_alumnos.php">
+            <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
+        </a>
+        <a href="./profesor_sesiones.php" class="active">
+            <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
+        </a>
+        <a href="./perfil.php">
+            <img src="../assets/img/person.svg" alt="person-icon">
+        </a>
+        <form action="profesor_dashboard.php" method="post">
+            <button type="submit" name="logout">
+                <img src="../assets/img/logout.svg" alt="logout-icon">
+            </button>
+        </form>
     </div>
 
 
