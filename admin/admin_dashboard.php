@@ -17,7 +17,6 @@
     $showMaterias = $db->query("SELECT * FROM materia");
     $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
     $db = null;
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,11 +99,11 @@
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" onclick="applyFilters()" id="select_clases" class="select-filter">
+                        <select name="clases" id="select_clases" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase"  onclick="applyFilters()"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">

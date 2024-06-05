@@ -182,7 +182,7 @@ $db = null;
         <a href="./perfil.php">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="admin_dashboard.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>

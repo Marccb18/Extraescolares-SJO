@@ -15,6 +15,7 @@ if (isset($_POST['logout'])) {
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showUsers = $db->query("SELECT * FROM personal ORDER BY Apellidos");
+$showUsers = $showUsers->fetchAll(PDO::FETCH_ASSOC);
 $db = null;
 ?>
 <!DOCTYPE html>
@@ -109,7 +110,7 @@ $db = null;
                 <p>Busca entre todos los usuarios</p>
             </div>
             <div class="main-content">
-                <table>
+                <table id="table-desktop">
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -144,15 +145,28 @@ $db = null;
                                 ?>
                             </td>
                             <td><a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td style="padding-right: 0"><a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
+                <div id="table-mobile">
+                    <?php foreach ($showUsers as $user) { ?>
+                        <details>
+                            <summary>
+                                <img src="../assets/img/arrow-select.svg" alt="">
+                                <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
+                            </summary>
+                            <div>
+                                HOLA
+                            </div>
+                        </details>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php" class="active">
+        <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
         <a href="./gestion_users.php">

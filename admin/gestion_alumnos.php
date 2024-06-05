@@ -125,7 +125,7 @@
                             <td><?= $alumno['Apellidos'] ?></td>
                             <td><?= $alumno['NombreMateria'] ?></td>
                             <td><a class="button-table" style="background-color: #000;" href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a></td>
-                            <td style="padding-right: 0; width: 12%"><a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
+                            <td style="padding-right: 0"><a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -133,10 +133,10 @@
         </div>
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php" class="active">
+        <a href="./admin_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./gestion_users.php" class="active">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
         <a href="./gestion_materias.php">

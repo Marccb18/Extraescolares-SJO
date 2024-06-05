@@ -138,15 +138,13 @@ $db = null;
                 </div>
             </div>
             <div id="main-content">
-                <?php foreach ($months as $month) {
-                    echo "<div><h2>$month</h2></div>";
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                        </a>
-                <?php }
-                } ?>
+                <?php
+                foreach ($materias as $materia) { ?>
+                    <a class="item" href="sesiones_historial.php?id=<?= $materia['ID'] ?>">
+                        <img src="../assets/img/logoSJO.svg" alt="logo">
+                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>

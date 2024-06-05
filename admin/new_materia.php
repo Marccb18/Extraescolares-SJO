@@ -133,13 +133,13 @@
         </div>  
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php" class="active">
+        <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
         <a href="./gestion_users.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php">
+        <a href="./gestion_materias.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">

@@ -35,7 +35,9 @@ let optionsDias = document.getElementsByClassName('optionDia');
 let items = document.getElementsByClassName('itemtitle');
 let itemsday = document.getElementsByClassName('itemsub')
 
+let asdasd=document.getElementById('select_clases')
 
+asdasd.addEventListener('change',applyFilters)
 
 function applyFilters() {
     let selectedClase = document.getElementById('select_clases').value;
