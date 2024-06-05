@@ -153,10 +153,7 @@ $db = null;
                     <?php foreach ($showUsers as $user) { ?>
                         <details>
                             <summary>
-                                <p>
-                                    <img src="../assets/img/arrow-select.svg" alt="">
-                                    Nombre
-                                </p>
+                                <img src="../assets/img/arrow-select.svg" alt="">
                                 <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
                             </summary>
                             <div>

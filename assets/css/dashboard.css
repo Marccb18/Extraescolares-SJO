@@ -779,23 +779,31 @@ input[type="checkbox"] {
         flex-direction: column;
         width: 100%;
         height: 100%;
+        gap: 10px;
+        margin-top: 20px;
     }
 
-    details[open] summary p img {
+    details {
+        border: 2px solid rgba(228, 228, 231, 1);
+        border-radius: 0.45rem;
+        transition: border all .1s;
+    }
+    
+    summary img {
+        rotate: 90deg;
+    }
+
+    details[open] summary img {
         rotate: 180deg;
+        
     }
 
     details summary {
         display: flex;
         cursor: pointer;
+        align-items: center;
+        gap: 5%;
+        margin-left: 10px;
     }
 
-    details summary p {
-        pointer-events: none;
-        
-    }
-
-    summary p img {
-        rotate: 90deg;
-    }
 }
