@@ -88,7 +88,6 @@
                 </ul>
             </div>
         </div>
-
     </div>
     <div id="main">
         <div id="content">
@@ -111,7 +110,7 @@
                 <p>Busca entre todos los alumnos</p>
             </div>
             <div class="main-content">
-                <table>
+                <table id="table-desktop">
                     <tr>
                         <th>Nombre</th>
                         <th>Apellidos</th>
@@ -129,10 +128,31 @@
                         </tr>
                     <?php } ?>
                 </table>
+
+                <div id="table-mobile">
+                    <input type="search"  id="search" placeholder="Buscar...">
+                    <?php foreach($alumnos as $alumno) { ?>
+                        <details id="details-desplegable">
+                            <summary class="materis">
+                                <img src="../assets/img/arrow-select.svg" alt="">
+                                <p><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
+                            </summary>
+                            <div class="details-content">
+                                <p>
+                                    Materia: <?= $alumno['NombreMateria'] ?> <br>
+                                </p>
+                                <div>
+                                    <a class="button-table" style="background-color: #000;" href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a>
+                                    <a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a>
+                                </div>
+                            </div>
+                        </details>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
+    <div id="mobile-menu">
         <a href="./admin_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
@@ -152,4 +172,5 @@
         </form>
     </div>
 <script src="../assets/js/index.js"></script>
+</body>
 </html>
