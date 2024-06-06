@@ -696,9 +696,18 @@ input[type=Search]:focus-visible {
         display: none;
     }
 
+    #top-content {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #top-content ul li a {
+        font-size: 0.8rem;
+    }
+
     #button-top {
         padding: 10px 15px;
-        margin-left: 5px;
+        font-size: 0.8rem;
     }
     
     select {
@@ -799,7 +808,7 @@ input[type=Search]:focus-visible {
 
     summary img {
         rotate: 90deg;
-        transition: rotate linear .1s;
+        transition: rotate linear .1s 100ms;
     }
 
     details[open] {
@@ -841,7 +850,7 @@ input[type=Search]:focus-visible {
         border-color: rgba(228, 228, 231, 1);
         border-collapse: collapse;
         border-radius: 0 0 0.45rem 0.45rem;
-        transition: max-height 500ms linear;
+        transition: max-height 500ms linear, border-color 0ms 500ms linear;
     }
 
     details[open] + .details-content {
