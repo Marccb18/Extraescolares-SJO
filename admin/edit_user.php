@@ -54,7 +54,6 @@
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
-            <p><?php echo $origin ?></p>
         </div>
         <ul id="side-menu">
             <li class="active">
