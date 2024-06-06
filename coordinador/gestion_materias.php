@@ -1,42 +1,43 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
-        header('Location: ../index.php');
-        exit();
-    }
+session_start();
+require('../config/conexion.php');
 
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
+    header('Location: ../index.php');
+    exit();
+}
 
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $materias = $db->query("SELECT * FROM materia");
-    $materias = $materias->fetchAll(PDO::FETCH_ASSOC);
+if (isset($_POST['logout'])) {
+    require_once('../config/logout.php');
+    logout();
+}
 
-    $id_materias = array_column($materias,'ID');
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$materias = $db->query("SELECT * FROM materia");
+$materias = $materias->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = $db->prepare("SELECT * FROM personal WHERE ROL = 'PRO'");
-    $query->execute();
-    $profesores = $query->fetchAll(PDO::FETCH_ASSOC);
+$id_materias = array_column($materias, 'ID');
 
-    $query = $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-    $query->execute();
-    $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
+$query = $db->prepare("SELECT * FROM personal WHERE ROL = 'PRO'");
+$query->execute();
+$profesores = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    $profesores_map = array();
-    foreach ($profesores as $profesor) {
-        $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
-    }
+$query = $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
+$query->execute();
+$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    
-    $db = null;
+$profesores_map = array();
+foreach ($profesores as $profesor) {
+    $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
+}
+
+
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +46,7 @@
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -58,37 +60,68 @@
                     Inicio
                 </a>
             </li>
-            <li >
+            <li>
                 <a href="./gestion_users.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Usuarios
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./coordinador_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
             </li>
-            <li class="active"> 
-                <a href="#">
+            <li class="active">
+                <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
                     Materias
                 </a>
             </li>
         </ul>
-
-        <form action="coord_dashboard.php" method="post">
-            <input type="submit" value="logout" name="logout">
-        </form>
-        
+        <div>
+            <div class="user-info-container" id="user-info-container">
+                <div class="user-info">
+                    <img src="../assets/img/logoSJO.svg" alt="Logo Sant Josep">
+                    <p><?php echo $_SESSION['username'] ?></p>
+                </div>
+                <img src="../assets/img/arrow-select.svg" alt="Vector img" class="vector-img">
+            </div>
+            <div class="optionsProfile" id="optionsProfile">
+                <ul>
+                    <li>
+                        <form action="perfil.php" method="post">
+                            <button type="submit" name="perfil">
+                                <div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                    Ver Perfil
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="coordinador_sesiones.php" method="post" id="logout-form">
+                            <button type="submit" name="logout">
+                                <div div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
+                                    Cerrar Sesión
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="main">
         <div id="content">
             <div id="topcontent">
                 <div id="title">
                     <h3>Materias</h3>
-                    <p>Busca entre todas las materias<p>
+                    <p>Busca entre todas las materias
+                    <p>
                 </div>
                 <a href="new_user.php" id="button-top">
                     <img src="../assets/img/plus-circled.svg" alt="Crear Usuario">
@@ -101,45 +134,31 @@
                         <th>Nombre</th>
                         <th>Profesor</th>
                         <th>Alumnos</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
-                    <?php foreach ($materias as $materia) {?>
+                    <?php foreach ($materias as $materia) { ?>
                         <tr>
                             <td><?= $materia['Nombre'] ?></td>
                             <td>
                                 <?= $profesores_map[$materia['ID_Profesor']] ?? '-' ?>
                             </td>
                             <td>
-                                <?php 
-                                    $count = 0;
-                                    foreach ($alumnos as $alumno) {
-                                        if ($alumno['ID_Materia'] == $materia['ID']) {
-                                            $count++;
-                                        }
+                                <?php
+                                $count = 0;
+                                foreach ($alumnos as $alumno) {
+                                    if ($alumno['ID_Materia'] == $materia['ID']) {
+                                        $count++;
                                     }
-                                    echo $count;
+                                }
+                                echo $count;
                                 ?>
-                            </td>
-                            <td>
-                                <a href="edit_materia.php?id=<?= $materia['ID'] ?>">
-                                    <img src="../assets/img/pen.svg"" alt="">
-                                    Editar
-                                </a>
-                            </td>
-                            <td>
-                                <a href="delete_materia.php?id=<?= $materia['ID'] ?>">
-                                    <img src="../assets/img/trash.svg" alt="">
-                                    Eliminar
-                                </a>
                             </td>
                         </tr>
                     <?php } ?>
                 </table>
             </div>
-        </div>  
+        </div>
     </div>
-<div id="mobile-menu">
+    <div id="mobile-menu">
         <a href="./admin_dashboard.php" class="active">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
@@ -158,5 +177,6 @@
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>
