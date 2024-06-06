@@ -54,6 +54,12 @@ $db = null;
                     Sesiones
                 </a>
             </li>
+            <li>
+                <a href="./gestion_materias.php">
+                    <img src="../assets/img/layout-grid.svg" alt="Subjects icon">
+                    Materias
+                </a>
+            </li>
         </ul>
         <div>
             <div class="user-info-container" id="user-info-container">

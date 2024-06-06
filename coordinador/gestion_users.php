@@ -1,24 +1,25 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
-        header('Location: ../index.php');
-        exit();
-    }
-    
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+session_start();
+require('../config/conexion.php');
 
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-        $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showUsers = $db->query("SELECT * FROM personal");
-    $db = null;
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
+    header('Location: ../index.php');
+    exit();
+}
+
+if (isset($_POST['logout'])) {
+    require_once('../config/logout.php');
+    logout();
+}
+
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$showUsers = $db->query("SELECT * FROM personal");
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,7 @@
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -71,18 +73,20 @@
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="./perfil.php">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
-                                Ver Perfil
-                            </div>
-                            <img src="../assets/img/chevron-right.svg" alt="">
-                        </a>
+                        <form action="perfil.php" method="post">
+                            <button type="submit" name="perfil">
+                                <div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                    Ver Perfil
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                     <li>
                         <form action="gestion_users.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -93,15 +97,14 @@
                 </ul>
             </div>
         </div>
-        
+
     </div>
     <div id="main">
         <div id="content">
-            <div id="topcontent">
-                <div id="title">
-                    <h3>Usuarios</h3>
-                    <p>Busca entre todas los usuarios<p>
-                </div>
+            <div id="title">
+                <h3>Usuarios</h3>
+                <p>Busca entre todas los usuarios
+                <p>
             </div>
             <div class="main-content">
                 <table>
@@ -110,7 +113,7 @@
                         <th>Apellidos</th>
                         <th>Rol</th>
                     </tr>
-                    <?php foreach ($showUsers as $user) {?>
+                    <?php foreach ($showUsers as $user) { ?>
                         <tr>
                             <td>
                                 <img src="../assets/img/user.svg" alt="user">
@@ -119,19 +122,19 @@
                             <td><?= $user['Apellidos'] ?></td>
                             <td>
                                 <?php
-                                    switch ($user['ROL']) {
-                                        case 'PRO':
-                                            echo 'Profesor';
-                                            break;
-                                            
-                                        case 'COO':
-                                            echo 'Coordinador';
-                                            break;
-                                        
-                                        case 'ADM':
-                                            echo 'Administrador';
-                                            break;
-                                    }
+                                switch ($user['ROL']) {
+                                    case 'PRO':
+                                        echo 'Profesor';
+                                        break;
+
+                                    case 'COO':
+                                        echo 'Coordinador';
+                                        break;
+
+                                    case 'ADM':
+                                        echo 'Administrador';
+                                        break;
+                                }
                                 ?>
                             </td>
                         </tr>
@@ -140,7 +143,7 @@
             </div>
         </div>
     </div>
-<div id="mobile-menu">
+    <div id="mobile-menu">
         <a href="./admin_dashboard.php" class="active">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
@@ -159,5 +162,6 @@
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>
