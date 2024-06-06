@@ -838,16 +838,11 @@ input[type=Search]:focus-visible {
         display: flex;
         outline: none;
         margin: 0;
-        max-height: 0;
         justify-content: space-between;
         padding: 0 2% 0 4%;
         overflow: hidden;
         align-items: center;
         transition: max-height 1.5s ease;
-    }
-
-    details[open] .details-content {
-        max-height: 200px;
     }
 
     .details-content p {
@@ -867,6 +862,10 @@ input[type=Search]:focus-visible {
 
     .button-table {
         font-size: 0.75rem;
+    }
+
+    form {
+        width: 100%;
     }
     
 }
