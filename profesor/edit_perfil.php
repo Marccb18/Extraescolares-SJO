@@ -6,47 +6,55 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
+
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
-    exit();
 }
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$showMaterias = $db->prepare("SELECT * FROM materia WHERE ID_Profesor = :profesor_id");
-$showMaterias->execute(array(':profesor_id' => $_SESSION['id']));
-$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-
-$id_materias = array_column($materias, 'ID');
-
-$query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$query->execute();
-$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
-
-$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$showFaltas->execute();
-$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
-
-$materiasMap = array();
-foreach ($materias as $materia) {
-    $materiasMap[$materia['ID']] = $materia['Nombre'];
+$user_id = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['perfil']) {
+        $origin = 'perfil';
+    } else {
+        $origin = 'edit_perfil';
+    }
+} else {
+    $origin = 'edit_perfil';
 }
 
+$query = $db->prepare('SELECT * FROM personal WHERE DNI = ?');
+$query->execute([$user_id]);
+$user = $query->fetch(PDO::FETCH_ASSOC);
 $db = null;
 
+if ($_SESSION['id'] != $user_id) {
+    header('Location: ../index.php');
+    exit();
+}
+
+function comprobarOpcion($v, $user)
+{
+    if ($v == $user['ROL']) {
+        echo 'selected';
+    }
+}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+
 </head>
 
 <body>
@@ -56,14 +64,14 @@ $db = null;
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li>
+            <li class="active">
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
             <li>
-                <a href="profesor_dashboard_alumnos.php" class="active">
+                <a href="profesor_dashboard_alumnos.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
                 </a>
@@ -111,56 +119,37 @@ $db = null;
     </div>
     <div id="main">
         <div id="content">
-            <div id="top-content">
-                <ul>
-                    <li>
-                        <a href="profesor_dashboard.php">Clases</a>
-                    </li>
-                    <li class="active">
-                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
-                    </li>
-                </ul>
-                <a href="select_pasar_lista.php" id="top-button">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
+            <div id="topcontent">
+                <div id="title" style="border: none; padding: 0;">
+                    <h3>Editar usuario</h3>
+                    <p>Edita al usuario <?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
+                </div>
             </div>
-            <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todes tus alumnes</p>
-            </div>
-            <div class="main-content">
-                <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Materia</th>
-                        <th>Faltas</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) { ?>
-                        <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $alumno['Nombre'] ?>
-                            </td>
-                            <td><?= $alumno['Apellidos'] ?></td>
-                            <td>
-                                <?= $materiasMap[$alumno['ID_Materia']] ?>
-                            </td>
-                            <td>
-                                <?php
-                                $count = 0;
-                                foreach ($Faltas as $Falta) {
-                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
-                                        $count++;
-                                    }
-                                }
-                                echo $count;
-                                ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+            <div id="main-content">
+                <form action="update_user.php" method="post">
+                    <input type="hidden" name="dni" value="<?= $user['DNI'] ?>">
+                    <p>Nombre</p>
+                    <input type="text" name="nombre" value="<?= $user['Nombre'] ?>">
+                    <p>Apellidos</p>
+                    <input type="text" name="apellidos" value="<?= $user['Apellidos'] ?>">
+                    <p>Email</p>
+                    <input type="email" name="email" value="<?= $user['Email'] ?>">
+                    <p>Contraseña</p>
+                    <input type="text" name="password" value="<?= $user['Password'] ?>">
+                    <p>Teléfono</p>
+                    <input type="number" name="telefono" id="telefono" value="<?= $user['Telefono'] ?>">
+                    <p>Rol</p>
+                    <input type="hidden" name="origin" value="<?= $origin ?>" disabled>
+                    <div class="form-select">
+                        <select name="rol" id="rol_id" disabled>
+                            <option value="PRO" <?php comprobarOpcion('PRO', $user) ?>>Profesor</option>
+                            <option value="COO" <?php comprobarOpcion('COO', $user) ?>>Coordinador</option>
+                            <option value="ADM" <?php comprobarOpcion('ADM', $user) ?>>Administrador</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="">
+                    </div>
+                    <input type="submit" value="Confirmar">
+                </form>
             </div>
         </div>
     </div>
@@ -168,13 +157,13 @@ $db = null;
         <a href="./profesor_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./profesor_dashboard_alumnos.php" class="active">
+        <a href="./profesor_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./profesor_sesiones.php" >
+        <a href="./profesor_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
-        <a href="./perfil.php">
+        <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
         <form action="profesor_dashboard.php" method="post">

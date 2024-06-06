@@ -6,37 +6,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
     header('Location: ../index.php');
     exit();
 }
+
 if (isset($_POST['logout'])) {
     require_once('../config/logout.php');
     logout();
-    exit();
 }
 
 $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$showMaterias = $db->prepare("SELECT * FROM materia WHERE ID_Profesor = :profesor_id");
-$showMaterias->execute(array(':profesor_id' => $_SESSION['id']));
-$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-
-$id_materias = array_column($materias, 'ID');
-
-$query =  $db->prepare("SELECT * FROM alumno WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$query->execute();
-$alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
-
-$showFaltas = $db->prepare("SELECT * FROM faltas WHERE ID_Materia IN (" . implode(',', $id_materias) . ")");
-$showFaltas->execute();
-$Faltas = $showFaltas->fetchAll(PDO::FETCH_ASSOC);
-
-$materiasMap = array();
-foreach ($materias as $materia) {
-    $materiasMap[$materia['ID']] = $materia['Nombre'];
-}
-
+$showPerfil = $db->query("SELECT * FROM personal where DNI = '$_SESSION[id]'");
+$perfil = $showPerfil->fetchAll(PDO::FETCH_ASSOC);
 $db = null;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,9 +24,9 @@ $db = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
+    <title>Perfil || <?php echo $perfil[0]['Nombre'] ?></title>
 </head>
 
 <body>
@@ -56,14 +36,14 @@ $db = null;
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li>
+            <li class="active">
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
             <li>
-                <a href="profesor_dashboard_alumnos.php" class="active">
+                <a href="profesor_dashboard_alumnos.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
                 </a>
@@ -111,78 +91,50 @@ $db = null;
     </div>
     <div id="main">
         <div id="content">
-            <div id="top-content">
-                <ul>
-                    <li>
-                        <a href="profesor_dashboard.php">Clases</a>
-                    </li>
-                    <li class="active">
-                        <a href="profesor/profesor_dashboard_alumnos.php">Alumnos</a>
-                    </li>
-                </ul>
-                <a href="select_pasar_lista.php" id="top-button">
-                    <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
-                    Pasar Lista
-                </a>
-            </div>
-            <div id="title">
-                <h3>Inicio</h3>
-                <p>Busca entre todes tus alumnes</p>
-            </div>
-            <div class="main-content">
-                <table>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Materia</th>
-                        <th>Faltas</th>
-                    </tr>
-                    <?php foreach ($alumnos as $alumno) { ?>
-                        <tr>
-                            <td>
-                                <img src="../assets/img/user.svg" alt="user">
-                                <?= $alumno['Nombre'] ?>
-                            </td>
-                            <td><?= $alumno['Apellidos'] ?></td>
-                            <td>
-                                <?= $materiasMap[$alumno['ID_Materia']] ?>
-                            </td>
-                            <td>
-                                <?php
-                                $count = 0;
-                                foreach ($Faltas as $Falta) {
-                                    if ($Falta['ID_Alumno'] == $alumno['ID']) {
-                                        $count++;
-                                    }
-                                }
-                                echo $count;
-                                ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+            <h3> Tu Cuenta</h3>
+            <p><?php echo $perfil[0]['Nombre'] ?></p>
+            <div id="main-content">
+                <form action="edit_perfil.php?id=<?php echo $perfil[0]['DNI'] ?>" method="post">
+                    <p>Nombre</p>
+                    <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
+                    <p>Apellido</p>
+                    <input type="text" value="<?php echo $perfil[0]['DNI'] ?>" disabled>
+                    <p>Email</p>
+                    <input type="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
+                    <p>Telefono</p>
+                    <input type="number" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
+                    <p>Rol</p>
+                    <input type="text" value="<?php echo $perfil[0]['ROL'] ?>" disabled>
+                    <p>Contraseña</p>
+                    <input type="password" value="<?php echo $perfil[0]['Password'] ?>" disabled>
+                    <input type="hidden" name="perfil" value="perfil">
+                    <input type="submit" value="Editar" id="edit">
+                    <script>
+                        console.log(<?php echo json_encode($perfil) ?>)
+                    </script>
+                </form>
             </div>
         </div>
     </div>
-    <div id="mobile-menu">
-        <a href="./profesor_dashboard.php" >
+<div id="mobile-menu">
+        <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./profesor_dashboard_alumnos.php" class="active">
+        <a href="./gestion_users.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./profesor_sesiones.php" >
+        <a href="./gestion_materias.php">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
-        <a href="./perfil.php">
+        <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="profesor_dashboard.php" method="post">
+        <form action="admin_dashboard.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>
         </form>
     </div>
-    <script src="../assets/js/index.js"></script>
+<script src="../assets/js/index.js"></script>
 
 </html>

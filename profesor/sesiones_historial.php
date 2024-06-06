@@ -20,12 +20,12 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $class_id = $_GET['id'];
 $query = $db->prepare("
-  SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
-         p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
-  FROM materia m
-  INNER JOIN personal p ON m.ID_Profesor = p.DNI
-  INNER JOIN matriculas mt ON m.ID = mt.ID_Materia
-  WHERE m.ID = :id_materia;
+SELECT m.ID AS materia_id, m.Nombre AS materia_nombre, m.Dia, m.Hora,
+p.DNI AS profesor_dni, p.Nombre AS profesor_nombre, p.Apellidos AS profesor_apellidos
+FROM materia m
+INNER JOIN personal p ON m.ID_Profesor = p.DNI
+WHERE m.ID = :id_materia
+GROUP BY m.ID, m.Nombre, m.Dia, m.Hora, p.DNI, p.Nombre, p.Apellidos;
 ");
 $query->bindParam(':id_materia', $class_id);
 
@@ -58,26 +58,26 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <div id="aside">
+<div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
+            <li >
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="profesor_dashboard_alumnos.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
                     Alumnos
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="profesor_sesiones.php" class="active">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
@@ -103,7 +103,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                     </li>
                     <li>
-                        <form action="gestion_materias.php" method="post">
+                        <form action="profesor_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -116,7 +116,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
         </div>
-    </div>
+    </div>  
     <div id="main">
         <div id="content">
             <h1>Historial de faltas</h1>
@@ -159,13 +159,13 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         if (strtolower($diaAcrtual) == $dia_de_materia) {
                             echo '<div class="historic-card">';
                             echo '<p>'. $currentDate  .'</p>';
-                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($currentDate)) . '">Ver faltas</a>';
+                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($currentDate)) . '" id="button-top">Ver faltas</a>';
                             echo '</div>';
                         }
                         while (strtotime($ultimaClase_dada) >= strtotime($fechaInicio)) {
                             echo '<div class="historic-card">';
                             echo '<p>' . $ultimaClase_dada . '</p>';
-                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($ultimaClase_dada)) . '">Ver faltas</a>';
+                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($ultimaClase_dada)) . '" id="button-top">Ver faltas</a>';
                             echo '</div>';
             
                             $ultimaClase_dada = date('d-m-Y', strtotime($ultimaClase_dada . ' - 7 days'));
@@ -174,7 +174,25 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                 </div>
            </div>
         </div>
-
+    </div>
+    <div id="mobile-menu">
+        <a href="./profesor_dashboard.php" >
+            <img src="../assets/img/icon-home.svg" alt="home-icon">
+        </a>
+        <a href="./profesor_dashboard_alumnos.php">
+            <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
+        </a>
+        <a href="./profesor_sesiones.php" class="active">
+            <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
+        </a>
+        <a href="./perfil.php">
+            <img src="../assets/img/person.svg" alt="person-icon">
+        </a>
+        <form action="profesor_dashboard.php" method="post">
+            <button type="submit" name="logout">
+                <img src="../assets/img/logout.svg" alt="logout-icon">
+            </button>
+        </form>
     </div>
 
 
