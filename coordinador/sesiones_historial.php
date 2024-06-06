@@ -100,13 +100,15 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="./perfil.php">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
-                                Ver Perfil
-                            </div>
-                            <img src="../assets/img/chevron-right.svg" alt="">
-                        </a>
+                        <form action="perfil.php" method="post">
+                            <button type="submit" name="perfil">
+                                <div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                    Ver Perfil
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                     <li>
                         <form action="coord_dashboard.php" method="post" id="logout-form">

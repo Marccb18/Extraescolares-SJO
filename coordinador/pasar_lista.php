@@ -56,12 +56,12 @@ if (isset($_POST['submit_button'])) {
                 $query->bindParam(':id_alumno', $alumno['ID']);
                 $query->bindParam(':fecha', $currentDate);
                 $query->execute();
-            } 
+            }
         }
     }
     if (!empty($_POST['selected_alumnos'])) {
         $selectedStudents = $_POST['selected_alumnos'];
-        
+
 
         foreach ($selectedStudents as $stud) {
             $query = $db->prepare('INSERT INTO faltas (ID_Alumno, ID_Materia, Fecha) VALUES (:id_alumno, :id_materia, :fecha )');
@@ -92,13 +92,13 @@ $db = null;
 </head>
 
 <body>
-<div id="aside">
+    <div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li >
+            <li>
                 <a href="./coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -134,18 +134,20 @@ $db = null;
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="./perfil.php">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
-                                Ver Perfil
-                            </div>
-                            <img src="../assets/img/chevron-right.svg" alt="">
-                        </a>
+                        <form action="perfil.php" method="post">
+                            <button type="submit" name="perfil">
+                                <div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                    Ver Perfil
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                     <li>
                         <form action="coord_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -155,8 +157,9 @@ $db = null;
                     </li>
                 </ul>
             </div>
-        </div>   
-    </div>    <div id="main">
+        </div>
+    </div>
+    <div id="main">
         <div id="content">
             <div id="title" style="padding-top: 0;">
                 <php>
@@ -198,7 +201,7 @@ $db = null;
         </div>
     </div>
     <div id="mobile-menu">
-        <a href="./coord_dashboard.php" >
+        <a href="./coord_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
         <a href="./gestion_users.php">
@@ -218,4 +221,5 @@ $db = null;
     </div>
     <script src="../assets/js/index.js"></script>
 </body>
+
 </html>

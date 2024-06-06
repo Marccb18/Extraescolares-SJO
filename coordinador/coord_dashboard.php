@@ -1,25 +1,26 @@
 <?php
-    session_start();
-    require('../config/conexion.php');
-    
-    if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
-        header('Location: ../index.php');
-        exit();
-    }
-    
-    if (isset($_POST['logout'])) {
-        require_once('../config/logout.php');
-        logout();
-    }
+session_start();
+require('../config/conexion.php');
 
-    $db = new PDO($conn, $fields['user'], $fields['pass']);
-    $db ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $showMaterias = $db->query("SELECT * FROM materia");
-    $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
-    $db = null;
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
+    header('Location: ../index.php');
+    exit();
+}
+
+if (isset($_POST['logout'])) {
+    require_once('../config/logout.php');
+    logout();
+}
+
+$db = new PDO($conn, $fields['user'], $fields['pass']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$showMaterias = $db->query("SELECT * FROM materia");
+$materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +29,7 @@
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -71,18 +73,20 @@
             <div class="optionsProfile" id="optionsProfile">
                 <ul>
                     <li>
-                        <a href="./perfil.php">
-                            <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
-                                Ver Perfil
-                            </div>
-                            <img src="../assets/img/chevron-right.svg" alt="">
-                        </a>
+                        <form action="perfil.php" method="post">
+                            <button type="submit" name="perfil">
+                                <div style="display: flex;  align-items: center;">
+                                    <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                    Ver Perfil
+                                </div>
+                                <img src="../assets/img/chevron-right.svg" alt="">
+                            </button>
+                        </form>
                     </li>
                     <li>
                         <form action="coord_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
-                                <div div style="display: flex;  align-items: center;" >
+                                <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
                                     Cerrar Sesión
                                 </div>
@@ -92,7 +96,7 @@
                     </li>
                 </ul>
             </div>
-        </div>        
+        </div>
     </div>
     <div id="main">
         <div id="content" style="margin-top: 0;">
@@ -109,8 +113,8 @@
                         <select name="clases" class="select-filter">
                             <option value="">Todas</option>
                             <?php
-                                foreach ($materias as $materia) { ?>
-                                    <option value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                            foreach ($materias as $materia) { ?>
+                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -125,44 +129,44 @@
                 </div>
             </div>
             <div id="main-content">
-                <?php 
-                    foreach ($materias as $materia) { ?>
-                        <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
-                            <img src="../assets/img/logoSJO.svg" alt="logo">
-                            <p class="itemtitle"><?= $materia['Nombre'] ?></p>
-                            <p class="itemsub"><?php
-                                switch ($materia['Dia']) {
-                                    case 'LUN':
-                                        echo 'Lunes ';
-                                        break;
-                                    case 'MAR':
-                                        echo 'Martes ';
-                                        break;
-                                    case 'MIE':
-                                        echo 'Miércoles ';
-                                        break;
-                                    case 'JUE':
-                                        echo 'Jueves ';
-                                        break;
-                                    case 'VIE':
-                                        echo 'Viernes ';
-                                        break;
-                                    case 'SAB':
-                                        echo 'Sábado ';
-                                        break;
-                                    case 'DOM';
-                                        echo 'Domingo ';
-                                        break;
-                                }?>
-                                · 
-                                <?= date('H:i',strtotime($materia['Hora'])) ?>
-                            </p>
-                        </a>
-                <?php }?>
+                <?php
+                foreach ($materias as $materia) { ?>
+                    <a class="item" href="show_materia.php?id=<?= $materia['ID'] ?>">
+                        <img src="../assets/img/logoSJO.svg" alt="logo">
+                        <p class="itemtitle"><?= $materia['Nombre'] ?></p>
+                        <p class="itemsub"><?php
+                                            switch ($materia['Dia']) {
+                                                case 'LUN':
+                                                    echo 'Lunes ';
+                                                    break;
+                                                case 'MAR':
+                                                    echo 'Martes ';
+                                                    break;
+                                                case 'MIE':
+                                                    echo 'Miércoles ';
+                                                    break;
+                                                case 'JUE':
+                                                    echo 'Jueves ';
+                                                    break;
+                                                case 'VIE':
+                                                    echo 'Viernes ';
+                                                    break;
+                                                case 'SAB':
+                                                    echo 'Sábado ';
+                                                    break;
+                                                case 'DOM';
+                                                    echo 'Domingo ';
+                                                    break;
+                                            } ?>
+                            ·
+                            <?= date('H:i', strtotime($materia['Hora'])) ?>
+                        </p>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
+    <div id="mobile-menu">
         <a href="./admin_dashboard.php" class="active">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
@@ -181,5 +185,6 @@
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>
