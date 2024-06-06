@@ -137,16 +137,16 @@
                                 <img src="../assets/img/arrow-select.svg" alt="">
                                 <p><?= $alumno['Nombre'] . ' ' . $alumno['Apellidos'] ?></p>
                             </summary>
-                        </details>
-                        <div class="details-content">
-                            <p>
-                                Materia: <?= $alumno['NombreMateria'] ?> <br>
-                            </p>
-                            <div>
-                                <a class="button-table" style="background-color: #000;" href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a>
-                                <a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a>
+                            <div class="details-content">
+                                <p>
+                                    Materia: <?= $alumno['NombreMateria'] ?> <br>
+                                </p>
+                                <div>
+                                    <a class="button-table" style="background-color: #000;" href="./edit_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a>
+                                    <a class="button-table" href="./delete_alumno.php?id=<?= $alumno['ID'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a>
+                                </div>
                             </div>
-                        </div>
+                        </details>
                     <?php } ?>
                 </div>
             </div>
