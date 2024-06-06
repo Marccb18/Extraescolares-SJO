@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li>
-                        <form action="admin_dashboard.php" method="post" id="logout-form">
+                        <form action="coord_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;" >
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
