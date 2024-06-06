@@ -543,6 +543,7 @@ table td {
     align-items: center;
     width: fit-content;
     gap: 5px;
+    text-decoration: none;
 }
 
 table td:has(.button-table) {
@@ -681,6 +682,12 @@ input[type=Search] {
 
 input[type=Search]::placeholder {
     color: rgba(113, 113, 122, 1);
+    font-size: 0.9rem;
+}
+
+input[type=Search]:focus-visible {
+    border: 2px solid #000;
+    outline: none;
 }
 
 @media (width <= 480px) {
@@ -691,6 +698,7 @@ input[type=Search]::placeholder {
 
     #button-top {
         padding: 10px 15px;
+        margin-left: 5px;
     }
     
     select {
@@ -770,25 +778,6 @@ input[type=Search]::placeholder {
     .item {
         width: 40vw;
     }
-
-    table {
-        max-width: 100vw;
-    }
-
-    table th {
-        display: none;
-    }
-
-    table tr {
-        display: flex;
-        flex-direction: row;
-        max-height: min-content;
-    }
-
-    table td {
-        width: fit-content;
-        max-width: fit-content;
-    }
     
     #table-mobile {
         display: flex;
@@ -802,21 +791,25 @@ input[type=Search]::placeholder {
     details {
         border: 2px solid rgba(228, 228, 231, 1);
         border-radius: 0.45rem;
-        transition: border all .1s;
         appearance: none;
+        overflow: hidden;
+        border-collapse: collapse;
+        transition: border-bottom 0ms 600ms linear, border-radius 0ms 20ms linear;
     }
-    
+
     summary img {
         rotate: 90deg;
+        transition: rotate linear .1s;
     }
 
     details[open] {
-        border: #000000 1.5px solid;
+        border: #000000 2px solid;
+        border-bottom: none;
+        border-radius: 0.45rem 0.45rem 0 0;
     }
 
     details[open] summary img {
         rotate: 180deg;
-        
     }
 
     details summary::-webkit-details-marker {
@@ -830,6 +823,63 @@ input[type=Search]::placeholder {
         gap: 5%;
         margin-left: 10px;
         list-style: none;
+        outline: none;
     }
 
+    .details-content {
+        display: flex;
+        outline: none;
+        margin: 0;
+        margin-top: -11px;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        max-width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 2% 0 4%;
+        border-color: rgba(228, 228, 231, 1);
+        border-collapse: collapse;
+        border-radius: 0 0 0.45rem 0.45rem;
+        transition: max-height 700ms ease-in-out;
+    }
+
+    details[open] + .details-content {
+        max-height: 300px;
+        border: 2px solid #000;
+        border-top: none;
+        transition: max-height 700ms ease-in-out;
+    }
+
+    @keyframes borderAnimation {
+        0% {
+            border-color: black;
+        }
+        50% {
+            border-color: rgba(228, 228, 231, 1);
+        }
+        100% {
+            border-color: rgba(228, 228, 231, 1);
+        }
+    }
+
+    .details-content p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: rgba(113, 113, 122, 1);
+    }
+
+    .details-content div {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .button-table {
+        font-size: 0.75rem;
+    }
+    
 }
