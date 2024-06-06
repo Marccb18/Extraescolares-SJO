@@ -8,7 +8,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
 }
 $currentDate = date('d-m-Y');
 $currentMonth = date('m');
-if ($currentMonth >=9 && $currentMonth <=12) {
+if ($currentMonth >= 9 && $currentMonth <= 12) {
     $currentYear = date('Y');
 } else {
     $currentYear = date('Y') - 1;
@@ -58,7 +58,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<div id="aside">
+    <div id="aside">
         <div id="titlelogo">
             <img src="../assets/img/logoSJO.svg" alt="Logo SJO">
             <p>Sant Josep Obrer</p>
@@ -109,7 +109,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                     </li>
                     <li>
-                        <form action="profesor_dashboard.php" method="post" id="logout-form">
+                        <form action="coord_dashboard.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -122,79 +122,79 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
         </div>
-    </div>  
+    </div>
     <div id="main">
         <div id="content">
             <h1>Historial de faltas</h1>
             <h2><?= $data['materia_nombre'] ?>
-             <?php switch ($data['Dia']) {
-                            case 'LUN':
-                                echo 'Lunes';
-                                break;
-                            case 'MAR':
-                                echo 'Martes';
-                                break;
-                            case 'MIE':
-                                echo 'Miércoles';
-                                break;
-                            case 'JUE':
-                                echo 'Jueves';
-                                break;
-                            case 'VIE':
-                                echo 'Viernes';
-                                break;
-                            case 'SAB':
-                                echo 'Sábado';
-                                break;
-                            case 'DOM';
-                                echo 'Domingo';
-                                break;
-                        } ?> a las <?php echo $data['Hora'] ?></h2>
-           <div class="historic-cards">
+                <?php switch ($data['Dia']) {
+                    case 'LUN':
+                        echo 'Lunes';
+                        break;
+                    case 'MAR':
+                        echo 'Martes';
+                        break;
+                    case 'MIE':
+                        echo 'Miércoles';
+                        break;
+                    case 'JUE':
+                        echo 'Jueves';
+                        break;
+                    case 'VIE':
+                        echo 'Viernes';
+                        break;
+                    case 'SAB':
+                        echo 'Sábado';
+                        break;
+                    case 'DOM';
+                        echo 'Domingo';
+                        break;
+                } ?> a las <?php echo $data['Hora'] ?></h2>
+            <div class="historic-cards">
                 <p><?= $currentYear ?>-<?= $currentYear + 1 ?></p>
                 <div class="select-container">
-                    <input type="date" id="date" name="date" value="<?=date('Y-m-d', strtotime($currentDate)); ?>" min="<?= date('Y-m-d',strtotime($fechaInicio ))?>" max="<?= date('Y-m-d',strtotime($currentDate)) ?>">
+                    <input type="date" id="date" name="date" value="<?= date('Y-m-d', strtotime($currentDate)); ?>" min="<?= date('Y-m-d', strtotime($fechaInicio)) ?>" max="<?= date('Y-m-d', strtotime($currentDate)) ?>">
 
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-                
 
-                <?php       
-                     /* quiero coger el dia en nombre en el que estamos actualmente con date pasar a minuscula */
-                     $diaAcrtual = date('l');
-                        if (strtolower($diaAcrtual) == $dia_de_materia) {
-                            echo '<div class="historic-card">';
-                            echo '<p>'. $currentDate  .'</p>';
-                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($currentDate)) . '" id="button-top">Ver faltas</a>';
-                            echo '</div>';
-                        }
-                        while (strtotime($ultimaClase_dada) >= strtotime($fechaInicio)) {
-                            echo '<div class="historic-card">';
-                            echo '<p>' . $ultimaClase_dada . '</p>';
-                            echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($ultimaClase_dada)) . '" id="button-top">Ver faltas</a>';
-                            echo '</div>';
-            
-                            $ultimaClase_dada = date('d-m-Y', strtotime($ultimaClase_dada . ' - 7 days'));
-                        }
-                ?>
+
+                    <?php
+                    /* quiero coger el dia en nombre en el que estamos actualmente con date pasar a minuscula */
+                    $diaAcrtual = date('l');
+                    if (strtolower($diaAcrtual) == $dia_de_materia) {
+                        echo '<div class="historic-card">';
+                        echo '<p>' . $currentDate  . '</p>';
+                        echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($currentDate)) . '" id="button-top">Ver faltas</a>';
+                        echo '</div>';
+                    }
+                    while (strtotime($ultimaClase_dada) >= strtotime($fechaInicio)) {
+                        echo '<div class="historic-card">';
+                        echo '<p>' . $ultimaClase_dada . '</p>';
+                        echo '<a href="pasar_lista.php?id=' . $class['ID'] . '&fecha=' . date('Y-m-d', strtotime($ultimaClase_dada)) . '" id="button-top">Ver faltas</a>';
+                        echo '</div>';
+
+                        $ultimaClase_dada = date('d-m-Y', strtotime($ultimaClase_dada . ' - 7 days'));
+                    }
+                    ?>
                 </div>
-           </div>
+            </div>
         </div>
     </div>
     <div id="mobile-menu">
-        <a href="./profesor_dashboard.php" >
+        <a href="./coord_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./profesor_dashboard_alumnos.php">
+        <a href="./gestion_users.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./profesor_sesiones.php" class="active">
+        <a href="./coordinador_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="profesor_dashboard.php" method="post">
+        <form action="coord_dashboard.php" method="post" class="active">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>
@@ -202,4 +202,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 
+    <script src="../assets/js/index.js"></script>
 </body>
+
+</html>
