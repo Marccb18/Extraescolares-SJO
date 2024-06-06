@@ -150,17 +150,37 @@ $db = null;
                     <?php } ?>
                 </table>
                 <div id="table-mobile">
-                    <input type="search" name="" id="search">
+                    <input type="search" style="margin-bottom: 10px;" name="" id="search" placeholder="Buscar...">
                     <?php foreach ($showUsers as $user) { ?>
-                        <details>
+                        <details id="details-desplegable">
                             <summary class="materis">
                                 <img src="../assets/img/arrow-select.svg" alt="">
                                 <p><?= $user['Nombre'] . ' ' . $user['Apellidos'] ?></p>
                             </summary>
-                            <div>
-                                HOLA
-                            </div>
                         </details>
+                        <div class="details-content">
+                            <p>
+                                Rol: <?php
+                                        switch ($user['ROL']) {
+                                            case 'PRO':
+                                                echo 'Profesor';
+                                                break;
+
+                                            case 'COO':
+                                                echo 'Coordinador';
+                                                break;
+
+                                            case 'ADM':
+                                                echo 'Administrador';
+                                                break;
+                                        }
+                                    ?>
+                            </p>
+                            <div>
+                                <a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a>
+                                <a class="button-table" href="delete_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/trash.svg" alt="">Eliminar</a>
+                            </div>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
