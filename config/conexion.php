@@ -1,9 +1,6 @@
 <?php
-
 $uri = "mysql://avnadmin:AVNS_SV3vxOevkckSb-vKih-@extraescolar-msolizrueda-948a.b.aivencloud.com:18078/defaultdb?ssl-mode=REQUIRED";
-
 $fields = parse_url($uri);
-
 // build the DSN including SSL settings
 $conn = "mysql:";
 $conn .= "host=" . $fields["host"];
