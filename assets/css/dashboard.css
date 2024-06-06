@@ -794,7 +794,7 @@ input[type=Search]:focus-visible {
         appearance: none;
         overflow: hidden;
         border-collapse: collapse;
-        transition: border-bottom 0ms 600ms linear, border-radius 0ms 20ms linear;
+        transition: border-bottom 0ms 500ms linear;
     }
 
     summary img {
@@ -841,26 +841,14 @@ input[type=Search]:focus-visible {
         border-color: rgba(228, 228, 231, 1);
         border-collapse: collapse;
         border-radius: 0 0 0.45rem 0.45rem;
-        transition: max-height 700ms ease-in-out;
+        transition: max-height 500ms linear;
     }
 
     details[open] + .details-content {
         max-height: 300px;
         border: 2px solid #000;
         border-top: none;
-        transition: max-height 700ms ease-in-out;
-    }
-
-    @keyframes borderAnimation {
-        0% {
-            border-color: black;
-        }
-        50% {
-            border-color: rgba(228, 228, 231, 1);
-        }
-        100% {
-            border-color: rgba(228, 228, 231, 1);
-        }
+        transition: max-height 500ms linear;
     }
 
     .details-content p {
