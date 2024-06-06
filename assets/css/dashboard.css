@@ -696,9 +696,18 @@ input[type=Search]:focus-visible {
         display: none;
     }
 
+    #top-content {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #top-content ul li a {
+        font-size: 0.8rem;
+    }
+
     #button-top {
         padding: 10px 15px;
-        margin-left: 5px;
+        font-size: 0.8rem;
     }
     
     select {
@@ -794,18 +803,17 @@ input[type=Search]:focus-visible {
         appearance: none;
         overflow: hidden;
         border-collapse: collapse;
-        transition: border-bottom 0ms 500ms linear;
+        transition: all 500ms linear;
+    }
+
+    details[open] {
+        border: #000000 2px solid;
+        transition: all 500ms linear;
     }
 
     summary img {
         rotate: 90deg;
         transition: rotate linear .1s;
-    }
-
-    details[open] {
-        border: #000000 2px solid;
-        border-bottom: none;
-        border-radius: 0.45rem 0.45rem 0 0;
     }
 
     details[open] summary img {
@@ -830,25 +838,11 @@ input[type=Search]:focus-visible {
         display: flex;
         outline: none;
         margin: 0;
-        margin-top: -11px;
-        align-items: center;
         justify-content: space-between;
-        box-sizing: border-box;
-        max-width: 100%;
-        max-height: 0;
-        overflow: hidden;
         padding: 0 2% 0 4%;
-        border-color: rgba(228, 228, 231, 1);
-        border-collapse: collapse;
-        border-radius: 0 0 0.45rem 0.45rem;
-        transition: max-height 500ms linear;
-    }
-
-    details[open] + .details-content {
-        max-height: 300px;
-        border: 2px solid #000;
-        border-top: none;
-        transition: max-height 500ms linear;
+        overflow: hidden;
+        align-items: center;
+        transition: max-height 1.5s ease;
     }
 
     .details-content p {
@@ -868,6 +862,10 @@ input[type=Search]:focus-visible {
 
     .button-table {
         font-size: 0.75rem;
+    }
+
+    form {
+        width: 100%;
     }
     
 }

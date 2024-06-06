@@ -28,10 +28,11 @@
     $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
 
     $profesores_map = array();
+    $profesores_mobile = array();
     foreach ($profesores as $profesor) {
         $profesores_map[$profesor['DNI']] = $profesor['Nombre'];
+        $profesores_mobile[$profesor['DNI']] = $profesor['Nombre'] . ' ' . $profesor['Apellidos'];
     }
-
     
     $db = null;
 ?>
@@ -118,7 +119,7 @@
                 </a>
             </div>
             <div class="main-content">
-                <table>
+                <table id="table-desktop">
                     <tr>
                         <th>Nombre</th>
                         <th>Profesor</th>
@@ -158,6 +159,40 @@
                         </tr>
                     <?php } ?>
                 </table>
+                <div id="table-mobile">
+                    <?php foreach($materias as $materia) { ?>
+                        <details>
+                            <summary>
+                                <img src="../assets/img/arrow-select.svg" alt="">
+                                <p><?= $materia['Nombre'] ?></p>
+                            </summary>
+                            <div class="details-content"  style="padding-bottom: 10px;">
+                                <p>
+                                    Profesor: <?= $profesores_mobile[$materia['ID_Profesor']] ?? '-' ?><br>
+                                    Alumnos: <?php
+                                                $count = 0;
+                                                foreach ($alumnos as $alumno) {
+                                                    if ($alumno['ID_Materia'] == $materia['ID']) {
+                                                        $count++;
+                                                    }
+                                                }
+                                                echo $count;
+                                            ?>
+                                </p>
+                                <div>
+                                    <a style="background-color: #000;" class="button-table" href="edit_materia.php?id=<?= $materia['ID'] ?>">
+                                        <img src="../assets/img/pen.svg"" alt="">
+                                        Editar
+                                    </a>
+                                    <a class="button-table" href="delete_materia.php?id=<?= $materia['ID'] ?>">
+                                        <img src="../assets/img/trash.svg" alt="">
+                                        Eliminar
+                                    </a>
+                                </div>
+                            </div>
+                        </details>
+                    <?php } ?>
+                </div>
             </div>
         </div>  
     </div>
