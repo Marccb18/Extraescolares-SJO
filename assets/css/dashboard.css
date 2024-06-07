@@ -307,6 +307,7 @@ option {
     appearance: none;
     font-family: Inter;
     background-color: white;
+    color: black;
     width: 11rem;
     height: 2.5rem;
     border: none;

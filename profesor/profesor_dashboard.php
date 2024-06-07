@@ -16,6 +16,8 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $showMaterias = $db->query("SELECT * FROM materia where ID_Profesor = '$_SESSION[id]'");
 $materias = $showMaterias->fetchAll(PDO::FETCH_ASSOC);
 
+$fecha = date('Y-m-d');
+
 $db = null;
 ?>
 <!DOCTYPE html>
@@ -127,7 +129,7 @@ $db = null;
                     <p>Fecha</p>
                     <div id="date-container">
                         <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
+                        <input type="date" value="<?= $fecha ?>">
                     </div>
                 </div>
             </div>
