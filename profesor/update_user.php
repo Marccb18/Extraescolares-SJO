@@ -11,30 +11,21 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $telefono = $_POST['telefono'];
-        $rol = $_POST['rol'];
-        $origin = $_POST['origin'];
-
         try {
-            $query = $db->prepare("UPDATE personal SET Nombre = :nombre, Apellidos = :apellidos, Email = :email, Password = :password, Telefono = :telefono, ROL = :rol WHERE DNI = :user_id");
+            $query = $db->prepare("UPDATE personal SET Nombre = :nombre, Apellidos = :apellidos, Email = :email, Password = :password, Telefono = :telefono WHERE DNI = :user_id");
             
             $query->bindParam(':nombre', $nombre);
             $query->bindParam(':apellidos', $apellidos);
             $query->bindParam(':email', $email);
             $query->bindParam(':password', $password);
             $query->bindParam(':telefono', $telefono);
-            $query->bindParam(':rol', $rol);
             $query->bindParam(':user_id', $user_id);
 
             $query->execute();
 
             $db = null;
-            if ($origin == 'edit_user') {
-                header('Location: perfil.php');
-                exit();
-            } else {
-                header('Location: perfil.php');
-                exit();
-            }
+            header('Location: ./perfil.php');
+            exit();
 
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -44,5 +35,4 @@
         header('Location: perfil.php');
         exit();
     }
-
 ?>

@@ -96,22 +96,16 @@ $db = null;
             <div id="main-content">
                 <form action="edit_perfil.php?id=<?php echo $perfil[0]['DNI'] ?>" method="post">
                     <p>Nombre</p>
-                    <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
-                    <p>Apellido</p>
-                    <input type="text" value="<?php echo $perfil[0]['Apellidos'] ?>" disabled>
+                    <input type="text" name="nombre" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
+                    <p>Apellidos</p>
+                    <input type="text" name="apellidos" value="<?php echo $perfil[0]['Apellidos'] ?>" disabled>
                     <p>Email</p>
-                    <input type="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
+                    <input type="email" name="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
                     <p>Telefono</p>
-                    <input type="number" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
-                    <p>Rol</p>
-                    <input type="text" value="<?php echo $perfil[0]['ROL'] ?>" disabled>
+                    <input type="number" name="telefono" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
                     <p>Contraseña</p>
-                    <input type="password" value="<?php echo $perfil[0]['Password'] ?>" disabled>
-                    <input type="hidden" name="perfil" value="perfil">
-                    <input type="submit" value="Editar" id="edit">
-                    <script>
-                        console.log(<?php echo json_encode($perfil) ?>)
-                    </script>
+                    <input type="password" name="password" value="<?php echo $perfil[0]['Password'] ?>" disabled>
+                    <input type="submit" name="submit" value="Editar" id="edit">
                 </form>
             </div>
         </div>

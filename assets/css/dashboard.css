@@ -691,9 +691,13 @@ input[type=Search]:focus-visible {
 }
 
 @media (width <= 480px) {
-    
+
     #aside, #table-desktop {
         display: none;
+    }
+
+    button {
+        cursor: pointer;
     }
 
     #top-content {
