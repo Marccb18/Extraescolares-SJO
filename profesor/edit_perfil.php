@@ -163,7 +163,7 @@ function comprobarOpcion($v, $user)
         <a href="./profesor_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
-        <a href="./perfil.php" class="active">
+        <a href="./perfil.php" >
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
         <form action="profesor_dashboard.php" method="post">
