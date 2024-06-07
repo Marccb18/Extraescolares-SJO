@@ -98,7 +98,7 @@ $db = null;
                     <p>Nombre</p>
                     <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
                     <p>Apellido</p>
-                    <input type="text" value="<?php echo $perfil[0]['DNI'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['Apellidos'] ?>" disabled>
                     <p>Email</p>
                     <input type="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
                     <p>Telefono</p>
