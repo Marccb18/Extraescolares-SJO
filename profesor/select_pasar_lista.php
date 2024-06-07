@@ -125,7 +125,29 @@ if ($cantidad_materias == 1) {
                 </ul>
             </div>
             <div id="title">
-                <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
+                <h3>Tus clases de hoy: <?php switch ($day) {
+                                                case 'LUN':
+                                                    echo 'Lunes ';
+                                                    break;
+                                                case 'MAR':
+                                                    echo 'Martes ';
+                                                    break;
+                                                case 'MIE':
+                                                    echo 'Miércoles ';
+                                                    break;
+                                                case 'JUE':
+                                                    echo 'Jueves ';
+                                                    break;
+                                                case 'VIE':
+                                                    echo 'Viernes ';
+                                                    break;
+                                                case 'SAB':
+                                                    echo 'Sábado ';
+                                                    break;
+                                                case 'DOM';
+                                                    echo 'Domingo ';
+                                                    break;
+                                            }  ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
             <div class="main-content">
@@ -145,7 +167,7 @@ if ($cantidad_materias == 1) {
                 <?php }
                 }
                 if ($count == 0) {
-                    echo '<h2>no hay materias hoy</h2>';
+                    echo '<p>No tienes clases hoy</p>';
                 }
                 ?>
             </div>
