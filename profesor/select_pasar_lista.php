@@ -128,7 +128,7 @@ if ($cantidad_materias == 1) {
                 <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
-            <div class="main-content">
+            <div id="main-content">
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {

@@ -127,7 +127,7 @@ $db = null;
             </div>
             <div id="title">
                 <h3>Inicio</h3>
-                <p>Busca entre todes tus alumnes</p>
+                <p>Busca entre todos tus alumnos</p>
             </div>
             <div class="main-content">
                 <table>
