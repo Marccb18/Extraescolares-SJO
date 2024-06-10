@@ -46,10 +46,7 @@ filterDay?.addEventListener('change',applyFilters)
 
 function applyFilters() {
     let selectedClase = document.getElementById('select_clases').value;
-    console.log(selectedClase);
     let selectedDia = document.getElementById('select_dias').value;
-    console.log(selectedDia);
-
     for (let item of items) {
         let clase = item.textContent;
         let dia = item.parentElement.querySelector('.itemsub').textContent;
@@ -59,12 +56,34 @@ function applyFilters() {
         item.parentElement.style.display = showItem ? 'flex' : 'none';
     }
 }
+let selectedClase_2 = document.getElementById('select_clases2');
 
+selectedClase_2?.addEventListener('change', filterClase);
 function filterClase() {
-    let selectedClase = document.getElementById('select_clases').value;
+    
     for (let item of items) {
         let clase = item.textContent;
-        let showItem = selectedClase === 'Todas' || clase === selectedClase;
+        let showItem = selectedClase_2.value === 'Todas' || clase === selectedClase_2.value;
         item.parentElement.style.display = showItem ? 'flex' : 'none';
+    }
+}
+
+let dateSesions = document.getElementById('date-sesion');
+dateSesions?.addEventListener('change', filterDate);
+
+function filterDate() {
+    let selectedDate = document.getElementById('date-sesion').value;
+    /* pasar a selectedDate a formato español numerico recuerda que siempre hay 2 digitos en dia y mes */
+    let date = new Date(selectedDate);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    selectedDate = `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`;
+console.log(selectedDate);
+    let datesOfSesiones= document.getElementsByClassName('historic-card')
+    for (let date of datesOfSesiones) {
+        console.log(date.children[0].textContent);
+        let showDate = selectedDate == '' || date.children[0].textContent == selectedDate;
+        date.style.display = showDate ? 'block' : 'none';
     }
 }

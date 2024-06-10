@@ -110,21 +110,30 @@ $db = null;
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" class="select-filter">
-                            <option value="">Todas</option>
+                        <select name="clases" id="select_clases" class="select-filter">
+                            <option class="optionClase" value="Todas">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>
-                                <option value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
+                                <option class="optionClase" value="<?= $materia['Nombre'] ?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
                 <div id="fecha">
-                    <p>Fecha</p>
-                    <div id="date-container">
-                        <img src="../assets/img/Calendar.svg" alt="Calendar">
-                        <input type="date">
+                    <p>Dia</p>
+                    <div class="select-container">
+                        <select name="diasemana" class="select-filter" id="select_dias">
+                            <option class="optionDia" value="Todos">Todos</option>
+                            <option class="optionDia" value="Lunes">Lunes</option>
+                            <option class="optionDia" value="Martes">Martes</option>
+                            <option class="optionDia" value="Miércoles">Miércoles</option>
+                            <option class="optionDia" value="Jueves">Jueves</option>
+                            <option class="optionDia" value="Viernes">Viernes</option>
+                            <option class="optionDia" value="Sábado">Sábado</option>
+                            <option class="optionDia" value="Domingo">Domingo</option>
+                        </select>
+                        <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
                     </div>
                 </div>
             </div>
@@ -187,4 +196,5 @@ $db = null;
     </div>
     <script src="../assets/js/index.js"></script>
 
+</body>
 </html>
