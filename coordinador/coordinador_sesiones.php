@@ -47,7 +47,7 @@ $db = null;
             <li>
                 <a href="./gestion_users.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
-                    Alumnos
+                    Usuarios
                 </a>
             </li>
             <li class="active">
@@ -102,16 +102,6 @@ $db = null;
 
     <div id="main">
         <div id="content">
-            <div id="top-content">
-                <ul>
-                    <li class="active">
-                        <a href="profesor_dashboard.php">Clases</a>
-                    </li>
-                    <li>
-                        <a href="profesor_dashboard_alumnos.php">Alumnos</a>
-                    </li>
-                </ul>
-            </div>
             <div id="title">
                 <h3>Sesiones</h3>
                 <p>Escoge la clase para ver sesiones</p>
@@ -120,7 +110,7 @@ $db = null;
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
+                        <select name="clases" id="select_clases2" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>

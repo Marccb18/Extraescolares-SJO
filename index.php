@@ -12,16 +12,19 @@ require_once('./config/users_control.php');
     <link rel="icon" href="./assets/img/logoSJO-fav.svg">
 </head>
 <body>
-    <form action="index.php" method="post">
-        <?php if ($error != "") { ?>
-            <div style="color: red;"><?php echo $error; ?></div>
-        <?php } ?>
-        <label for="email">Email: </label>
-        <input type="text" name="email" id="email"><br><br>
-        <label for="password">Contraseña: </label>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Iniciar Sesión">
-    </form>
+    <main>
+        <form action="index.php" method="post">
+            <span>
+                <img src="./assets/img/logoSJO.svg" alt="logo-sjo">
+                Sant Josep Obrer
+            </span>
+            <input type="text" name="email" id="email" placeholder="Email">
+            <input type="password" id="password" name="password" placeholder="Contraseña">
+            <input type="submit" value="Iniciar Sesión">
+        </form>
+    </main>
 </body>
-<script src="../assets/js/index.js"></script>
+    <?php if ($error != "") { ?>
+        <script src="./assets/js/error.js"></script>
+    <?php } ?>
 </html>

@@ -16,15 +16,6 @@ $db = new PDO($conn, $fields['user'], $fields['pass']);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $user_id = $_GET['id'];
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($_POST['perfil']) {
-        $origin = 'perfil';
-    } else {
-        $origin = 'edit_perfil';
-    }
-} else {
-    $origin = 'edit_perfil';
-}
 
 $query = $db->prepare('SELECT * FROM personal WHERE DNI = ?');
 $query->execute([$user_id]);
@@ -34,13 +25,6 @@ $db = null;
 if ($_SESSION['id'] != $user_id) {
     header('Location: ../index.php');
     exit();
-}
-
-function comprobarOpcion($v, $user)
-{
-    if ($v == $user['ROL']) {
-        echo 'selected';
-    }
 }
 
 ?>
@@ -96,7 +80,7 @@ function comprobarOpcion($v, $user)
                     <li>
                         <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px; font-size: 0.85rem">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="">
@@ -134,20 +118,10 @@ function comprobarOpcion($v, $user)
                     <input type="text" name="apellidos" value="<?= $user['Apellidos'] ?>">
                     <p>Email</p>
                     <input type="email" name="email" value="<?= $user['Email'] ?>">
-                    <p>Contraseña</p>
-                    <input type="text" name="password" value="<?= $user['Password'] ?>">
                     <p>Teléfono</p>
                     <input type="number" name="telefono" id="telefono" value="<?= $user['Telefono'] ?>">
-                    <p>Rol</p>
-                    <input type="hidden" name="origin" value="<?= $origin ?>" disabled>
-                    <div class="form-select">
-                        <select name="rol" id="rol_id" disabled>
-                            <option value="PRO" <?php comprobarOpcion('PRO', $user) ?>>Profesor</option>
-                            <option value="COO" <?php comprobarOpcion('COO', $user) ?>>Coordinador</option>
-                            <option value="ADM" <?php comprobarOpcion('ADM', $user) ?>>Administrador</option>
-                        </select>
-                        <img src="../assets/img/arrow-select.svg" alt="">
-                    </div>
+                    <p>Contraseña</p>
+                    <input type="text" name="password" value="<?= $user['Password'] ?>">
                     <input type="submit" value="Confirmar">
                 </form>
             </div>
@@ -163,7 +137,7 @@ function comprobarOpcion($v, $user)
         <a href="./profesor_sesiones.php" class="active">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
-        <a href="./perfil.php" class="active">
+        <a href="./perfil.php" >
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
         <form action="profesor_dashboard.php" method="post">

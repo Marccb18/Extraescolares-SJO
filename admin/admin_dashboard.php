@@ -66,7 +66,7 @@
                     <li>
                         <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px; font-size: 0.85rem">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="">
@@ -103,7 +103,7 @@
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                                 foreach ($materias as $materia) { ?>
-                                    <option class="optionClase"  value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
+                                    <option class="optionClase" value="<?= $materia['Nombre']?>"><?= $materia['Nombre'] ?></option>
                             <?php } ?>
                         </select>
                         <img src="../assets/img/arrow-select.svg" alt="Arrow Select">
@@ -112,7 +112,7 @@
                 <div id="fecha">
                     <p>Dia</p>
                     <div class="select-container">
-                        <select name="diasemana" class="select-filter" id="select_dias" onclick="applyFilters()">
+                        <select name="diasemana" class="select-filter" id="select_dias">
                             <option class="optionDia" value="Todos">Todos</option>
                             <option class="optionDia" value="Lunes">Lunes</option>
                             <option class="optionDia" value="Martes">Martes</option>
@@ -204,4 +204,3 @@
     </div>
 <script src="../assets/js/index.js"></script>
 </html>
-

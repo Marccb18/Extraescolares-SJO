@@ -128,13 +128,16 @@ $db = null;
                     Crear Materia
                 </a>
             </div>
+            <div>
+                <input type="search" id="search-table" placeholder="Buscar materia">
+            </div>
             <div class="main-content">
-                <table>
-                    <tr>
+                <table id="table">
+                    <thead>
                         <th>Nombre</th>
                         <th>Profesor</th>
                         <th>Alumnos</th>
-                    </tr>
+                    </thead>
                     <?php foreach ($materias as $materia) { ?>
                         <tr>
                             <td><?= $materia['Nombre'] ?></td>
@@ -178,5 +181,6 @@ $db = null;
         </form>
     </div>
     <script src="../assets/js/index.js"></script>
+    <script src="../assets/js/tableSort.js"></script>
 
 </html>

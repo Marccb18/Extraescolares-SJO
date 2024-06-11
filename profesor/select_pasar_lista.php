@@ -91,7 +91,7 @@ if ($cantidad_materias == 1) {
                     <li>
                         <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px; font-size: 0.85rem">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="">
@@ -128,7 +128,7 @@ if ($cantidad_materias == 1) {
                 <h3>Tus clases de hoy: <?php echo getDayOfWeek() ?> </h3>
                 <p>Escoge una clase para pasar lista</p>
             </div>
-            <div class="main-content">
+            <div id="main-content">
                 <?php
                 $count = 0;
                 foreach ($materias as $materia) {

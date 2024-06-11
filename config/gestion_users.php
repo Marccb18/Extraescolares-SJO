@@ -106,13 +106,16 @@ $db = null;
                 <p>Busca entre todas los usuarios
                 <p>
             </div>
+            <div>
+                <input type="search" id="search-table" placeholder="Buscar materia">
+            </div>
             <div class="main-content">
-                <table>
-                    <tr>
+                <table id="table">  
+                    <thead>
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Rol</th>
-                    </tr>
+                    </thead>
                     <?php foreach ($showUsers as $user) { ?>
                         <tr>
                             <td>
@@ -163,5 +166,7 @@ $db = null;
         </form>
     </div>
     <script src="../assets/js/index.js"></script>
+    <script src="../assets/js/tableSort.js"></script>
+</body>
 
 </html>

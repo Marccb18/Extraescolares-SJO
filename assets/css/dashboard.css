@@ -307,6 +307,7 @@ option {
     appearance: none;
     font-family: Inter;
     background-color: white;
+    color: black;
     width: 11rem;
     height: 2.5rem;
     border: none;
@@ -461,8 +462,6 @@ option {
     height: 100%;
     width: 100%;
 }
-
-
 
 .user-info-container > img {
     rotate: 90deg;
@@ -691,9 +690,13 @@ input[type=Search]:focus-visible {
 }
 
 @media (width <= 480px) {
-    
+
     #aside, #table-desktop {
         display: none;
+    }
+
+    button {
+        cursor: pointer;
     }
 
     #top-content {
@@ -726,6 +729,7 @@ input[type=Search]:focus-visible {
         position: fixed;
         bottom: 0px;
         width: 100vw;
+        height: fit-content;
         background-color: rgb(255,255,255);
         align-items: center;
         justify-content: space-around;
@@ -773,11 +777,11 @@ input[type=Search]:focus-visible {
         align-items: center;
         justify-content: space-between;
         gap: 0;
+        margin-bottom: 50px;
     }
 
     #filter {
         justify-content: space-between;
-        gap: 0;
     }
 
     .select-container select {
@@ -867,5 +871,7 @@ input[type=Search]:focus-visible {
     form {
         width: 100%;
     }
+
+    
     
 }

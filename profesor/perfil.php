@@ -68,7 +68,7 @@ $db = null;
                     <li>
                         <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px; font-size: 0.85rem">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="">
@@ -96,40 +96,34 @@ $db = null;
             <div id="main-content">
                 <form action="edit_perfil.php?id=<?php echo $perfil[0]['DNI'] ?>" method="post">
                     <p>Nombre</p>
-                    <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
-                    <p>Apellido</p>
-                    <input type="text" value="<?php echo $perfil[0]['DNI'] ?>" disabled>
+                    <input type="text" name="nombre" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
+                    <p>Apellidos</p>
+                    <input type="text" name="apellidos" value="<?php echo $perfil[0]['Apellidos'] ?>" disabled>
                     <p>Email</p>
-                    <input type="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
+                    <input type="email" name="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
                     <p>Telefono</p>
-                    <input type="number" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
-                    <p>Rol</p>
-                    <input type="text" value="<?php echo $perfil[0]['ROL'] ?>" disabled>
+                    <input type="number" name="telefono" value="<?php echo $perfil[0]['Telefono'] ?>" disabled>
                     <p>Contraseña</p>
-                    <input type="password" value="<?php echo $perfil[0]['Password'] ?>" disabled>
-                    <input type="hidden" name="perfil" value="perfil">
-                    <input type="submit" value="Editar" id="edit">
-                    <script>
-                        console.log(<?php echo json_encode($perfil) ?>)
-                    </script>
+                    <input type="password" name="password" value="<?php echo $perfil[0]['Password'] ?>" disabled>
+                    <input type="submit" name="submit" value="Editar" id="edit">
                 </form>
             </div>
         </div>
     </div>
-<div id="mobile-menu">
-        <a href="./admin_dashboard.php">
+    <div id="mobile-menu">
+        <a href="./profesor_dashboard.php" >
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./gestion_users.php">
+        <a href="./profesor_dashboard_alumnos.php">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./gestion_materias.php">
+        <a href="./profesor_sesiones.php" >
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="admin_dashboard.php" method="post">
+        <form action="profesor_dashboard.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>

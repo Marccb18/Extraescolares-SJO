@@ -155,14 +155,13 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
             <div class="historic-cards">
                 <p><?= $currentYear ?>-<?= $currentYear + 1 ?></p>
                 <div class="select-container">
-                    <input type="date" id="date" name="date" value="<?= date('Y-m-d', strtotime($currentDate)); ?>" min="<?= date('Y-m-d', strtotime($fechaInicio)) ?>" max="<?= date('Y-m-d', strtotime($currentDate)) ?>">
+                    <input type="date" id="date-sesion" name="date" min="<?= date('Y-m-d', strtotime($fechaInicio)) ?>" max="<?= date('Y-m-d', strtotime($currentDate)) ?>">
 
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
 
 
                     <?php
-                    /* quiero coger el dia en nombre en el que estamos actualmente con date pasar a minuscula */
                     $diaAcrtual = date('l');
                     if (strtolower($diaAcrtual) == $dia_de_materia) {
                         echo '<div class="historic-card">';

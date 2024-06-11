@@ -84,7 +84,7 @@ $db = null;
                     <li>
                         <a href="./perfil.php">
                             <div style="display: flex;  align-items: center;">
-                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px;">
+                                <img src="../assets/img/person.svg" alt="" style="margin-right: 6px; font-size: 0.85rem">
                                 Ver Perfil
                             </div>
                             <img src="../assets/img/chevron-right.svg" alt="">
@@ -126,7 +126,7 @@ $db = null;
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
+                        <select name="clases" id="select_clases2" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>
