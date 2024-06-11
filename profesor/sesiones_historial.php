@@ -195,5 +195,8 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
 
+    <script src="../assets/js/index.js"></script>
 
 </body>
+
+</html>

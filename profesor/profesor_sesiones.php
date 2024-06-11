@@ -126,7 +126,7 @@ $db = null;
                 <div id="clases">
                     <p>Clases</p>
                     <div class="select-container">
-                        <select name="clases" onclick="filterClase()" id="select_clases" class="select-filter">
+                        <select name="clases" id="select_clases2" class="select-filter">
                             <option class="optionClase" value="Todas">Todas</option>
                             <?php
                             foreach ($materias as $materia) { ?>

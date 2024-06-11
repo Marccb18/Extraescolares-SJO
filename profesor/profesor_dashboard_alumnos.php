@@ -129,14 +129,17 @@ $db = null;
                 <h3>Inicio</h3>
                 <p>Busca entre todes tus alumnes</p>
             </div>
+            <div>
+                <input type="search" id="search-table" placeholder="Buscar materia">
+            </div>
             <div class="main-content">
-                <table>
-                    <tr>
+                <table id="table">
+                    <thead>
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Materia</th>
                         <th>Faltas</th>
-                    </tr>
+                    </thead>
                     <?php foreach ($alumnos as $alumno) { ?>
                         <tr>
                             <td>
@@ -184,5 +187,6 @@ $db = null;
         </form>
     </div>
     <script src="../assets/js/index.js"></script>
-
+    <script src="../assets/js/tableSort.js"></script>
+</body>
 </html>

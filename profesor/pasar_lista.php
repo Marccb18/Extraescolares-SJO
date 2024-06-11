@@ -216,4 +216,8 @@ if ($_SESSION['id'] !=  $class['ID_profesor']) {
         </form>
     </div>
 
+    <script src="../assets/js/index.js"></script>
+</body>
+
+
 </html>

@@ -73,17 +73,20 @@ dateSesions?.addEventListener('change', filterDate);
 
 function filterDate() {
     let selectedDate = document.getElementById('date-sesion').value;
-    /* pasar a selectedDate a formato español numerico recuerda que siempre hay 2 digitos en dia y mes */
     let date = new Date(selectedDate);
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     selectedDate = `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`;
-console.log(selectedDate);
     let datesOfSesiones= document.getElementsByClassName('historic-card')
     for (let date of datesOfSesiones) {
-        console.log(date.children[0].textContent);
         let showDate = selectedDate == '' || date.children[0].textContent == selectedDate;
         date.style.display = showDate ? 'block' : 'none';
     }
+    if (selectedDate == 'NaN-NaN-NaN') {
+        for (let date of datesOfSesiones) {
+            date.style.display = 'block';
+        }
+    }
+
 }
