@@ -20,6 +20,7 @@ $db = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,7 @@ $db = null;
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="icon" href="../assets/img/logoSJO-fav.svg">
 </head>
+
 <body>
     <div id="aside">
         <div id="titlelogo">
@@ -100,6 +102,14 @@ $db = null;
                         <a href="./gestion_alumnos.php">Alumnos</a>
                     </li>
                 </ul>
+
+                <form action="import_alumnos.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" accept=".csv">
+                    <button type="submit">Importar Alumnos</button>
+                </form>
+
+
+
                 <a href="./new_user.php" id="button-top">
                     <img src="../assets/img/plus-circled.svg" alt="Pasar Lista">
                     Añadir Usuario
@@ -164,16 +174,16 @@ $db = null;
                                                 case 'PRO':
                                                     echo 'Profesor';
                                                     break;
-    
+
                                                 case 'COO':
                                                     echo 'Coordinador';
                                                     break;
-    
+
                                                 case 'ADM':
                                                     echo 'Administrador';
                                                     break;
                                             }
-                                        ?>
+                                            ?>
                                 </p>
                                 <div>
                                     <a style="background-color: #000;" class="button-table" href="edit_user.php?id=<?= $user['DNI'] ?>"><img src="../assets/img/pen.svg" alt="">Editar</a>
@@ -186,7 +196,7 @@ $db = null;
             </div>
         </div>
     </div>
-<div id="mobile-menu">
+    <div id="mobile-menu">
         <a href="./admin_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
@@ -205,5 +215,6 @@ $db = null;
             </button>
         </form>
     </div>
-<script src="../assets/js/index.js"></script>
+    <script src="../assets/js/index.js"></script>
+
 </html>
