@@ -64,7 +64,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li >
+            <li>
                 <a href="profesor_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
@@ -76,8 +76,8 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                     Alumnos
                 </a>
             </li>
-            <li>
-                <a href="profesor_sesiones.php" class="active">
+            <li class="active">
+                <a href="profesor_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
                 </a>
@@ -103,7 +103,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                     </li>
                     <li>
-                        <form action="profesor_dashboard.php" method="post" id="logout-form">
+                        <form action="profesor_sesiones.php" method="post" id="logout-form">
                             <button type="submit" name="logout">
                                 <div div style="display: flex;  align-items: center;">
                                     <img src="../assets/img/logout.svg" alt="" style="margin-right: 6px;">
@@ -116,7 +116,7 @@ $alumnos = $query->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
         </div>
-    </div>  
+    </div> 
     <div id="main">
         <div id="content">
             <h1>Historial de faltas</h1>
