@@ -2,7 +2,7 @@
 session_start();
 require('../config/conexion.php');
 
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'PRO') {
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
     header('Location: ../index.php');
     exit();
 }
@@ -64,22 +64,27 @@ function comprobarOpcion($v, $user)
             <p>Sant Josep Obrer</p>
         </div>
         <ul id="side-menu">
-            <li class="active">
-                <a href="profesor_dashboard.php">
+            <li>
+                <a href="./coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
             </li>
             <li>
-                <a href="profesor_dashboard_alumnos.php">
+                <a href="./gestion_users.php">
                     <img src="../assets/img/Vector.svg" alt="Students icon">
-                    Alumnos
+                    Usuarios
                 </a>
             </li>
             <li>
-                <a href="profesor_sesiones.php">
+            <a href="./coordinador_sesiones.php">
                     <img src="../assets/img/library.svg" alt="Library icon">
                     Sesiones
+                </a>
+            <li>
+                <a href="./gestion_materias.php">
+                    <img src="../assets/img/layout-grid.svg" alt="Layout icon">
+                    Materias
                 </a>
             </li>
         </ul>
@@ -154,19 +159,19 @@ function comprobarOpcion($v, $user)
         </div>
     </div>
     <div id="mobile-menu">
-        <a href="./profesor_dashboard.php" >
+        <a href="./coord_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
-        <a href="./profesor_dashboard_alumnos.php">
+        <a href="./gestion_users.php" class="active">
             <img src="../assets/img/Vector.svg" alt="gestion-users-icon">
         </a>
-        <a href="./profesor_sesiones.php" class="active">
+        <a href="./coordinador_sesiones.php">
             <img src="../assets/img/layout-grid.svg" alt="gestion-materias-icon">
         </a>
         <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="profesor_dashboard.php" method="post">
+        <form action="perfil.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>

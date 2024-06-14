@@ -2,7 +2,7 @@
 session_start();
 require('../config/conexion.php');
 
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'ADM') {
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'COO') {
     header('Location: ../index.php');
     exit();
 }
@@ -37,7 +37,7 @@ $db = null;
         </div>
         <ul id="side-menu">
             <li>
-                <a href="./admin_dashboard.php">
+                <a href="./coord_dashboard.php">
                     <img src="../assets/img/icon-home.svg" alt="Home icon">
                     Inicio
                 </a>
@@ -48,6 +48,11 @@ $db = null;
                     Usuarios
                 </a>
             </li>
+            <li>
+            <a href="./coordinador_sesiones.php">
+                    <img src="../assets/img/library.svg" alt="Library icon">
+                    Sesiones
+                </a>
             <li>
                 <a href="./gestion_materias.php">
                     <img src="../assets/img/layout-grid.svg" alt="Layout icon">
@@ -94,11 +99,11 @@ $db = null;
             <h3>Cuenta</h3>
             <p>Perfil de <?php echo $perfil[0]['Nombre'] ?></p>
             <div id="main-content">
-                <form action="edit_user.php?id=<?php echo $perfil[0]['DNI'] ?>" method="post">
+                <form action="edit_perfil.php?id=<?php echo $perfil[0]['DNI'] ?>" method="post">
                     <p>Nombre</p>
                     <input type="text" value="<?php echo $perfil[0]['Nombre'] ?>" disabled>
                     <p>Apellido</p>
-                    <input type="text" value="<?php echo $perfil[0]['DNI'] ?>" disabled>
+                    <input type="text" value="<?php echo $perfil[0]['Apellidos'] ?>" disabled>
                     <p>Email</p>
                     <input type="email" value="<?php echo $perfil[0]['Email'] ?>" disabled>
                     <p>Telefono</p>
@@ -117,7 +122,7 @@ $db = null;
         </div>
     </div>
 <div id="mobile-menu">
-        <a href="./admin_dashboard.php">
+        <a href="./coord_dashboard.php">
             <img src="../assets/img/icon-home.svg" alt="home-icon">
         </a>
         <a href="./gestion_users.php">
@@ -129,7 +134,7 @@ $db = null;
         <a href="./perfil.php" class="active">
             <img src="../assets/img/person.svg" alt="person-icon">
         </a>
-        <form action="admin_dashboard.php" method="post">
+        <form action="perfil.php" method="post">
             <button type="submit" name="logout">
                 <img src="../assets/img/logout.svg" alt="logout-icon">
             </button>
